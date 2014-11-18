@@ -21,8 +21,8 @@ var BlurFilter = React.createClass({
         </div>
     },
 
-    _onChange: function (e) {
-        FilterActions.update('blur', {
+    _onChange: function () {
+        FilterActions.update(this.props.filter.id, {
             active: this.refs.active.getDOMNode().checked,
             radius: parseInt(this.refs.radius.getDOMNode().value, 10)
         });

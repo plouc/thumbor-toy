@@ -18,8 +18,8 @@ var GrayscaleFilter = React.createClass({
         </div>
     },
 
-    _onChange: function (e) {
-        FilterActions.update('grayscale', {
+    _onChange: function () {
+        FilterActions.update(this.props.filter.id, {
             active: this.refs.active.getDOMNode().checked
         });
     }

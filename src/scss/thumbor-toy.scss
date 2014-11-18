@@ -57,6 +57,9 @@ $header-height: 42px;
   &__settings {
     margin-bottom: 5px;
     display: none;
+    select {
+      width: 100%;
+    }
   }
   &._is-active {
     .filter__label {
@@ -102,6 +105,7 @@ $header-height: 42px;
 
 .filters {
   left: 0;
+  border-right: 1px solid #000;
   &__title {
     background-color: #393939;
     margin: 0;
@@ -118,6 +122,7 @@ $header-height: 42px;
 }
 .metadata {
   right: 0;
+  border-left: 1px solid #000;
 }
 .content {
   position: absolute;

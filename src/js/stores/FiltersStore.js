@@ -40,6 +40,18 @@ var _filters = {
         stringify: function () {
             return this.id + '()';
         }
+    },
+
+    watermark: {
+        id:           'watermark',
+        active:       false,
+        image:        null,
+        x:            0,
+        y:            0,
+        transparency: 0,
+        stringify:    function () {
+            return this.id + '(' + this.image + ',' + this.x + ',' + this.y + ',' + this.transparency +')';
+        }
     }
 };
 

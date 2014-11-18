@@ -7,6 +7,7 @@ var BrightnessFilter = require('./filters/BrightnessFilter.jsx');
 var BlurFilter       = require('./filters/BlurFilter.jsx');
 var GrayscaleFilter  = require('./filters/GrayscaleFilter.jsx');
 var NoiseFilter      = require('./filters/NoiseFilter.jsx');
+var WatermarkFilter  = require('./filters/WatermarkFilter.jsx');
 
 var Filters = React.createClass({
     mixins: [Reflux.ListenerMixin],
@@ -29,6 +30,7 @@ var Filters = React.createClass({
             <BlurFilter filter={this.state.filters.blur} />
             <NoiseFilter filter={this.state.filters.noise} />
             <GrayscaleFilter filter={this.state.filters.grayscale} />
+            <WatermarkFilter filter={this.state.filters.watermark} />
         </div>
     },
 

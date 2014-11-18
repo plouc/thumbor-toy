@@ -21,8 +21,8 @@ var NoiseFilter = React.createClass({
         </div>
     },
 
-    _onChange: function (e) {
-        FilterActions.update('noise', {
+    _onChange: function () {
+        FilterActions.update(this.props.filter.id, {
             active: this.refs.active.getDOMNode().checked,
             amount: parseInt(this.refs.amount.getDOMNode().value, 10)
         });
