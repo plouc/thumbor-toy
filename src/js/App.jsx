@@ -4,6 +4,7 @@ var ImageSource = require('./components/ImageSource.jsx');
 var Image       = require('./components/Image.jsx');
 var Url         = require('./components/Url.jsx');
 var Filters     = require('./components/Filters.jsx');
+var Resize      = require('./components/Resize.jsx');
 
 React.render((
     <div>
@@ -16,7 +17,7 @@ React.render((
             <Filters />
         </div>
         <div className="metadata">
-            <Metadata />
+            <Resize />
         </div>
         <div className="content">
             <Image />

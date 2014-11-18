@@ -1,11 +1,15 @@
 @import "../../bower_components/normalize-scss/normalize";
 
+$fa-font-path: 'bower_components/font-awesome/fonts';
+@import "../../bower_components/font-awesome/scss/font-awesome";
+
 body {
   font-size: 16px;
   height: 100%;
   width: 100%;
 
   background-color: #262626;
+  color: #bbb;
 
   font-family: 'Roboto', sans-serif;
 }
@@ -35,38 +39,116 @@ $header-height: 42px;
 
   padding: 0 15px;
 
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid #000;
 
   font-size: 14px;
 }
 
 .filter {
   font-size: 13px;
-  border-top:    1px solid rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(0,     0,   0, 0.1);
 
-  background-color: #535353;
-
-  padding: 0 10px;
-
-  &__label {
+  &__toggle,
+  &__delete,
+  &__expand {
+    position: absolute;
+    top: 4px;
     display: block;
-    margin: 5px 0;
-    color: #888;
+    width:       20px;
+    height:      20px;
+    line-height: 20px;
+    background-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.35) inset;
+    text-align: center;
+    border-radius: 2px;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.35);
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0) inset;
+    }
   }
+  &__toggle {
+    left: 10px;
+    font-size: 12px;
+  }
+  &__delete {
+    right: 32px;
+    font-size: 10px;
+  }
+  &__expand {
+    right: 10px;
+  }
+
+  &__header {
+    position: relative;
+    display: block;
+    padding: 4px 0 4px 37px;
+    color: #888;
+    background-color: #535353;
+    cursor: pointer;
+    height:      30px;
+    line-height: 20px;
+    border-top:    1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(0,     0,   0, 0.35);
+  }
+
   &__settings {
-    margin-bottom: 5px;
     display: none;
+    padding: 7px 10px;
+    background-color: rgba(0, 0, 0, 0.1);
     select {
       width: 100%;
     }
+    &._is-expanded {
+      display: block;
+    }
   }
   &._is-active {
-    .filter__label {
+    .filter__header {
       color: #fff;
     }
-    .filter__settings {
-      display: block;
+  }
+
+  &__setting {
+    &--text {
+      color: #777;
+      width: 100%;
+      border: none;
+      background-color: #333;
+      border-radius: 2px;
+      padding: 3px 10px;
+      &:focus {
+        outline: 0 none;
+        background-color: #222;
+        color: #999;
+      }
+    }
+  }
+}
+
+.filters__selector {
+  padding: 10px 40px 10px 10px;
+  position: relative;
+  vertical-align: top;
+  select {
+    vertical-align: top;
+    width: 100%;
+  }
+  &__add {
+    position: absolute;
+    top:   10px;
+    right: 10px;
+    display: block;
+    width:       20px;
+    height:      20px;
+    line-height: 20px;
+    background-color: #535353;
+    text-align: center;
+    color: #fff;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 10px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    &:hover {
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0.35);
     }
   }
 }
@@ -83,6 +165,31 @@ $header-height: 42px;
   }
 }
 
+.resize {
+  font-size: 14px;
+  &__group {
+    margin-bottom: 10px;
+  }
+  &__dimension {
+    &__label {
+      display: inline-block;
+      width: 50%;
+    }
+    &__control {
+      width: 50%;
+      color: #777;
+      border: none;
+      background-color: #333;
+      border-radius: 2px;
+      padding: 3px 10px;
+    }
+  }
+  &__switch {
+    display: inline-block;
+    width: 50%;
+  }
+}
+
 
 .filters,
 .metadata {
@@ -95,8 +202,6 @@ $header-height: 42px;
   width: 20%;
 
   background-color: #464646;
-
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
 }
 
 .metadata {
@@ -117,7 +222,6 @@ $header-height: 42px;
     font-size: 14px;
   }
   &__list {
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
   }
 }
 .metadata {

@@ -1,7 +1,14 @@
 var React         = require('react/addons');
 var FilterActions = require('./../../actions/FilterActions');
+var FilterToggle  = require('./../FilterToggle.jsx');
 
 var GrayscaleFilter = React.createClass({
+    getInitialState: function () {
+        return {
+            expanded: true
+        };
+    },
+
     render: function () {
 
         var cssClasses = 'filter';
@@ -10,17 +17,13 @@ var GrayscaleFilter = React.createClass({
         }
 
         return <div className={cssClasses}>
-            <label className="filter__label">
-                <input ref="active" type="checkbox" onChange={this._onChange} />
-                &nbsp;
-                Grayscale
-            </label>
+            <FilterToggle {...this.props} onToggle={this._onToggleSettings} expanded={this.state.expanded} />
         </div>
     },
 
-    _onChange: function () {
-        FilterActions.update(this.props.filter.id, {
-            active: this.refs.active.getDOMNode().checked
+    _onToggleSettings: function () {
+        this.setState({
+            expanded: !this.state.expanded
         });
     }
 });

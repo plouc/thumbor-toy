@@ -1,7 +1,14 @@
 var React         = require('react/addons');
 var FilterActions = require('./../../actions/FilterActions');
+var FilterToggle  = require('./../FilterToggle.jsx');
 
 var BrightnessFilter = React.createClass({
+    getInitialState: function () {
+        return {
+            expanded: true
+        };
+    },
+
     render: function () {
 
         var cssClasses = 'filter';
@@ -10,20 +17,21 @@ var BrightnessFilter = React.createClass({
         }
 
         return <div className={cssClasses}>
-            <label className="filter__label">
-                <input ref="active" type="checkbox" onChange={this._onChange} />
-                &nbsp;
-                Brightness
-            </label>
-            <div className="filter__settings">
-                <input ref="amount" onChange={this._onChange} defaultValue="0" />
+            <FilterToggle {...this.props} onToggle={this._onToggleSettings} expanded={this.state.expanded} />
+            <div className={'filter__settings' + (this.state.expanded ? ' _is-expanded' : '')}>
+                <input className="filter__setting--text" ref="amount" onChange={this._onChange} defaultValue="0" />
             </div>
         </div>
     },
 
+    _onToggleSettings: function () {
+        this.setState({
+            expanded: !this.state.expanded
+        });
+    },
+
     _onChange: function () {
         FilterActions.update(this.props.filter.id, {
-            active: this.refs.active.getDOMNode().checked,
             amount: parseInt(this.refs.amount.getDOMNode().value, 10)
         });
     }

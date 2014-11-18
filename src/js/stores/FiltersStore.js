@@ -1,88 +1,105 @@
 var Reflux        = require('reflux');
 var FilterActions = require('./../actions/FilterActions');
+var config        = require('./../../../config');
 var _             = require('lodash');
 
-var _filters = {
-    // Usage: blur(radius [, sigma])
-    blur: {
-        id:        'blur',
+var _currentFilters   = [];
+var _availableFilters = [
+    {
+        type:      'blur',
+        label:     'Blur',
         active:    false,
-        radius:    0,
+        radius:    1,
         stringify: function () {
-            return this.id + '(' + this.radius + ')';
+            return this.type + '(' + this.radius + ')';
         }
     },
-
     // Usage: brightness(amount)
-    brightness: {
-        id:        'brightness',
+    {
+        type:      'brightness',
+        label:     'Brightness',
         active:    false,
         amount:    0,
         stringify: function () {
-            return this.id + '(' + this.amount + ')';
+            return this.type + '(' + this.amount + ')';
         }
     },
-
     // Usage: noise(amount)
-    noise: {
-        id:        'noise',
+    {
+        type:      'noise',
+        label:     'Noise',
         active:    false,
         amount:    0,
         stringify: function () {
-            return this.id + '(' + this.amount + ')';
+            return this.type + '(' + this.amount + ')';
         }
 
     },
-
-    grayscale: {
-        id:        'grayscale',
+    {
+        type:      'grayscale',
+        label:     'Grayscale',
         active:    false,
         stringify: function () {
-            return this.id + '()';
+            return this.type + '()';
         }
     },
-
-    watermark: {
-        id:           'watermark',
+    {
+        type:         'watermark',
+        label:        'Watermark',
         active:       false,
-        image:        null,
-        x:            0,
-        y:            0,
+        image:        config.watermarkImages[0].src,
+        x:            10,
+        y:            10,
         transparency: 0,
         stringify:    function () {
-            return this.id + '(' + this.image + ',' + this.x + ',' + this.y + ',' + this.transparency +')';
+            return this.type + '(' + this.image + ',' + this.x + ',' + this.y + ',' + this.transparency +')';
         }
     }
-};
+];
 
 var FiltersStore = Reflux.createStore({
     init: function () {
         this.listenTo(FilterActions.update, this.updateFilter);
+        this.listenTo(FilterActions.add,    this.addFilter);
+        this.listenTo(FilterActions.delete, this.deleteFilter);
     },
 
-    updateFilter: function (id, filter) {
-        _.merge(_filters[id], filter);
+    addFilter: function (type) {
+        var filter = _.find(_availableFilters, { 'type': type });
+
+        var filterInstance = _.clone(filter);
+        filterInstance.active = true;
+
+        _currentFilters.push(filterInstance);
+
+        _.forEach(_currentFilters, function (filter, i) {
+            filter.id = i;
+        });
 
         this.trigger();
     },
 
-    get: function (id) {
-        return _filters[id];
-    },
-
-    all: function () {
-        return _filters;
-    },
-
-    actives: function () {
-        var actives = [];
-        _.forOwn(_filters, function (filter, id) {
-            if (filter.active === true) {
-                actives.push(filter);
-            }
+    deleteFilter: function (id) {
+        _.remove(_currentFilters, { id: id });
+        _.forEach(_currentFilters, function (filter, i) {
+            filter.id = i;
         });
 
-        return actives;
+        this.trigger();
+    },
+
+    updateFilter: function (id, settings) {
+        _.merge(_currentFilters[id], settings);
+
+        this.trigger();
+    },
+
+    current: function () {
+        return _currentFilters;
+    },
+
+    available: function () {
+        return _availableFilters;
     }
 });
 

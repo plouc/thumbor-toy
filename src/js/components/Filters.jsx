@@ -9,12 +9,14 @@ var GrayscaleFilter  = require('./filters/GrayscaleFilter.jsx');
 var NoiseFilter      = require('./filters/NoiseFilter.jsx');
 var WatermarkFilter  = require('./filters/WatermarkFilter.jsx');
 
+var FilterSelector = require('./FilterSelector.jsx');
+
 var Filters = React.createClass({
     mixins: [Reflux.ListenerMixin],
 
     getInitialState: function () {
         return {
-            filters: FiltersStore.all()
+            filters: []
         };
     },
 
@@ -24,23 +26,45 @@ var Filters = React.createClass({
     },
 
     render: function () {
+
+        var filtersNodes = this.state.filters.map(function (filter, i) {
+            switch (filter.type) {
+                case 'brightness':
+                    return <BrightnessFilter filter={filter} />
+                    break;
+
+                case 'blur':
+                    return <BlurFilter filter={filter} />
+                    break;
+
+                case 'grayscale':
+                    return <GrayscaleFilter filter={filter} />
+                    break;
+
+                case 'watermark':
+                    return <WatermarkFilter filter={filter} />
+                    break;
+
+                case 'noise':
+                    return <NoiseFilter filter={filter} />
+                    break;
+            }
+        });
+
         return <div className="filters__list">
             <h3 className="filters__title">Filters</h3>
-            <BrightnessFilter filter={this.state.filters.brightness} />
-            <BlurFilter filter={this.state.filters.blur} />
-            <NoiseFilter filter={this.state.filters.noise} />
-            <GrayscaleFilter filter={this.state.filters.grayscale} />
-            <WatermarkFilter filter={this.state.filters.watermark} />
+            <FilterSelector />
+            {filtersNodes}
         </div>
     },
 
     _onImageChange: function () {
-        console.log('img src', ImageStore.get());
+        //console.log('img src', ImageStore.get());
     },
 
     _onFiltersChange: function () {
         this.setState({
-            filters: FiltersStore.all()
+            filters: FiltersStore.current()
         });
     }
 });

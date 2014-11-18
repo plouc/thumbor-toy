@@ -3,29 +3,37 @@ var _            = require('lodash');
 var config       = require('./../../../config');
 var ImageStore   = require('./ImageStore');
 var FiltersStore = require('./FiltersStore');
-
-var $ = require('jquery');
+var ResizeStore  = require('./ResizeStore');
 
 var UrlStore = Reflux.createStore({
     init: function () {
         this.listenTo(ImageStore,   this.update);
         this.listenTo(FiltersStore, this.update);
+        this.listenTo(ResizeStore,  this.update);
     },
 
     update: function () {
-        var activeFilters = FiltersStore.actives();
-        var filters = '';
-        if (activeFilters.length) {
-            filters = 'filters:' + _.map(activeFilters, function (filter) {
+        var currentFilters = _.filter(FiltersStore.current(), { 'active': true });
+        var filters        = '';
+        if (currentFilters.length) {
+            filters = 'filters:' + _.map(currentFilters, function (filter) {
                 return filter.stringify();
             }).join(':') + '/';
         }
 
-        var url = config.baseUrl + 'unsafe/' + filters + ImageStore.get();
+        var resizeConfig = ResizeStore.config();
+        var resize       = '';
+        if (resizeConfig.active) {
+            if (resizeConfig.debug) {
+                resize += 'debug/';
+            }
+            resize += resizeConfig.width + 'x' + resizeConfig.height + '/';
+            if (resizeConfig.smart) {
+                resize += 'smart/';
+            }
+        }
 
-        console.log('URL', url);
-
-        //console.log(window);
+        var url = config.baseUrl + 'unsafe/' + resize + filters + ImageStore.get();
 
         this.trigger(url);
     }

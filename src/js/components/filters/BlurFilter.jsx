@@ -1,7 +1,14 @@
 var React         = require('react/addons');
 var FilterActions = require('./../../actions/FilterActions');
+var FilterToggle  = require('./../FilterToggle.jsx');
 
 var BlurFilter = React.createClass({
+    getInitialState: function () {
+        return {
+            expanded: true
+        };
+    },
+
     render: function () {
 
         var cssClasses = 'filter';
@@ -10,20 +17,24 @@ var BlurFilter = React.createClass({
         }
 
         return <div className={cssClasses}>
-            <label className="filter__label">
-                <input ref="active" type="checkbox" onChange={this._onChange} />
-                &nbsp;
-                Blur
-            </label>
-            <div className="filter__settings">
-                <input ref="radius" onChange={this._onChange} defaultValue="1" />
+            <FilterToggle {...this.props} onToggle={this._onToggleSettings} expanded={this.state.expanded} />
+            <div className={'filter__settings' + (this.state.expanded ? ' _is-expanded' : '')}>
+                <input className="filter__setting--text"
+                       ref="radius"
+                       onChange={this._onChange}
+                       defaultValue={this.props.filter.radius} />
             </div>
         </div>
     },
 
+    _onToggleSettings: function () {
+        this.setState({
+            expanded: !this.state.expanded
+        });
+    },
+
     _onChange: function () {
         FilterActions.update(this.props.filter.id, {
-            active: this.refs.active.getDOMNode().checked,
             radius: parseInt(this.refs.radius.getDOMNode().value, 10)
         });
     }
