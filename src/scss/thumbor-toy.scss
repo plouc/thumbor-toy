@@ -1,0 +1,94 @@
+@import "../../bower_components/normalize-scss/normalize";
+
+body {
+  font-size: 16px;
+  height: 100%;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+$header-height: 42px;
+
+.url {
+  height:      $header-height;
+  line-height: $header-height;
+
+  background-color: #eee;
+
+  font-family: consolas, menlo, monaco, monospace;
+  color: #000;
+
+  position: absolute;
+
+  top:   0;
+  left:  0;
+  right: 0;
+
+  padding: 0 15px;
+
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
+
+  font-size: 14px;
+
+  z-index: 100;
+}
+
+h3 {
+  margin: 7px 0;
+}
+
+.filter {
+  font-size: 13px;
+  &__label {
+    display: block;
+    margin: 5px 0;
+    color: #999;
+  }
+  &__settings {
+    margin-bottom: 5px;
+    display: none;
+  }
+  &._is-active {
+    .filter__label {
+      color: #000;
+    }
+    .filter__settings {
+      display: block;
+    }
+  }
+  border-top: 1px dotted #ccc;
+}
+
+.filters,
+.metadata {
+  position: absolute;
+
+  top:    $header-height;
+  bottom: 0;
+
+  width: 20%;
+
+  background-color: #eee;
+
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
+
+  padding: 10px 15px;
+}
+
+.filters {
+  left: 0;
+}
+.metadata {
+  right: 0;
+}
+.content {
+  position: absolute;
+  top:    $header-height;
+  right:  20%;
+  bottom: 0;
+  left:   20%;
+  overflow: auto;
+}
