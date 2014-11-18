@@ -4,6 +4,10 @@ body {
   font-size: 16px;
   height: 100%;
   width: 100%;
+
+  background-color: #262626;
+
+  font-family: 'Roboto', sans-serif;
 }
 
 * {
@@ -13,13 +17,15 @@ body {
 $header-height: 42px;
 
 .url {
+  z-index: 200;
+
   height:      $header-height;
   line-height: $header-height;
 
-  background-color: #eee;
+  background-color: #535353;
 
   font-family: consolas, menlo, monaco, monospace;
-  color: #000;
+  color: #fff;
 
   position: absolute;
 
@@ -29,23 +35,24 @@ $header-height: 42px;
 
   padding: 0 15px;
 
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
 
   font-size: 14px;
-
-  z-index: 100;
-}
-
-h3 {
-  margin: 7px 0;
 }
 
 .filter {
   font-size: 13px;
+  border-top:    1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0,     0,   0, 0.1);
+
+  background-color: #535353;
+
+  padding: 0 10px;
+
   &__label {
     display: block;
     margin: 5px 0;
-    color: #999;
+    color: #888;
   }
   &__settings {
     margin-bottom: 5px;
@@ -53,17 +60,30 @@ h3 {
   }
   &._is-active {
     .filter__label {
-      color: #000;
+      color: #fff;
     }
     .filter__settings {
       display: block;
     }
   }
-  border-top: 1px dotted #ccc;
 }
+
+.image-source {
+  border-top:    1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0,     0,   0, 0.1);
+
+  background-color: #535353;
+
+  padding: 10px;
+  select {
+    width: 100%;
+  }
+}
+
 
 .filters,
 .metadata {
+  z-index: 100;
   position: absolute;
 
   top:    $header-height;
@@ -71,15 +91,30 @@ h3 {
 
   width: 20%;
 
-  background-color: #eee;
+  background-color: #464646;
 
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+}
 
+.metadata {
   padding: 10px 15px;
 }
 
 .filters {
   left: 0;
+  &__title {
+    background-color: #393939;
+    margin: 0;
+    font-weight: 400;
+    padding: 5px 10px;
+    color: #999;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+  &__list {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+  }
 }
 .metadata {
   right: 0;

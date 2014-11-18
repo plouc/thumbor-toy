@@ -12,7 +12,7 @@ React.render((
             React.createElement(Url, null)
         ), 
         React.createElement("div", {className: "filters"}, 
-            React.createElement("h3", null, "image"), 
+            React.createElement("h3", {className: "filters__title"}, "Image"), 
             React.createElement(ImageSource, null), 
             React.createElement(Filters, null)
         ), 
@@ -26,7 +26,7 @@ React.render((
 ), document.body);
 },{"./components/Filters.jsx":182,"./components/Image.jsx":183,"./components/ImageSource.jsx":184,"./components/Metadata.jsx":185,"./components/Url.jsx":186,"react/addons":6}],2:[function(require,module,exports){
 module.exports = {
-    baseUrl: 'http://192.168.66.66:8888/',
+    baseUrl: 'http://thumbor.poc/',
     images: [
         { label: 'canalsat logo',      src: 'canalsat.png' },
         { label: 'naked lunch',        src: 'naked-lunch.png' },
@@ -36965,8 +36965,8 @@ var Filters = React.createClass({displayName: 'Filters',
     },
 
     render: function () {
-        return React.createElement("div", null, 
-            React.createElement("h3", null, "Filters"), 
+        return React.createElement("div", {className: "filters__list"}, 
+            React.createElement("h3", {className: "filters__title"}, "Filters"), 
             React.createElement(BrightnessFilter, {filter: this.state.filters.brightness}), 
             React.createElement(BlurFilter, {filter: this.state.filters.blur}), 
             React.createElement(NoiseFilter, {filter: this.state.filters.noise}), 
@@ -37044,8 +37044,10 @@ var ImageSource = React.createClass({displayName: 'ImageSource',
         });
 
         return (
-            React.createElement("select", {onChange: this._onChange}, 
-                options
+            React.createElement("div", {className: "image-source"}, 
+                React.createElement("select", {onChange: this._onChange}, 
+                    options
+                )
             )
         );
     },

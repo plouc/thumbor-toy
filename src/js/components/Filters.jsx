@@ -23,8 +23,8 @@ var Filters = React.createClass({
     },
 
     render: function () {
-        return <div>
-            <h3>Filters</h3>
+        return <div className="filters__list">
+            <h3 className="filters__title">Filters</h3>
             <BrightnessFilter filter={this.state.filters.brightness} />
             <BlurFilter filter={this.state.filters.blur} />
             <NoiseFilter filter={this.state.filters.noise} />

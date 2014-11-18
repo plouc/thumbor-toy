@@ -18,9 +18,11 @@ var ImageSource = React.createClass({
         });
 
         return (
-            <select onChange={this._onChange}>
-                {options}
-            </select>
+            <div className="image-source">
+                <select onChange={this._onChange}>
+                    {options}
+                </select>
+            </div>
         );
     },
 
