@@ -52,7 +52,10 @@ var Filters = React.createClass({
         });
 
         return <div className="filters__list">
-            <h3 className="filters__title">Filters</h3>
+            <h3 className="panel__title">
+                <i className="fa fa-magic" />
+                Filters
+            </h3>
             <FilterSelector />
             {filtersNodes}
         </div>

@@ -9,7 +9,7 @@ var ImageSource = React.createClass({
     render: function () {
         var sources = config.images;
         sources.unshift({
-            label: 'select an image',
+            label: '--- select an image ---',
             src:   null
         });
 
@@ -17,13 +17,17 @@ var ImageSource = React.createClass({
             return <option key={image.src} value={image.src}>{image.label}</option>
         });
 
-        return (
-            <div className="image-source">
-                <select onChange={this._onChange}>
+        return <div className="panel panel--img-src">
+            <h3 className="panel__title">
+                <i className="fa fa-picture-o" />
+                Image
+            </h3>
+            <div className="panel__content">
+                <select className="select--full" onChange={this._onChange}>
                     {options}
                 </select>
             </div>
-        );
+        </div>;
     },
 
     _onChange: function (e) {

@@ -12,7 +12,6 @@ React.render((
             <Url />
         </div>
         <div className="filters">
-            <h3 className="filters__title">Image</h3>
             <ImageSource />
             <Filters />
         </div>
