@@ -3,3 +3,5 @@
 node_modules
 /config.js
 bower_components
+thumbor-toy.js
+thumbor-toy.min.css
