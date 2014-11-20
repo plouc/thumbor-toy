@@ -1,16 +1,23 @@
-var Reflux = require('reflux');
-var _      = require('lodash');
-var config = require('./../../../config');
+var Reflux        = require('reflux');
+var _             = require('lodash');
+var config        = require('./../../../config');
+var ServerActions = require('./../actions/ServerActions');
 
 var _server = '';
 
 var ServerStore = Reflux.createStore({
     init: function () {
+        this.listenTo(ServerActions.set, this.updateServer);
     },
 
-    update: function () {
+    updateServer: function (server) {
+        _server = server;
 
-        this.trigger(url);
+        this.trigger(_server);
+    },
+
+    current: function () {
+        return _server;
     }
 });
 

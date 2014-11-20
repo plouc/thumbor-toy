@@ -1,0 +1,23 @@
+.url {
+  z-index: 200;
+
+  height:      $header-height;
+  line-height: $header-height;
+
+  background-color: #535353;
+
+  font-family: consolas, menlo, monaco, monospace;
+  color: #fff;
+
+  position: absolute;
+
+  top:   0;
+  left:  0;
+  right: 0;
+
+  padding: 0 15px;
+
+  border-bottom: 1px solid #000;
+
+  font-size: 14px;
+}

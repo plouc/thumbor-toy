@@ -12,7 +12,7 @@ var FilterToggle = React.createClass({
                 <i className="fa fa-times" />
             </span>
             <span className="filter__expand" onClick={this._onToggleVisibility}>
-                <i className={'fa fa-angle-' + (this.props.expanded ? 'down' : 'right') } />
+                <i className={'fa fa-chevron-' + (this.props.expanded ? 'down' : 'right') } />
             </span>
         </div>
     },

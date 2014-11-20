@@ -4,12 +4,14 @@ var config       = require('./../../../config');
 var ImageStore   = require('./ImageStore');
 var FiltersStore = require('./FiltersStore');
 var ResizeStore  = require('./ResizeStore');
+var ServerStore  = require('./ServerStore');
 
 var UrlStore = Reflux.createStore({
     init: function () {
         this.listenTo(ImageStore,   this.update);
         this.listenTo(FiltersStore, this.update);
         this.listenTo(ResizeStore,  this.update);
+        this.listenTo(ServerStore,  this.update);
     },
 
     update: function () {
@@ -39,7 +41,7 @@ var UrlStore = Reflux.createStore({
             }
         }
 
-        var url = config.baseUrl + 'unsafe/' + resize + filters + ImageStore.get();
+        var url = ServerStore.current() + 'unsafe/' + resize + filters + ImageStore.get();
 
         this.trigger(url);
     }

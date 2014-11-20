@@ -5,89 +5,73 @@ $fa-font-path: 'bower_components/font-awesome/fonts';
 
 body {
   font-size: 16px;
+
   height: 100%;
-  width: 100%;
+  width:  100%;
 
   background-color: #262626;
-  color: #bbb;
+  color:            #bbb;
 
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 * {
   box-sizing: border-box;
 }
 
-$header-height: 42px;
-
-.url {
-  z-index: 200;
-
-  height:      $header-height;
-  line-height: $header-height;
-
-  background-color: #535353;
-
-  font-family: consolas, menlo, monaco, monospace;
-  color: #fff;
-
-  position: absolute;
-
-  top:   0;
-  left:  0;
-  right: 0;
-
-  padding: 0 15px;
-
-  border-bottom: 1px solid #000;
-
-  font-size: 14px;
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  margin: 0;
 }
 
+$header-height: 42px;
+
 .filter {
-  font-size: 13px;
+  font-size: 12px;
 
   &__toggle,
   &__delete,
   &__expand {
     position: absolute;
-    top: 4px;
+    top: 0;
     display: block;
-    width:       20px;
-    height:      20px;
-    line-height: 20px;
-    background-color: rgba(0, 0, 0, 0.15);
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.35) inset;
+    width:       30px;
+    height:      30px;
+    line-height: 30px;
     text-align: center;
-    border-radius: 2px;
     &:hover {
-      background-color: rgba(0, 0, 0, 0.35);
-      box-shadow: 0 0 0 rgba(0, 0, 0, 0) inset;
+      background-color: rgba(255, 255, 255, 0.15);
     }
   }
   &__toggle {
-    left: 10px;
+    left: 0;
     font-size: 12px;
   }
   &__delete {
-    right: 32px;
+    right: 30px;
     font-size: 10px;
   }
   &__expand {
-    right: 10px;
+    right: 0;
+    font-size: 10px;
   }
 
   &__header {
+    font-size: 14px;
     position: relative;
     display: block;
-    padding: 4px 0 4px 37px;
+    padding: 0 0 0 37px;
     color: #888;
     background-color: #535353;
     cursor: pointer;
-    height:      30px;
-    line-height: 20px;
-    border-top:    1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(0,     0,   0, 0.35);
+    height:      31px;
+    line-height: 30px;
+    font-weight: 300;
+    border-bottom: 1px solid #464646;
+    &:hover {
+      background-color: #5d5d5d;
+    }
   }
 
   &__settings {
@@ -125,33 +109,34 @@ $header-height: 42px;
 }
 
 .filters__selector {
-  padding: 10px 40px 10px 10px;
   position: relative;
-  vertical-align: top;
-  select {
-    vertical-align: top;
-    width: 100%;
-  }
+  padding-right: 60px;
+
   &__add {
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
     position: absolute;
-    top:   10px;
+    top:   8px;
     right: 10px;
     display: block;
-    width:       20px;
     height:      20px;
     line-height: 20px;
-    background-color: #535353;
     text-align: center;
-    color: #fff;
-    border-radius: 2px;
     cursor: pointer;
     font-size: 10px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+
+    color:            #aaa;
+    border: 1px solid #aaa;
+
+    padding: 0 5px;
+
     &:hover {
-      box-shadow: 0 0 1px rgba(0, 0, 0, 0.35);
+      color:        #fff;
+      border-color: #fff;
     }
   }
 }
+
 
 input[type="checkbox"] {
   margin-right: 7px;
@@ -203,34 +188,6 @@ select {
   background-color: #464646;
 }
 
-.metadata {
-}
-
-
-.panel {
-  &__title {
-    background-color: #393939;
-    margin: 0;
-    font-weight: 400;
-    padding: 7px 10px;
-    color: #bbb;
-    font-family: "Montserrat", sans-serif;
-    text-transform: uppercase;
-    font-size: 14px;
-    .fa {
-      color: #777;
-      margin-right: 7px;
-    }
-  }
-  &__content {
-    padding: 10px;
-    font-size: 14px;
-    border-top:    1px solid rgba(255, 255, 255, 0.1);
-    background-color: #535353;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.65);
-  }
-}
-
 .filters {
   left: 0;
   border-right: 1px solid #000;
@@ -247,3 +204,7 @@ select {
   left:   20%;
   overflow: auto;
 }
+
+@import "url";
+@import "panel";
+@import "select";

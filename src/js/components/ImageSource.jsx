@@ -7,11 +7,10 @@ var ImageSource = React.createClass({
     mixins: [Reflux.ListenerMixin],
 
     render: function () {
-        var sources = config.images;
-        sources.unshift({
+        var sources = [{
             label: '--- select an image ---',
             src:   null
-        });
+        }].concat(config.images);
 
         var options = sources.map(function (image) {
             return <option key={image.src} value={image.src}>{image.label}</option>
@@ -22,10 +21,11 @@ var ImageSource = React.createClass({
                 <i className="fa fa-picture-o" />
                 Image
             </h3>
-            <div className="panel__content">
+            <div className="select-box">
                 <select className="select--full" onChange={this._onChange}>
                     {options}
                 </select>
+                <i className="fa fa-angle-down" />
             </div>
         </div>;
     },

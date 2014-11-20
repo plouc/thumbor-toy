@@ -1,8 +1,8 @@
 var React         = require('react/addons');
 var Reflux        = require('reflux');
-var config        = require('./../../../config');
-var FiltersStore  = require('./../stores/FiltersStore');
-var FilterActions = require('./../actions/FilterActions');
+var config        = require('./../../../../config');
+var FiltersStore  = require('./../../stores/FiltersStore');
+var FilterActions = require('./../../actions/FilterActions');
 
 
 var FilterSelector = React.createClass({
@@ -14,11 +14,14 @@ var FilterSelector = React.createClass({
         });
 
         return <div className="filters__selector">
-            <select ref="filter" onChange={this._onChange}>
-                {options}
-            </select>
+            <div className="select-box select-box--filters">
+                <select ref="filter" onChange={this._onChange}>
+                    {options}
+                </select>
+                <i className="fa fa-angle-down" />
+            </div>
             <span className="filters__selector__add" onClick={this._onAdd}>
-                <i className="fa fa-plus" />
+                add <i className="fa fa-plus" />
             </span>
         </div>
     },

@@ -1,0 +1,21 @@
+.panel {
+  &__title {
+    background-color: #393939;
+    margin: 0;
+    font-weight: 400;
+    padding: 7px 10px;
+    color: #bbb;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    font-size: 14px;
+    .fa {
+      color: #777;
+      margin-right: 7px;
+    }
+  }
+  &__content {
+    padding: 10px;
+    font-size: 14px;
+    background-color: #535353;
+  }
+}

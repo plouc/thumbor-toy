@@ -1,0 +1,37 @@
+.select-box {
+  position: relative;
+  overflow: hidden;
+
+  color: #fff;
+
+  .fa {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    color: #fff;
+    font-size: 20px;
+    top: 50%;
+    margin-top: -10px;
+  }
+
+  select {
+    font-size: 14px;
+
+    position: relative;
+    font-weight: 300;
+    z-index: 1;
+    display: block;
+    width: 150%;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border: none;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    background-color: transparent;
+    padding: 9px 50px 9px 10px;
+    &:focus {
+      outline: none;
+    }
+  }
+}

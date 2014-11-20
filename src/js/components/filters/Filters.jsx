@@ -1,8 +1,8 @@
 var React          = require('react/addons');
 var Reflux         = require('reflux');
-var config         = require('./../../../config');
-var FiltersStore   = require('./../stores/FiltersStore');
-var ImageStore     = require('./../stores/ImageStore');
+var config         = require('./../../../../config');
+var FiltersStore   = require('./../../stores/FiltersStore');
+var ImageStore     = require('./../../stores/ImageStore');
 var FilterSelector = require('./FilterSelector.jsx');
 
 var Filters = React.createClass({

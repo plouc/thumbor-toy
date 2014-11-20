@@ -1,7 +1,8 @@
-var React    = require('react/addons');
-var Reflux   = require('reflux');
-var config   = require('./../../../config');
-var UrlStore = require('./../stores/UrlStore');
+var React      = require('react/addons');
+var Reflux     = require('reflux');
+var config     = require('./../../../config');
+var UrlStore   = require('./../stores/UrlStore');
+var ImageStore = require('./../stores/ImageStore');
 
 var Image = React.createClass({
     mixins: [Reflux.ListenerMixin],
@@ -17,7 +18,7 @@ var Image = React.createClass({
     },
 
     render: function () {
-        if (!this.state.src) {
+        if (!this.state.src || !ImageStore.get()) {
             return null;
         }
 
