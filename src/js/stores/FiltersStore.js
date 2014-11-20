@@ -1,61 +1,24 @@
 var Reflux        = require('reflux');
 var FilterActions = require('./../actions/FilterActions');
 var config        = require('./../../../config');
+var baseFilters   = require('./../baseFilters');
 var _             = require('lodash');
 
 var _currentFilters   = [];
-var _availableFilters = [
-    {
-        type:      'blur',
-        label:     'Blur',
-        active:    false,
-        radius:    1,
-        stringify: function () {
-            return this.type + '(' + this.radius + ')';
-        }
-    },
-    // Usage: brightness(amount)
-    {
-        type:      'brightness',
-        label:     'Brightness',
-        active:    false,
-        amount:    0,
-        stringify: function () {
-            return this.type + '(' + this.amount + ')';
-        }
-    },
-    // Usage: noise(amount)
-    {
-        type:      'noise',
-        label:     'Noise',
-        active:    false,
-        amount:    0,
-        stringify: function () {
-            return this.type + '(' + this.amount + ')';
-        }
+var _availableFilters = [];
 
-    },
-    {
-        type:      'grayscale',
-        label:     'Grayscale',
-        active:    false,
-        stringify: function () {
-            return this.type + '()';
+_.forEach(config.filters, function (filter) {
+    if (_.isString(filter)) {
+        var baseFilter = _.findLast(baseFilters, { type: filter });
+        if (!baseFilter) {
+            throw "no filter found with type: " + filter;
         }
-    },
-    {
-        type:         'watermark',
-        label:        'Watermark',
-        active:       false,
-        image:        config.watermarkImages[0].src,
-        x:            10,
-        y:            10,
-        transparency: 0,
-        stringify:    function () {
-            return this.type + '(' + this.image + ',' + this.x + ',' + this.y + ',' + this.transparency +')';
-        }
+        _availableFilters.push(baseFilter);
+    } else {
+        _availableFilters.push(filter);
     }
-];
+});
+
 
 var FiltersStore = Reflux.createStore({
     init: function () {

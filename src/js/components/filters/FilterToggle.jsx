@@ -1,5 +1,5 @@
 var React         = require('react/addons');
-var FilterActions = require('./../actions/FilterActions');
+var FilterActions = require('./../../actions/FilterActions');
 
 var FilterToggle = React.createClass({
     render: function () {
