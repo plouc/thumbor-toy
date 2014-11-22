@@ -2,21 +2,42 @@
   position: relative;
   overflow: hidden;
 
-  color: #fff;
+  cursor: pointer;
+
+  background-color: $control-bg-color;
+  border-radius: 2px;
+  margin: 0 10px;
+
+  box-shadow: 0 1px 0 darken($panel-bg-color, 10);
+
+  background: lighten($control-bg-color, 1); /* Old browsers */
+  background: -moz-linear-gradient(top,  lighten($control-bg-color, 1) 0%, $control-bg-color 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,lighten($control-bg-color, 1)), color-stop(100%,$control-bg-color)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  lighten($control-bg-color, 1) 0%,$control-bg-color 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  lighten($control-bg-color, 1) 0%,$control-bg-color 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  lighten($control-bg-color, 1) 0%,$control-bg-color 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  lighten($control-bg-color, 1) 0%,$control-bg-color 100%); /* W3C */
+
 
   .fa {
     position: absolute;
     top: 0;
     right: 10px;
-    color: #fff;
     font-size: 20px;
     top: 50%;
     margin-top: -10px;
+    color: lighten($panel-bg-color, 10);
+  }
+
+  &:hover {
+    color: $font-highlight-color;
+    .fa {
+      color: $font-highlight-color;
+    }
   }
 
   select {
     font-size: 14px;
-
     position: relative;
     font-weight: 300;
     z-index: 1;
@@ -27,11 +48,15 @@
             appearance: none;
     border: none;
     -webkit-border-radius: 0;
-    border-radius: 0;
-    background-color: rgb(169, 169, 169);
+            border-radius: 0;
+
+    background-color: transparent;
+
     padding: 9px 50px 9px 10px;
     &:focus {
       outline: none;
+      background-color: $bg-color;
+      color: #fff;
     }
   }
 }

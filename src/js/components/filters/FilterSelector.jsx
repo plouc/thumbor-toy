@@ -21,7 +21,7 @@ var FilterSelector = React.createClass({
                 <i className="fa fa-angle-down" />
             </div>
             <span className="filters__selector__add" onClick={this._onAdd}>
-                add <i className="fa fa-plus" />
+                <i className="fa fa-plus" />
             </span>
         </div>
     },

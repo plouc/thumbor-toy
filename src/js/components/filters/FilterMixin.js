@@ -28,11 +28,21 @@ var FilterMixin = {
     },
 
     render: function () {
-        return <div className={this.getClassName()}>
-            <FilterToggle {...this.props} onToggle={this._onToggleSettings} expanded={this.state.expanded} />
-            <div className={this.getSettingsClassName()}>
-                {this.getSettingsNodes()}
+
+        var settings      = '';
+        var settingsNodes = this.getSettingsNodes();
+        if (settingsNodes) {
+            settings = <div className={this.getSettingsClassName()}>
+                {settingsNodes}
             </div>
+        }
+
+        return <div className={this.getClassName()}>
+            <FilterToggle {...this.props}
+                onToggle={this._onToggleSettings}
+                expandable={settings != ''}
+                expanded={this.state.expanded} />
+            {settings}
         </div>
     }
 };

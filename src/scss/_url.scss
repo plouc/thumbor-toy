@@ -4,20 +4,23 @@
   height:      $header-height;
   line-height: $header-height;
 
-  background-color: #535353;
-
-  font-family: consolas, menlo, monaco, monospace;
-  color: #fff;
-
   position: absolute;
 
   top:   0;
   left:  0;
   right: 0;
 
-  padding: 0 15px;
+  padding: 9px 10px 0;
 
-  border-bottom: 1px solid #000;
+  font-size: 16px;
 
-  font-size: 14px;
+  background-color: #1f2332;
+
+  input[type="text"] {
+    vertical-align: top;
+    font-family: consolas, menlo, monaco, monospace;
+    background-color: $bg-color;
+    width: 100%;
+    padding: 9px;
+  }
 }

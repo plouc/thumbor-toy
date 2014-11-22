@@ -1,0 +1,14 @@
+.app-info {
+  position: absolute;
+  bottom: 0;
+  padding: 12px 10px;
+  text-align: left;
+  display: block;
+  width: 100%;
+
+  border-top: 1px solid darken($panel-bg-color, 5);
+
+  .fa {
+    margin-right: 7px;
+  }
+}

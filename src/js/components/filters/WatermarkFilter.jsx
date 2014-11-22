@@ -14,9 +14,27 @@ var WatermarkFilter = React.createClass({
             <select ref="image" onChange={this._onChange}>
                 {options}
             </select>
-            <input className="filter__setting--text" ref="x" onChange={this._onChange} defaultValue={this.props.filter.x} />
-            <input className="filter__setting--text" ref="y" onChange={this._onChange} defaultValue={this.props.filter.x} />
-            <input className="filter__setting--text" ref="transparency" onChange={this._onChange} defaultValue={this.props.filter.transparency} />
+            <div className="control-group">
+                <label className="control-group__label">left</label>
+                <input className="control-group__control"
+                       ref="x" type="text"
+                       onChange={this._onChange}
+                       defaultValue={this.props.filter.x} />
+            </div>
+            <div className="control-group">
+                <label className="control-group__label">top</label>
+                <input className="control-group__control"
+                       ref="y" type="text"
+                       onChange={this._onChange}
+                       defaultValue={this.props.filter.x} />
+            </div>
+            <div className="control-group">
+                <label className="control-group__label">transparency</label>
+                <input className="control-group__control"
+                       ref="transparency" type="text"
+                       onChange={this._onChange}
+                       defaultValue={this.props.filter.transparency} />
+            </div>
         </div>
     },
 

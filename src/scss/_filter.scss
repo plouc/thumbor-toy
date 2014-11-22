@@ -1,0 +1,75 @@
+.filter {
+  color: $font-color;
+
+  border-bottom: 1px solid $panel-bg-color;
+
+  &__toggle,
+  &__delete,
+  &__expand {
+    position: absolute;
+    top: 0;
+    display: block;
+    width:       30px;
+    height:      30px;
+    line-height: 30px;
+    text-align: center;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+  }
+  &__toggle {
+    left: 0;
+    font-size: 12px;
+  }
+  &__delete {
+    right: 30px;
+    font-size: 10px;
+  }
+  &__expand {
+    right: 0;
+    font-size: 10px;
+  }
+
+  &__header {
+    position: relative;
+    display: block;
+    padding: 0 0 0 37px;
+    cursor: pointer;
+    height:      31px;
+    line-height: 30px;
+    font-weight: 300;
+
+    background-color: #35394b;
+
+    &:hover {
+    }
+  }
+
+  &__settings {
+    display: none;
+    padding: 7px 10px 0 10px;
+    select {
+      width: 100%;
+    }
+    &._is-expanded {
+      display: block;
+    }
+  }
+  &._is-active {
+    .filter__header {
+      color: #fff;
+    }
+  }
+
+  &__setting {
+    &--text {
+    width: 100%;
+      border: none;
+      border-radius: 2px;
+      padding: 3px 10px;
+      &:focus {
+        outline: 0 none;
+      }
+    }
+  }
+}

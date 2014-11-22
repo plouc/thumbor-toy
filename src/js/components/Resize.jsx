@@ -9,8 +9,7 @@ var Resize = React.createClass({
     render: function () {
         return <div className="panel panel--resize">
             <h3 className="panel__title">
-                <i className="fa fa-crop" />
-                Resize
+                Resize <i className="fa fa-crop" />
             </h3>
             <div className="panel__content">
                 <div className="resize__group">
@@ -26,12 +25,14 @@ var Resize = React.createClass({
                 <div className="resize__group">
                     <label className="resize__dimension__label">width</label>
                     <input className="resize__dimension__control"
+                           type="text" ref="height"
                            ref="width" onChange={this._onChange} defaultValue="100" />
                 </div>
                 <div className="resize__group">
                     <label className="resize__dimension__label">height</label>
                     <input className="resize__dimension__control"
-                           ref="height" onChange={this._onChange} defaultValue="100" />
+                           type="text" ref="height"
+                           onChange={this._onChange} defaultValue="100" />
                 </div>
                 <div className="resize__group">
                     <label className="resize__switch">

@@ -1,0 +1,28 @@
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 14px;
+  margin: 0;
+}
+
+.control-group {
+  margin-bottom: 7px;
+  &__label {
+    width: 40%;
+    display: inline-block;
+  }
+  &__control {
+    width: 60%;
+  }
+}
+
+input[type="text"] {
+  background-color: $control-bg-color;
+  border: none;
+  border-radius: 2px;
+  padding: 7px 10px;
+  &:focus {
+    background-color: $bg-color;
+    outline: none;
+    color: #fff;
+  }
+}

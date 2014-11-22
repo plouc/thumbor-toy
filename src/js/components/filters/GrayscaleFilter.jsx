@@ -5,7 +5,7 @@ var GrayscaleFilter = React.createClass({
     mixins: [FilterMixin],
 
     getSettingsNodes: function () {
-        return null;
+        return '';
     }
 });
 

@@ -16,7 +16,7 @@ var Url = React.createClass({
     },
 
     render: function () {
-        return <span>{this.state.url}</span>
+        return <input type="text" value={this.state.url} />
     },
 
     _onUrlChange: function (url) {

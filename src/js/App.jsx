@@ -29,6 +29,10 @@ React.render((
         </div>
         <div className="metadata">
             <Resize />
+            <a className="app-info" href="https://github.com/plouc/thumbor-toy">
+                <i className="fa fa-github" />
+                thumbor-toy
+            </a>
         </div>
         <div className="content">
             <Image />
