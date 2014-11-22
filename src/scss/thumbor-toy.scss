@@ -93,6 +93,9 @@ select {
   }
 }
 
+.render {
+  position: absolute;
+}
 
 .filters,
 .metadata {
@@ -109,9 +112,11 @@ select {
 
 .filters {
   left: 0;
+  border-right: 1px solid $bg-color;
 }
 .metadata {
   right: 0;
+  border-left: 1px solid $bg-color;
 }
 .content {
   position: absolute;

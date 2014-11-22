@@ -71,7 +71,6 @@ var ImageSource = React.createClass({
     },
 
     _onChange: function (e) {
-        console.log('IMAGE', e.target.value);
         ImageActions.set(e.target.value);
     }
 });
