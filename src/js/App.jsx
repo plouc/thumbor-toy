@@ -22,13 +22,13 @@ React.render((
         <div className="url">
             <Url />
         </div>
-        <div className="filters">
+        <div className="sidebar sidebar--settings">
             {serverSelector}
             <ImageSource />
-            <Filters />
-        </div>
-        <div className="metadata">
             <Resize />
+        </div>
+        <div className="sidebar sidebar--filters">
+            <Filters />
             <a className="app-info" href="https://github.com/plouc/thumbor-toy">
                 <i className="fa fa-github" />
                 thumbor-toy

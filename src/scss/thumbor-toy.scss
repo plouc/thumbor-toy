@@ -29,64 +29,7 @@ a {
   box-sizing: border-box;
 }
 
-.filters__selector {
-  position: relative;
-  padding-right: 45px;
-  margin-bottom: 10px;
-
-  &__add {
-    text-transform: uppercase;
-    position: absolute;
-    font-weight: 400;
-    top:   3px;
-    right: 10px;
-    display: block;
-    height:      30px;
-    width:       30px;
-    line-height: 30px;
-    text-align: center;
-    cursor: pointer;
-    font-size: 12px;
-
-    border: 1px solid $font-color;
-    border-radius: 1px;
-
-
-    .fa {
-    }
-
-    &:hover {
-      color:        $font-highlight-color;
-      border-color: $font-highlight-color;;
-    }
-  }
-}
-
-
-input[type="checkbox"] {
-  margin-right: 7px;
-}
-
-select {
-  font-size: 16px;
-}
-.select--full {
-  width: 100%;
-}
-
 .resize {
-  &__group {
-    margin-bottom: 10px;
-  }
-  &__dimension {
-    &__label {
-      display: inline-block;
-      width: 50%;
-    }
-    &__control {
-      width: 50%;
-    }
-  }
   &__switch {
     display: inline-block;
     width: 50%;
@@ -95,43 +38,31 @@ select {
 
 .render {
   position: absolute;
+
   top:  50%;
   left: 50%;
+
   &__loader {
     position: absolute;
+
+    z-index: 9000;
+
     top:  50%;
     left: 50%;
-    z-index: 9000;
-    width: 120px;
-    text-align: center;
-    height: 36px;
+
+    width:       120px;
+    height:      36px;
     line-height: 36px;
+
+    margin-left: -60px;
+    margin-top:  -18px;
+
+    text-align: center;
     background-color: $panel-bg-color;
     border-radius: 2px;
   }
 }
 
-.filters,
-.metadata {
-  z-index: 100;
-  position: absolute;
-
-  top:    $header-height;
-  bottom: 0;
-
-  width: 20%;
-
-  background-color: $panel-bg-color;
-}
-
-.filters {
-  left: 0;
-  border-right: 1px solid $bg-color;
-}
-.metadata {
-  right: 0;
-  border-left: 1px solid $bg-color;
-}
 .content {
   position: absolute;
   top:    $header-height;
@@ -141,10 +72,12 @@ select {
   overflow: auto;
 }
 
+@import "sidebar";
 @import "filter";
+@import "filter-selector";
 @import "url";
 @import "forms";
+@import "switch";
 @import "panel";
 @import "select";
-@import "img-src";
 @import "app-info";

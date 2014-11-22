@@ -13,14 +13,14 @@ var FilterSelector = React.createClass({
             return <option key={filter.type} value={filter.type}>{filter.label}</option>
         });
 
-        return <div className="filters__selector">
+        return <div className="filter-selector">
             <div className="select-box select-box--filters">
                 <select ref="filter" onChange={this._onChange}>
                     {options}
                 </select>
                 <i className="fa fa-angle-down" />
             </div>
-            <span className="filters__selector__add" onClick={this._onAdd}>
+            <span className="filter-selector__add" onClick={this._onAdd}>
                 <i className="fa fa-plus" />
             </span>
         </div>

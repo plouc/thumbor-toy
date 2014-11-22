@@ -1,0 +1,36 @@
+.filter-selector {
+  position: relative;
+  padding-right: 40px;
+
+  &__add {
+    position: absolute;
+
+    top:   3px;
+    right: 0;
+
+    display: block;
+
+    height:      30px;
+    width:       30px;
+    line-height: 30px;
+
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    border: 1px solid $font-color;
+    border-radius: 1px;
+
+    &:hover {
+      color:        $font-highlight-color;
+      border-color: $font-highlight-color;;
+    }
+  }
+}
+
+.panel__content--filter-selector {
+  border-bottom: 1px solid darken($panel-bg-color, 5);
+}

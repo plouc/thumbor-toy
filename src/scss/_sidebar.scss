@@ -1,0 +1,21 @@
+.sidebar {
+  z-index: 100;
+  position: absolute;
+
+  top:    $header-height;
+  bottom: 0;
+
+  width: 20%;
+
+  background-color: $panel-bg-color;
+
+  &--settings {
+    left: 0;
+    border-right: 1px solid $bg-color;
+  }
+
+  &--filters {
+    right: 0;
+    border-left: 1px solid $bg-color;
+  }
+}

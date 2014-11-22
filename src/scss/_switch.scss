@@ -1,0 +1,73 @@
+.switch {
+  position: relative;
+
+  font-weight: 300;
+
+  background-color: $control-bg-color;
+  border-radius: 2px;
+
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+
+  overflow: hidden;
+
+  box-shadow: 0 1px 0 darken($panel-bg-color, 13) inset;
+
+  label {
+    position: relative;
+    z-index: 2;
+    display: table-cell;
+
+    padding: 0 10px;
+    cursor: pointer;
+
+    width:       50%;
+    height:      32px;
+    line-height: 30px;
+
+    text-align: center;
+
+    color: lighten($panel-bg-color, 15);
+
+    &:hover {
+      color: lighten($font-color, 10);
+    }
+  }
+
+  input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+  }
+
+  i {
+    display: block;
+    position: absolute;
+
+    top:  0;
+    left: 0;
+
+    padding: 0;
+    z-index: 1;
+    width: 50%;
+    height: 100%;
+
+    border-radius: 2px;
+    background-color: $control-embossed-bg-color;
+
+    box-shadow: 0 -2px 0 $control-embossed-shade-color inset;
+
+    -webkit-transition: left 0.3s;
+            transition: left 0.3s;
+  }
+
+  input:last-of-type:checked ~ i {
+    left: 50%;
+  }
+
+  input:checked + label {
+    color: lighten($font-color, 10);
+  }
+
+  margin-bottom: 7px;
+}

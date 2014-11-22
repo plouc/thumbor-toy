@@ -1,22 +1,23 @@
 .panel {
-  padding-bottom: 10px;
   border-bottom: 1px solid darken($panel-bg-color, 5);
 
   &__title {
     margin: 0;
     font-weight: 100;
+    font-size: 20px;
     padding: 12px 10px;
     position: relative;
     text-transform: uppercase;
     color: $font-highlight-color;
     .fa {
-      color: $font-color;
+      color: #545f88;
       position: absolute;
       right: 15px;
-      top:   12px;
+      top:   15px;
+      font-size: 16px;
     }
   }
   &__content {
-    padding: 10px;
+    padding: 0 10px 10px;
   }
 }

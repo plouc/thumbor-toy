@@ -29,38 +29,40 @@ var ImageSource = React.createClass({
         var sourceControl;
         if (this.state.static) {
             sourceControl = <div className="select-box">
-                <select ref="source" className="select--full"
+                <select ref="source" className="control--full-width"
                         onChange={this._onChange}>
                     {options}
                 </select>
                 <i className="fa fa-angle-down" />
             </div>
         } else {
-            sourceControl = <div className="img-src__free">
-                <input ref="source" type="text"
-                       onChange={this._onChange} />
-            </div>
+            sourceControl = <input ref="source" type="text"
+                                   className="control--full-width"
+                                   onChange={this._onChange} />
         }
 
         return <div className="panel panel--img-src">
             <h3 className="panel__title">
                 Image <i className="fa fa-picture-o" />
             </h3>
-            <div className="img-src__switch">
-                <label className="img-src__switch__item">
-                    <input type="radio" ref="type_static" name="type"
+            <div className="panel__content">
+                <div className="switch">
+                    <input type="radio" ref="type_static"
+                           id="type_static" name="type"
                            onChange={this._onTypeChange}
                            checked={this.state.static} />
-                    predefined
-                </label>
-                <label className="img-src__switch__item">
-                    <input type="radio" ref="type_dynamic" name="type"
+                    <label htmlFor="type_static">predefined</label>
+
+                    <input type="radio" ref="type_dynamic"
+                           id="type_dynamic" name="type"
                            onChange={this._onTypeChange}
                            checked={!this.state.static} />
-                    manual
-                </label>
+                    <label htmlFor="type_dynamic">manual</label>
+
+                    <i />
+                </div>
+                {sourceControl}
             </div>
-            {sourceControl}
         </div>;
     },
 

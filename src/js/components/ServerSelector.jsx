@@ -21,11 +21,14 @@ var ServerSelector = React.createClass({
                 <i className="fa fa-hdd-o" />
                 Server
             </h3>
-            <div className="select-box">
-                <select className="select--full" onChange={this._onChange}>
-                    {options}
-                </select>
-                <i className="fa fa-angle-down" />
+            <div className="panel__content">
+                <div className="select-box">
+                    <select className="control--full-width"
+                            onChange={this._onChange}>
+                        {options}
+                    </select>
+                    <i className="fa fa-angle-down" />
+                </div>
             </div>
         </div>;
     },
