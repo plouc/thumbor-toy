@@ -28,12 +28,11 @@ var ImageComponent = React.createClass({
     },
 
     componentDidUpdate: function() {
-        var $el     = $(this.getDOMNode());
-        var $parent = $el.parent();
+        var $el = $(this.getDOMNode());
 
         $el.css({
-            top:  ($parent.height() - $el.height()) / 2,
-            left: ($parent.width()  - $el.width())  / 2
+            'margin-top':  -$el.height() / 2,
+            'margin-left': -$el.width()  / 2
         });
     },
 
