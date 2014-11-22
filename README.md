@@ -1,13 +1,17 @@
-# Install
+# thumbor-toy
 
-## Dependencies install
+[<img src="https://raw.github.com/plouc/thumbor-toy/master/doc/thumbor-toy-screenshot.jpg">](https://github.com/plouc/thumbor-toy)
+
+## Install
+
+### Dependencies install
 
 ```
 npm install
 bower install
 ```
 
-## Configuration
+### Configuration
 
 Create a config.js file with the config for your application, for instance:
 
@@ -38,7 +42,7 @@ module.exports = {
 };
 ```
 
-## Compile assets
+### Compile assets
  
 ```
 gulp
