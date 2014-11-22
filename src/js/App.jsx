@@ -1,9 +1,9 @@
 var React          = require('react/addons');
-var Metadata       = require('./components/Metadata.jsx');
 var ServerSelector = require('./components/ServerSelector.jsx');
 var ImageSource    = require('./components/ImageSource.jsx');
 var Image          = require('./components/Image.jsx');
 var Url            = require('./components/Url.jsx');
+var Loader         = require('./components/Loader.jsx');
 var Filters        = require('./components/filters/Filters.jsx');
 var Resize         = require('./components/Resize.jsx');
 var ServerActions  = require('./actions/ServerActions');
@@ -35,6 +35,7 @@ React.render((
             </a>
         </div>
         <div className="content">
+            <Loader />
             <Image />
         </div>
     </div>

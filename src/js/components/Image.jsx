@@ -1,9 +1,10 @@
-var React      = require('react/addons');
-var Reflux     = require('reflux');
-var config     = require('./../../../config');
-var UrlStore   = require('./../stores/UrlStore');
-var ImageStore = require('./../stores/ImageStore');
-var $          = require('jquery');
+var React         = require('react/addons');
+var Reflux        = require('reflux');
+var config        = require('./../../../config');
+var UrlStore      = require('./../stores/UrlStore');
+var ImageStore    = require('./../stores/ImageStore');
+var LoaderActions = require('./../actions/LoaderActions');
+var $             = require('jquery');
 
 var ImageComponent = React.createClass({
     mixins: [Reflux.ListenerMixin],
@@ -37,12 +38,18 @@ var ImageComponent = React.createClass({
     },
 
     _onUrlChange: function (url) {
+        LoaderActions.loading();
         this.img.src = url;
-        this.img.onload = function () {
+        this.img.onload = function (e) {
             this.setState({
                 src: url
             });
+            LoaderActions.loaded();
         }.bind(this);
+
+        this.img.onerror = function (e) {
+            LoaderActions.loaded();
+        };
     }
 });
 
