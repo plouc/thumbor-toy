@@ -14,6 +14,8 @@
 
   box-shadow: 0 1px 0 darken($panel-bg-color, 13) inset;
 
+  margin-bottom: 7px;
+
   label {
     position: relative;
     z-index: 2;
@@ -61,13 +63,19 @@
             transition: left 0.3s;
   }
 
-  input:last-of-type:checked ~ i {
-    left: 50%;
-  }
+  &__radio--0:checked ~ i { left: 0;   }
+  &__radio--1:checked ~ i { left: 50%; }
 
   input:checked + label {
     color: lighten($font-color, 10);
   }
 
-  margin-bottom: 7px;
+  &--3 {
+    label, i {
+      width: 33.33%;
+    }
+    .switch__radio--0:checked ~ i { left: 0;      }
+    .switch__radio--1:checked ~ i { left: 33.33%; }
+    .switch__radio--2:checked ~ i { left: 66.66%; }
+  }
 }

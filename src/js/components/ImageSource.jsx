@@ -48,12 +48,14 @@ var ImageSource = React.createClass({
             <div className="panel__content">
                 <div className="switch">
                     <input type="radio" ref="type_static"
+                           className="switch__radio--0"
                            id="type_static" name="type"
                            onChange={this._onTypeChange}
                            checked={this.state.static} />
                     <label htmlFor="type_static">predefined</label>
 
                     <input type="radio" ref="type_dynamic"
+                           className="switch__radio--1"
                            id="type_dynamic" name="type"
                            onChange={this._onTypeChange}
                            checked={!this.state.static} />

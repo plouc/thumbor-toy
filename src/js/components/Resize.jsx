@@ -24,13 +24,19 @@ var Resize = React.createClass({
                         debug
                     </label>
                 </div>
-                <div className="switch">
-                    <input ref="smart" type="radio"
+                <div className="switch switch--3">
+                    <input type="radio" className="switch__radio--0"
+                           id="resize_mode_default" name="resize_mode"
+                           defaultChecked="true"
+                           onChange={this._onChange} />
+                    <label htmlFor="resize_mode_default">default</label>
+
+                    <input ref="smart" type="radio" className="switch__radio--1"
                            id="resize_mode_smart" name="resize_mode"
                            onChange={this._onChange} />
                     <label htmlFor="resize_mode_smart">smart</label>
 
-                    <input ref="fit" type="radio"
+                    <input ref="fit" type="radio" className="switch__radio--2"
                            id="resize_mode_fit" name="resize_mode"
                            onChange={this._onChange} />
                     <label htmlFor="resize_mode_fit">fit</label>
