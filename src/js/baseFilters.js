@@ -41,6 +41,16 @@ module.exports = [
         }
     },
     {
+        type:      'fill',
+        label:     'Fill',
+        active:    false,
+        color:     'fff',
+        component: require('./components/filters/FillFilter.jsx'),
+        stringify: function () {
+            return this.type + '(' + this.color + ')';
+        }
+    },
+    {
         type:      'noise',
         label:     'Noise',
         active:    false,
