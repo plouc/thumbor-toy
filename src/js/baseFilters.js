@@ -32,6 +32,15 @@ module.exports = [
         }
     },
     {
+        type:      'equalize',
+        label:     'Equalize',
+        active:    false,
+        component: require('./components/filters/EqualizeFilter.jsx'),
+        stringify: function () {
+            return this.type + '()';
+        }
+    },
+    {
         type:      'noise',
         label:     'Noise',
         active:    false,
