@@ -71,6 +71,15 @@ module.exports = [
         }
     },
     {
+        type:      'no_upscale',
+        label:     'No upscale',
+        active:    false,
+        component: require('./components/filters/NoUpscaleFilter.jsx'),
+        stringify: function () {
+            return this.type + '()';
+        }
+    },
+    {
         type:         'watermark',
         label:        'Watermark',
         active:       false,
