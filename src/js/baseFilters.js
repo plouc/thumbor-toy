@@ -11,7 +11,6 @@ module.exports = [
             return this.type + '(' + this.radius + ')';
         }
     },
-    // Usage: brightness(amount)
     {
         type:      'brightness',
         label:     'Brightness',
@@ -22,7 +21,16 @@ module.exports = [
             return this.type + '(' + this.amount + ')';
         }
     },
-    // Usage: noise(amount)
+    {
+        type:      'contrast',
+        label:     'Contrast',
+        active:    false,
+        amount:    1,
+        component: require('./components/filters/ContrastFilter.jsx'),
+        stringify: function () {
+            return this.type + '(' + this.amount + ')';
+        }
+    },
     {
         type:      'noise',
         label:     'Noise',
