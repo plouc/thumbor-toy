@@ -1,4 +1,5 @@
 module.exports = {
-    src:  './src',
-    dest: '.'
+    src:      './src',
+    bowerSrc: './bower_components',
+    dest:     '.'
 };
