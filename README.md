@@ -1,5 +1,7 @@
 # thumbor-toy
 
+Want to see it in action ? check the [demo](http://plouc.github.io/thumbor-toy/)
+
 [<img src="https://raw.github.com/plouc/thumbor-toy/master/doc/thumbor-toy-screenshot.jpg">](https://github.com/plouc/thumbor-toy)
 
 ## Install
