@@ -11,9 +11,14 @@ var WatermarkFilter = React.createClass({
         });
 
         return <div>
-            <select ref="image" onChange={this._onChange}>
-                {options}
-            </select>
+            <div className="control-group">
+                <div className="select-box">
+                    <select ref="image" onChange={this._onChange}>
+                        {options}
+                    </select>
+                    <i className="fa fa-angle-down" />
+                </div>
+            </div>
             <div className="control-group">
                 <label className="control-group__label">left</label>
                 <input className="control-group__control"
