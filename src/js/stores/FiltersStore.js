@@ -25,6 +25,7 @@ var FiltersStore = Reflux.createStore({
         this.listenTo(FilterActions.update, this.updateFilter);
         this.listenTo(FilterActions.add,    this.addFilter);
         this.listenTo(FilterActions.delete, this.deleteFilter);
+        this.listenTo(FilterActions.clear,  this.clearFilters);
     },
 
     addFilter: function (type) {
@@ -47,6 +48,12 @@ var FiltersStore = Reflux.createStore({
         _.forEach(_currentFilters, function (filter, i) {
             filter.id = i;
         });
+
+        this.trigger();
+    },
+
+    clearFilters: function () {
+        _currentFilters = [];
 
         this.trigger();
     },
