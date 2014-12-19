@@ -7,7 +7,7 @@ var ResizeActions = require('./../actions/ResizeActions');
 var FilterActions = require('./../actions/FilterActions');
 var _             = require('lodash');
 
-var ImageSelector = React.createClass({
+var PresetSelector = React.createClass({
     mixins: [Reflux.ListenerMixin],
 
     render: function () {
@@ -61,4 +61,4 @@ var ImageSelector = React.createClass({
     }
 });
 
-module.exports = ImageSelector;
+module.exports = PresetSelector;

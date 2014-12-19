@@ -1,6 +1,6 @@
 var React          = require('react/addons');
 var ServerSelector = require('./components/ServerSelector.jsx');
-var ImageSelector  = require('./components/ImageSelector.jsx');
+var PresetSelector = require('./components/PresetSelector.jsx');
 var ImageSource    = require('./components/ImageSource.jsx');
 var Image          = require('./components/Image.jsx');
 var Url            = require('./components/Url.jsx');
@@ -18,9 +18,9 @@ if (_.isArray(config.server)) {
     ServerActions.set(config.server);
 }
 
-var imageSelector = null;
-if (_.isArray(config.preset_images)) {
-    imageSelector = <ImageSelector />;
+var presetSelector = null;
+if (_.isArray(config.preset_images) && config.preset_images.length > 0) {
+    presetSelector = <PresetSelector />;
 }
 
 React.render((
@@ -29,7 +29,7 @@ React.render((
             <Url />
         </div>
         <div className="sidebar sidebar--settings">
-            {imageSelector}
+            {presetSelector}
             {serverSelector}
             <ImageSource />
             <Resize />
