@@ -1,7 +1,8 @@
 var Reflux = require('reflux');
 
 var ResizeActions = Reflux.createActions([
-    'update'
+    'update',
+    'clear',
 ]);
 
 module.exports = ResizeActions;

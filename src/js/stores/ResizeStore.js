@@ -14,10 +14,24 @@ var _resizeConfig = {
 var ResizeStore = Reflux.createStore({
     init: function () {
         this.listenTo(ResizeActions.update, this.updateResize);
+        this.listenTo(ResizeActions.clear,  this.clearResize);
     },
 
     updateResize: function (config) {
         _resizeConfig = _.merge(_resizeConfig, config);
+
+        this.trigger();
+    },
+
+    clearResize: function () {
+        _resizeConfig = {
+            active:    false,
+            width:     300,
+            height:    300,
+            smart:     true,
+            debug:     false,
+            fit:       false
+        };
 
         this.trigger();
     },
