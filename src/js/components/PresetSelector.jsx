@@ -19,7 +19,7 @@ var PresetSelector = React.createClass({
                 resize:  {},
                 filters: []
             }
-        }].concat(config.preset_images);
+        }].concat(config.presetImages);
 
         var options = this.props.images.map(function (image, i) {
             return <option key={i} value={i}>{image.label}</option>

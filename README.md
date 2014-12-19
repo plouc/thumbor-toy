@@ -21,7 +21,7 @@ Create a config.js file with the config for your application, for instance:
 module.exports = {
 
     // This is an optional config, to provide sample images pre-filtered & resized
-    preset_images: [{
+    presetImages: [{
         label: 'Image 1',
         data: {
             server:  'http://server1.com/',

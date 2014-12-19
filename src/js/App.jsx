@@ -19,7 +19,7 @@ if (_.isArray(config.server)) {
 }
 
 var presetSelector = null;
-if (_.isArray(config.preset_images) && config.preset_images.length > 0) {
+if (_.isArray(config.presetImages) && config.presetImages.length > 0) {
     presetSelector = <PresetSelector />;
 }
 
