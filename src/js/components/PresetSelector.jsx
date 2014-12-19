@@ -12,7 +12,7 @@ var PresetSelector = React.createClass({
 
     render: function () {
         this.props.images = [{
-            label: '--- select a pre-filtered image ---',
+            label: '--- select a preset image ---',
             data:  {
                 server:  null,
                 image:   null,
@@ -28,7 +28,7 @@ var PresetSelector = React.createClass({
         return <div className="panel panel--img-src">
             <h3 className="panel__title">
                 <i className="fa fa-image" />
-                Pre-filtered images
+                Preset images
             </h3>
             <div className="panel__content">
                 <div className="select-box">
