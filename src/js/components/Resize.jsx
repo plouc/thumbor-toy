@@ -6,10 +6,14 @@ var ResizeActions = require('./../actions/ResizeActions');
 var Resize = React.createClass({
     mixins: [Reflux.ListenerMixin],
 
+    props: {
+        presets: React.PropTypes.array,
+    },
+
     render: function () {
         var select = "";
 
-        if (_.isArray(this.props.presets)) {
+        if (this.props.presets && this.props.presets.length > 0) {
             presets = [{
                 label:  '--- select an image ratio ---',
                 width:  null,
