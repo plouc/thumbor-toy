@@ -1,12 +1,39 @@
+var _             = require('lodash');
 var React         = require('react/addons');
 var Reflux        = require('reflux');
 var ResizeActions = require('./../actions/ResizeActions');
 
-
 var Resize = React.createClass({
     mixins: [Reflux.ListenerMixin],
 
+    props: {
+        presets: React.PropTypes.array,
+    },
+
     render: function () {
+        var selectNode = '';
+
+        if (this.props.presets && this.props.presets.length > 0) {
+            presets = [{
+                label:  '--- select an image ratio ---',
+                width:  null,
+                height: null,
+            }].concat(this.props.presets);
+
+            var options = presets.map(function (preset, i) {
+                return <option key={i} value={i}>{preset.label}</option>
+            });
+
+            selectNode = <div className="select-box">
+                <select className="control--full-width"
+                    ref="presets"
+                    onChange={this._onPresetChange}>
+                    {options}
+                </select>
+                <i className="fa fa-angle-down" />
+            </div>;
+        }
+
         return <div className="panel panel--resize">
             <h3 className="panel__title">
                 Resize <i className="fa fa-crop" />
@@ -43,6 +70,7 @@ var Resize = React.createClass({
 
                     <i />
                 </div>
+                {selectNode}
                 <div className="control-group">
                     <label className="control-group__label">width</label>
                     <input className="control-group__control"
@@ -57,6 +85,13 @@ var Resize = React.createClass({
                 </div>
             </div>
         </div>
+    },
+
+    _onPresetChange: function (e) {
+        var preset = this.props.presets[e.target.value-1];
+        this.refs.width.getDOMNode().value  = preset.width;
+        this.refs.height.getDOMNode().value = preset.height;
+        ResizeActions.setPreset(preset);
     },
 
     _onChange: function () {

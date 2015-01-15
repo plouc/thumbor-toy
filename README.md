@@ -20,6 +20,21 @@ Create a config.js file with the config for your application, for instance:
 ```javascript
 module.exports = {
 
+    // This is an optional config, to provide resizing ratios
+    presetsResize: [{
+        label:  '4/3',
+        width:  432,
+        height: 326
+    }, {
+        label:  '16/9',
+        width:  462,
+        height: 260
+    }, {
+        label:  '16/7',
+        width:  474,
+        height: 209
+    }],
+
     // This is an optional config, to provide sample images pre-filtered & resized
     presetImages: [{
         label: 'Image 1',
