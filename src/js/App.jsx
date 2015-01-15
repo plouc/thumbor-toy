@@ -32,7 +32,7 @@ React.render((
             {presetSelector}
             {serverSelector}
             <ImageSource />
-            <Resize />
+            <Resize presets={config.presetsResize} />
         </div>
         <div className="sidebar sidebar--filters">
             <Filters />

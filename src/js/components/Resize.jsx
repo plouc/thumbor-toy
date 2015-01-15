@@ -1,7 +1,6 @@
 var _             = require('lodash');
 var React         = require('react/addons');
 var Reflux        = require('reflux');
-var config        = require('./../../../config');
 var ResizeActions = require('./../actions/ResizeActions');
 
 var Resize = React.createClass({
@@ -10,14 +9,14 @@ var Resize = React.createClass({
     render: function () {
         var select = "";
 
-        if (_.isArray(config.presetsResize)) {
-            this.props.presets = [{
+        if (_.isArray(this.props.presets)) {
+            presets = [{
                 label:  '--- select an image ratio ---',
                 width:  null,
                 height: null,
-            }].concat(config.presetsResize);
+            }].concat(this.props.presets);
 
-            var options = this.props.presets.map(function (preset, i) {
+            var options = presets.map(function (preset, i) {
                 return <option key={i} value={i}>{preset.label}</option>
             });
 
@@ -85,7 +84,7 @@ var Resize = React.createClass({
     },
 
     _onPresetChange: function(e) {
-        var preset = this.props.presets[e.target.value];
+        var preset = this.props.presets[e.target.value-1];
         this.refs.width.getDOMNode().value  = preset.width;
         this.refs.height.getDOMNode().value = preset.height;
         this._onChange();
