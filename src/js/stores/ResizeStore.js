@@ -13,8 +13,9 @@ var _resizeConfig = {
 
 var ResizeStore = Reflux.createStore({
     init: function () {
-        this.listenTo(ResizeActions.update, this.updateResize);
-        this.listenTo(ResizeActions.clear,  this.clearResize);
+        this.listenTo(ResizeActions.update,    this.updateResize);
+        this.listenTo(ResizeActions.clear,     this.clearResize);
+        this.listenTo(ResizeActions.setPreset, this.presetResize);
     },
 
     updateResize: function (config) {
@@ -32,6 +33,15 @@ var ResizeStore = Reflux.createStore({
             debug:     false,
             fit:       false
         };
+
+        this.trigger();
+    },
+
+    presetResize: function (preset) {
+        _resizeConfig = _.merge(_resizeConfig, {
+            width:  preset.width,
+            height: preset.height,
+        });
 
         this.trigger();
     },

@@ -11,7 +11,7 @@ var Resize = React.createClass({
     },
 
     render: function () {
-        var select = "";
+        var selectNode = '';
 
         if (this.props.presets && this.props.presets.length > 0) {
             presets = [{
@@ -24,7 +24,7 @@ var Resize = React.createClass({
                 return <option key={i} value={i}>{preset.label}</option>
             });
 
-            select = <div className="select-box">
+            selectNode = <div className="select-box">
                 <select className="control--full-width"
                     ref="presets"
                     onChange={this._onPresetChange}>
@@ -70,7 +70,7 @@ var Resize = React.createClass({
 
                     <i />
                 </div>
-                {select}
+                {selectNode}
                 <div className="control-group">
                     <label className="control-group__label">width</label>
                     <input className="control-group__control"
@@ -87,11 +87,11 @@ var Resize = React.createClass({
         </div>
     },
 
-    _onPresetChange: function(e) {
+    _onPresetChange: function (e) {
         var preset = this.props.presets[e.target.value-1];
         this.refs.width.getDOMNode().value  = preset.width;
         this.refs.height.getDOMNode().value = preset.height;
-        this._onChange();
+        ResizeActions.setPreset(preset);
     },
 
     _onChange: function () {
