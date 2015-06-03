@@ -31,9 +31,10 @@ var Filters = React.createClass({
     },
 
     render() {
-        var filtersNodes = this.state.filters.map(filter => {
+        var filtersNodes = this.state.filters.map((filter, i) => {
             return React.createElement(filter.component, {
-                filter: filter
+                filter: filter,
+                key:    `${ filter.type }.${ i }`
             });
         });
 
