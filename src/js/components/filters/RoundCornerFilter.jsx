@@ -10,28 +10,28 @@ var RoundCornerFilter = React.createClass({
         return (
             <div className="control-group">
                 <div className="control-group">
-                    <label className="control-group__label">radius</label>
+                    <label className="control-group__label">Radius</label>
                     <input className="control-group__control"
                            ref="radius" type="text"
                            onChange={this.onChange}
                            defaultValue={this.props.filter.radius} />
                 </div>
                 <div className="control-group">
-                    <label className="control-group__label">red</label>
+                    <label className="control-group__label">Red (dec.)</label>
                     <input className="control-group__control"
                            ref="red" type="text"
                            onChange={this.onChange}
                            defaultValue={this.props.filter.red} />
                 </div>
                 <div className="control-group">
-                    <label className="control-group__label">green</label>
+                    <label className="control-group__label">Green (dec.)</label>
                     <input className="control-group__control"
                            ref="green" type="text"
                            onChange={this.onChange}
                            defaultValue={this.props.filter.green} />
                 </div>
                 <div className="control-group">
-                    <label className="control-group__label">blue</label>
+                    <label className="control-group__label">Blue (dec.)</label>
                     <input className="control-group__control"
                            ref="blue" type="text"
                            onChange={this.onChange}

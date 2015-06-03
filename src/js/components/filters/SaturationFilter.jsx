@@ -9,7 +9,7 @@ var SaturationFilter = React.createClass({
     getSettingsNodes() {
         return (
             <div className="control-group">
-                <label className="control-group__label">amount</label>
+                <label className="control-group__label">Percentage (%)</label>
                 <input className="control-group__control"
                        ref="amount" type="text"
                        onChange={this.onChange}

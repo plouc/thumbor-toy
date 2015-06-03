@@ -28,6 +28,7 @@
     "watchify": "^3.2.1"
   },
   "dependencies": {
-    "jquery": "^2.1.1"
+    "jquery": "^2.1.1",
+    "marked": "^0.3.3"
   }
 }

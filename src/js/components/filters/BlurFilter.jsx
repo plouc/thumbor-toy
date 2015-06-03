@@ -9,7 +9,7 @@ var BlurFilter = React.createClass({
     getSettingsNodes() {
         return (
             <div className="control-group">
-                <label className="control-group__label">radius</label>
+                <label className="control-group__label">Radius</label>
                 <input className="control-group__control"
                        ref="radius" type="text"
                        onChange={this.onChange}

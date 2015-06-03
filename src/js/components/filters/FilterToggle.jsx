@@ -4,6 +4,16 @@ import FilterActions from './../../actions/FilterActions';
 var FilterToggle = React.createClass({
     displayName: 'FilterToggle',
 
+    propTypes: {
+        expandable: React.PropTypes.bool.isRequired,
+        expanded:   React.PropTypes.bool.isRequired,
+        filter:     React.PropTypes.shape({
+            id:     React.PropTypes.number.isRequired,
+            label:  React.PropTypes.string.isRequired,
+            active: React.PropTypes.bool.isRequired
+        }).isRequired
+    },
+
     onDeleteClick(e) {
         e.preventDefault();
         e.stopPropagation();

@@ -9,6 +9,11 @@ button, input, select, textarea {
   &__label {
     width: 40%;
     display: inline-block;
+    &--full {
+      display: block;
+      width: 100%;
+      margin-bottom: 7px;
+    }
   }
   &__control {
     width: 60%;

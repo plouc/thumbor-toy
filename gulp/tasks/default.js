@@ -1,3 +1,3 @@
 var gulp = require('gulp');
 
-gulp.task('default', ['js', 'css', 'fonts']);
+gulp.task('default', ['js', 'styles', 'fonts']);

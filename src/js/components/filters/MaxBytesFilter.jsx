@@ -9,7 +9,7 @@ var MaxBytesFilter = React.createClass({
     getSettingsNodes() {
         return (
             <div className="control-group">
-                <label className="control-group__label">bytes</label>
+                <label className="control-group__label">Max Number (bytes)</label>
                 <input className="control-group__control"
                        ref="bytes" type="text"
                        onChange={this.onChange}

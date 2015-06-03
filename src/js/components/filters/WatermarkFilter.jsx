@@ -15,6 +15,7 @@ var WatermarkFilter = React.createClass({
         return (
             <div>
                 <div className="control-group">
+                    <label className="control-group__label control-group__label--full">URL</label>
                     <div className="select-box">
                         <select ref="image" onChange={this.onChange}>
                             {options}
@@ -23,21 +24,21 @@ var WatermarkFilter = React.createClass({
                     </div>
                 </div>
                 <div className="control-group">
-                    <label className="control-group__label">left</label>
+                    <label className="control-group__label">Position x</label>
                     <input className="control-group__control"
                            ref="x" type="text"
                            onChange={this.onChange}
                            defaultValue={this.props.filter.x} />
                 </div>
                 <div className="control-group">
-                    <label className="control-group__label">top</label>
+                    <label className="control-group__label">Position y</label>
                     <input className="control-group__control"
                            ref="y" type="text"
                            onChange={this.onChange}
                            defaultValue={this.props.filter.x} />
                 </div>
                 <div className="control-group">
-                    <label className="control-group__label">transparency</label>
+                    <label className="control-group__label">Alpha</label>
                     <input className="control-group__control"
                            ref="transparency" type="text"
                            onChange={this.onChange}

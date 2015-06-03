@@ -34,8 +34,8 @@ var ImageSource = React.createClass({
             src:   null
         }].concat(config.images);
 
-        var options = sources.map(function (image) {
-            return <option key={image.src} value={image.src}>{image.label}</option>;
+        var options = sources.map((image, i) => {
+            return <option key={`${ image.src }.${ i }`} value={image.src}>{image.label}</option>;
         });
 
         var sourceControl;

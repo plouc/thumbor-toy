@@ -10,14 +10,14 @@ var ConvolutionFilter = React.createClass({
         return (
             <div className="control-group">
                 <div className="control-group">
-                    <label className="control-group__label">matrix</label>
+                    <label className="control-group__label">Matrix Items</label>
                     <input className="control-group__control"
                            ref="matrix" type="text"
                            onChange={this.onChange}
                            defaultValue={this.props.filter.matrix} />
                 </div>
                 <div className="control-group">
-                    <label className="control-group__label">columns</label>
+                    <label className="control-group__label">Number of Columns</label>
                     <input className="control-group__control"
                            ref="columns" type="text"
                            onChange={this.onChange}
@@ -27,7 +27,7 @@ var ConvolutionFilter = React.createClass({
                     <input ref="normalize" type="checkbox"
                            onChange={this.onChange}
                            defaultChecked={this.props.filter.normalize} />
-                    normalize
+                    Should normalize
                 </label>
             </div>
         );

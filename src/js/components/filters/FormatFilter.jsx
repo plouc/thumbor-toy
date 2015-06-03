@@ -10,6 +10,7 @@ var FormatFilter = React.createClass({
         return (
             <div>
                 <div className="control-group">
+                    <label className="control-group__label control-group__label--full">Output format</label>
                     <div className="select-box">
                         <select ref="format" onChange={this.onChange}
                                 defaultValue={this.props.filter.format}>

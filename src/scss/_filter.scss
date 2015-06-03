@@ -45,14 +45,35 @@
     }
   }
 
-  &__settings {
+  &__description {
+    padding: 10px 10px;
+    p {
+      margin: 0;
+    }
+    a {
+      .fa {
+        margin-left: 3px;
+        color: darken($font-color, 10);
+      }
+      &:hover {
+        color: lighten($font-color, 10);
+      }
+    }
+  }
+
+  &__body {
     display: none;
+    &._is-expanded {
+      display: block;
+    }
+  }
+
+  &__settings {
+    color: $font-highlight-color;
+    font-weight: 300;
     padding: 7px 10px 0 10px;
     select {
       width: 100%;
-    }
-    &._is-expanded {
-      display: block;
     }
   }
   &._is-active {
@@ -63,7 +84,7 @@
 
   &__setting {
     &--text {
-    width: 100%;
+      width: 100%;
       border: none;
       border-radius: 2px;
       padding: 3px 10px;

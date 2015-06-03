@@ -10,14 +10,14 @@ var SharpenFilter = React.createClass({
         return (
             <div className="control-group">
                 <div className="control-group">
-                    <label className="control-group__label">amount</label>
+                    <label className="control-group__label">Amount</label>
                     <input className="control-group__control"
                            ref="amount" type="text"
                            onChange={this.onChange}
                            defaultValue={this.props.filter.amount} />
                 </div>
                 <div className="control-group">
-                    <label className="control-group__label">radius</label>
+                    <label className="control-group__label">Radius</label>
                     <input className="control-group__control"
                            ref="radius" type="text"
                            onChange={this.onChange}
@@ -28,7 +28,7 @@ var SharpenFilter = React.createClass({
                         <input ref="luminance" type="checkbox"
                                onChange={this.onChange}
                                defaultChecked={this.props.filter.luminanceOnly} />
-                        luminance only
+                        Luminance
                     </label>
                 </div>
             </div>

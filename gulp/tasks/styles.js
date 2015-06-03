@@ -7,7 +7,7 @@ var config  = require('../config');
 var notify  = require('gulp-notify');
 var onError = require('../util/handleErrors');
 
-gulp.task('css', function () {
+gulp.task('styles', function () {
     gulp.src(config.src + '/scss/**/*.scss')
         .pipe(sass())
         .on('error', onError)
@@ -19,3 +19,9 @@ gulp.task('css', function () {
         .pipe(notify('ok, new css generated'))
     ;
 });
+
+gulp.task('watch:styles', function () {
+    gulp.watch(config.src + '/scss/**', ['styles']);
+});
+
+gulp.task('watch:styles:dev', ['watch:styles']);

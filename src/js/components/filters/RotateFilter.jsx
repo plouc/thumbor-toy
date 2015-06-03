@@ -10,6 +10,7 @@ var RotateFilter = React.createClass({
         return (
             <div>
                 <div className="control-group">
+                    <label className="control-group__label control-group__label--full">Angle</label>
                     <div className="select-box">
                         <select ref="angle" onChange={this.onChange}
                                 defaultValue={this.props.filter.angle}>
