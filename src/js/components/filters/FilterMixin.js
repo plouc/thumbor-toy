@@ -5,7 +5,8 @@ import FilterToggle  from './FilterToggle.jsx';
 
 var FilterMixin = {
     propTypes: {
-        filter: React.PropTypes.shape({
+        showDescription: React.PropTypes.bool.isRequired,
+        filter:          React.PropTypes.shape({
             type:        React.PropTypes.string.isRequired,
             label:       React.PropTypes.string.isRequired,
             active:      React.PropTypes.bool.isRequired,
@@ -62,6 +63,14 @@ var FilterMixin = {
     render() {
         var settings = this.getSettingsNodes();
 
+        var description = null;
+        if (this.props.showDescription) {
+            description = (
+                <div className="filter__description"
+                    dangerouslySetInnerHTML={{ __html: marked(this.props.filter.description, { renderer: this.markdown }) }}/>
+            );
+        }
+
         return (
             <div className={this.getClassName()}>
                 <FilterToggle {...this.props}
@@ -69,8 +78,7 @@ var FilterMixin = {
                     expandable={!!settings}
                     expanded={this.state.expanded} />
                 <div className={this.getBodyClassName()}>
-                    <div className="filter__description"
-                        dangerouslySetInnerHTML={{ __html: marked(this.props.filter.description, { renderer: this.markdown }) }}/>
+                    {description}
                     <div className="filter__settings">
                         {settings}
                     </div>

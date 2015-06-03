@@ -94,3 +94,20 @@
     }
   }
 }
+
+.filters {
+  &__description-control {
+    padding: 7px 10px;
+    cursor: pointer;
+    margin-bottom: 7px;
+    .fa {
+      margin-right: 7px;
+    }
+
+    &--active {
+      .fa {
+        color: $font-highlight-color;
+      }
+    }
+  }
+}
