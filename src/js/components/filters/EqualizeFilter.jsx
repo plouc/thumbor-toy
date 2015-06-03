@@ -1,12 +1,14 @@
-var React       = require('react/addons');
-var FilterMixin = require('./FilterMixin');
+import React       from 'react/addons';
+import FilterMixin from './FilterMixin';
 
 var EqualizeFilter = React.createClass({
+    displayName: 'EqualizeFilter',
+
     mixins: [FilterMixin],
 
-    getSettingsNodes: function () {
+    getSettingsNodes() {
         return '';
     }
 });
 
-module.exports = EqualizeFilter;
+export default EqualizeFilter;

@@ -1,24 +1,22 @@
-var Reflux       = require('reflux');
-var ImageActions = require('./../actions/ImageActions');
-var config       = require('./../../../config');
-var $            = require('jquery');
+import Reflux       from 'reflux';
+import ImageActions from './../actions/ImageActions';
 
 var _image = '';
 
 var ImageStore = Reflux.createStore({
-    init: function () {
+    init() {
         this.listenTo(ImageActions.set, this.setImage);
     },
 
-    setImage: function (image) {
+    setImage(image) {
         _image = image;
 
         this.trigger();
     },
 
-    get: function () {
+    get() {
         return _image;
     }
 });
 
-module.exports = ImageStore;
+export default ImageStore;

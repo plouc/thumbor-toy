@@ -1,34 +1,27 @@
-var React         = require('react/addons');
-var Reflux        = require('reflux');
-var config        = require('./../../../config');
-var UrlStore      = require('./../stores/UrlStore');
-var ImageStore    = require('./../stores/ImageStore');
-var LoaderActions = require('./../actions/LoaderActions');
-var $             = require('jquery');
+import React         from 'react/addons';
+import Reflux        from 'reflux';
+import UrlStore      from './../stores/UrlStore';
+import ImageStore    from './../stores/ImageStore';
+import LoaderActions from './../actions/LoaderActions';
+import $             from 'jquery';
 
 var ImageComponent = React.createClass({
+    displayName: 'ImageComponent',
+
     mixins: [Reflux.ListenerMixin],
 
-    getInitialState: function () {
+    getInitialState() {
         return {
             src: null
         };
     },
 
-    componentWillMount: function () {
+    componentWillMount() {
         this.img = new Image();
-        this.listenTo(UrlStore, this._onUrlChange);
+        this.listenTo(UrlStore, this.onUrlChange);
     },
 
-    render: function () {
-        if (!this.state.src || !ImageStore.get()) {
-            return null;
-        }
-
-        return <img className="render" src={this.state.src} />
-    },
-
-    componentDidUpdate: function() {
+    componentDidUpdate() {
         var $el = $(this.getDOMNode());
 
         $el.css({
@@ -37,20 +30,28 @@ var ImageComponent = React.createClass({
         });
     },
 
-    _onUrlChange: function (url) {
+    onUrlChange(url) {
         LoaderActions.loading();
         this.img.src = url;
-        this.img.onload = function (e) {
+        this.img.onload = function () {
             this.setState({
                 src: url
             });
             LoaderActions.loaded();
         }.bind(this);
 
-        this.img.onerror = function (e) {
+        this.img.onerror = function () {
             LoaderActions.loaded();
         };
+    },
+
+    render() {
+        if (!this.state.src || !ImageStore.get()) {
+            return null;
+        }
+
+        return <img className="render" src={this.state.src} />;
     }
 });
 
-module.exports = ImageComponent;
+export default ImageComponent;

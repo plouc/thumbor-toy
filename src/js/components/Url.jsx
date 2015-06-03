@@ -1,29 +1,31 @@
-var React    = require('react/addons');
-var Reflux   = require('reflux');
-var UrlStore = require('./../stores/UrlStore');
+import React    from 'react/addons';
+import Reflux   from 'reflux';
+import UrlStore from './../stores/UrlStore';
 
 var Url = React.createClass({
+    displayName: 'Url',
+
     mixins: [Reflux.ListenerMixin],
 
-    getInitialState: function () {
+    getInitialState() {
         return {
             url: ''
         };
     },
 
-    componentWillMount: function () {
-        this.listenTo(UrlStore, this._onUrlChange);
+    componentWillMount() {
+        this.listenTo(UrlStore, this.onUrlChange);
     },
 
-    render: function () {
-        return <input type="text" readOnly value={this.state.url} />
-    },
-
-    _onUrlChange: function (url) {
+    onUrlChange(url) {
         this.setState({
             url: url
         });
+    },
+
+    render() {
+        return <input type="text" readOnly value={this.state.url} />;
     }
 });
 
-module.exports = Url;
+export default Url;

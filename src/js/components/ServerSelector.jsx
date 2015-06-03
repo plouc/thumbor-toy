@@ -1,41 +1,45 @@
-var React         = require('react/addons');
-var Reflux        = require('reflux');
-var config        = require('./../../../config');
-var ServerActions = require('./../actions/ServerActions');
+import React         from 'react/addons';
+import Reflux        from 'reflux';
+import config        from './../../../config';
+import ServerActions from './../actions/ServerActions';
 
 var ServerSelector = React.createClass({
+    displayName: 'ServerSelector',
+
     mixins: [Reflux.ListenerMixin],
 
-    render: function () {
+    onChange(e) {
+        ServerActions.set(e.target.value);
+    },
+
+    render() {
         var servers = [{
             label: '--- select a server ---',
             src:   null
         }].concat(config.server);
 
-        var options = servers.map(function (server, i) {
-            return <option key={i} value={server.url}>{server.label}</option>
+        var options = servers.map((server, i) => {
+            return <option key={i} value={server.url}>{server.label}</option>;
         });
 
-        return <div className="panel panel--img-src">
-            <h3 className="panel__title">
-                <i className="fa fa-hdd-o" />
-                Server
-            </h3>
-            <div className="panel__content">
-                <div className="select-box">
-                    <select className="control--full-width"
-                            onChange={this._onChange}>
-                        {options}
-                    </select>
-                    <i className="fa fa-angle-down" />
+        return (
+            <div className="panel panel--img-src">
+                <h3 className="panel__title">
+                    <i className="fa fa-hdd-o" />
+                    Server
+                </h3>
+                <div className="panel__content">
+                    <div className="select-box">
+                        <select className="control--full-width"
+                                onChange={this.onChange}>
+                            {options}
+                        </select>
+                        <i className="fa fa-angle-down" />
+                    </div>
                 </div>
             </div>
-        </div>;
-    },
-
-    _onChange: function (e) {
-        ServerActions.set(e.target.value);
+        );
     }
 });
 
-module.exports = ServerSelector;
+export default ServerSelector;

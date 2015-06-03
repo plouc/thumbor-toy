@@ -1,51 +1,54 @@
-var React          = require('react/addons');
-var Reflux         = require('reflux');
-var config         = require('./../../../../config');
-var FiltersStore   = require('./../../stores/FiltersStore');
-var ImageStore     = require('./../../stores/ImageStore');
-var FilterSelector = require('./FilterSelector.jsx');
+import React          from 'react/addons';
+import Reflux         from 'reflux';
+import FiltersStore   from './../../stores/FiltersStore';
+import ImageStore     from './../../stores/ImageStore';
+import FilterSelector from './FilterSelector.jsx';
 
 var Filters = React.createClass({
+    displayName: 'Filters',
+
     mixins: [Reflux.ListenerMixin],
 
-    getInitialState: function () {
+    getInitialState() {
         return {
             filters: []
         };
     },
 
-    componentWillMount: function () {
-        this.listenTo(FiltersStore, this._onFiltersChange);
-        this.listenTo(ImageStore,   this._onImageChange);
+    componentWillMount() {
+        this.listenTo(FiltersStore, this.onFiltersChange);
+        this.listenTo(ImageStore,   this.onImageChange);
     },
 
-    render: function () {
-        var filtersNodes = this.state.filters.map(function (filter, i) {
+    onImageChange() {
+        //console.log('img src', ImageStore.get());
+    },
+
+    onFiltersChange() {
+        this.setState({
+            filters: FiltersStore.current()
+        });
+    },
+
+    render() {
+        var filtersNodes = this.state.filters.map(filter => {
             return React.createElement(filter.component, {
                 filter: filter
             });
         });
 
-        return <div className="filters__list">
-            <h3 className="panel__title">
-                Filters <i className="fa fa-magic" />
-            </h3>
-            <div className="panel__content panel__content--filter-selector">
-                <FilterSelector />
+        return (
+            <div className="filters__list">
+                <h3 className="panel__title">
+                    Filters <i className="fa fa-magic" />
+                </h3>
+                <div className="panel__content panel__content--filter-selector">
+                    <FilterSelector />
+                </div>
+                {filtersNodes}
             </div>
-            {filtersNodes}
-        </div>
-    },
-
-    _onImageChange: function () {
-        //console.log('img src', ImageStore.get());
-    },
-
-    _onFiltersChange: function () {
-        this.setState({
-            filters: FiltersStore.current()
-        });
+        );
     }
 });
 
-module.exports = Filters;
+export default Filters;

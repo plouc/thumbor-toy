@@ -1,35 +1,39 @@
-var React       = require('react/addons');
-var FilterMixin = require('./FilterMixin');
+import React       from 'react/addons';
+import FilterMixin from './FilterMixin';
 
 var ConvolutionFilter = React.createClass({
+    displayName: 'ConvolutionFilter',
+
     mixins: [FilterMixin],
 
-    getSettingsNodes: function () {
-        return <div className="control-group">
+    getSettingsNodes() {
+        return (
             <div className="control-group">
-                <label className="control-group__label">matrix</label>
-                <input className="control-group__control"
-                       ref="matrix" type="text"
-                       onChange={this._onChange}
-                       defaultValue={this.props.filter.matrix} />
+                <div className="control-group">
+                    <label className="control-group__label">matrix</label>
+                    <input className="control-group__control"
+                           ref="matrix" type="text"
+                           onChange={this.onChange}
+                           defaultValue={this.props.filter.matrix} />
+                </div>
+                <div className="control-group">
+                    <label className="control-group__label">columns</label>
+                    <input className="control-group__control"
+                           ref="columns" type="text"
+                           onChange={this.onChange}
+                           defaultValue={this.props.filter.columns} />
+                </div>
+                <label>
+                    <input ref="normalize" type="checkbox"
+                           onChange={this.onChange}
+                           defaultChecked={this.props.filter.normalize} />
+                    normalize
+                </label>
             </div>
-            <div className="control-group">
-                <label className="control-group__label">columns</label>
-                <input className="control-group__control"
-                       ref="columns" type="text"
-                       onChange={this._onChange}
-                       defaultValue={this.props.filter.columns} />
-            </div>
-            <label>
-                <input ref="normalize" type="checkbox"
-                       onChange={this._onChange}
-                       defaultChecked={this.props.filter.normalize} />
-                normalize
-            </label>
-        </div>
+        );
     },
 
-    getSettings: function () {
+    getSettings() {
         return {
             matrix:    this.refs.matrix.getDOMNode().value,
             columns:   parseInt(this.refs.columns.getDOMNode().value, 10),
@@ -38,4 +42,4 @@ var ConvolutionFilter = React.createClass({
     }
 });
 
-module.exports = ConvolutionFilter;
+export default ConvolutionFilter;

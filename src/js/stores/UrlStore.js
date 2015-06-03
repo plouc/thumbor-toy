@@ -1,20 +1,19 @@
-var Reflux       = require('reflux');
-var _            = require('lodash');
-var config       = require('./../../../config');
-var ImageStore   = require('./ImageStore');
-var FiltersStore = require('./FiltersStore');
-var ResizeStore  = require('./ResizeStore');
-var ServerStore  = require('./ServerStore');
+import Reflux       from 'reflux';
+import _            from 'lodash';
+import ImageStore   from './ImageStore';
+import FiltersStore from './FiltersStore';
+import ResizeStore  from './ResizeStore';
+import ServerStore  from './ServerStore';
 
 var UrlStore = Reflux.createStore({
-    init: function () {
+    init() {
         this.listenTo(ImageStore,   this.update);
         this.listenTo(FiltersStore, this.update);
         this.listenTo(ResizeStore,  this.update);
         this.listenTo(ServerStore,  this.update);
     },
 
-    update: function () {
+    update() {
         var currentFilters = _.filter(FiltersStore.current(), { 'active': true });
         var filters        = '';
         if (currentFilters.length) {
@@ -47,4 +46,4 @@ var UrlStore = Reflux.createStore({
     }
 });
 
-module.exports = UrlStore;
+export default UrlStore;

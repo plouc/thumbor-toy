@@ -1,12 +1,14 @@
-var React       = require('react/addons');
-var FilterMixin = require('./FilterMixin');
+import React       from 'react/addons';
+import FilterMixin from './FilterMixin';
 
 var ExtractFocalFilter = React.createClass({
+    displayName: 'ExtractFocalFilter',
+
     mixins: [FilterMixin],
 
-    getSettingsNodes: function () {
+    getSettingsNodes() {
         return '';
     }
 });
 
-module.exports = ExtractFocalFilter;
+export default ExtractFocalFilter;

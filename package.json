@@ -1,20 +1,31 @@
 {
   "devDependencies": {
-    "moment": "^2.8.3",
-    "react": "^0.12.0",
-    "react-tools": "*",
-    "reflux": "^0.1.15",
-    "lodash": "^2.4.1",
+    "babel-eslint": "^3.1.10",
+    "babelify": "^6.1.2",
     "browserify": "^6.2.0",
+    "chalk": "^1.0.0",
+    "eslint": "^0.22.1",
+    "eslint-plugin-react": "^2.4.0",
     "gulp": "^3.8.9",
     "gulp-concat": "^2.4.1",
     "gulp-cssmin": "^0.1.6",
+    "gulp-eslint": "^0.12.0",
+    "gulp-flowtype": "^0.4.7",
     "gulp-notify": "^2.0.0",
     "gulp-rename": "^1.2.0",
     "gulp-ruby-sass": "^0.7.1",
+    "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.5",
+    "lodash": "^2.4.1",
+    "moment": "^2.8.3",
+    "react": "^0.12.0",
     "react-router": "^0.10.2",
+    "react-tools": "*",
     "reactify": "^0.15.2",
-    "vinyl-source-stream": "^1.0.0"
+    "reflux": "^0.1.15",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "^3.2.1"
   },
   "dependencies": {
     "jquery": "^2.1.1"

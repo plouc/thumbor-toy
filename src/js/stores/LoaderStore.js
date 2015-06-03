@@ -1,25 +1,25 @@
-var Reflux        = require('reflux');
-var LoaderActions = require('./../actions/LoaderActions');
+import Reflux        from 'reflux';
+import LoaderActions from './../actions/LoaderActions';
 
 var _loading = false;
 
 var ImageStore = Reflux.createStore({
-    init: function () {
+    init() {
         this.listenTo(LoaderActions.loading, this.setLoading);
         this.listenTo(LoaderActions.loaded,  this.setLoaded);
     },
 
-    setLoading: function () {
+    setLoading() {
         _loading = true;
 
         this.trigger(_loading);
     },
 
-    setLoaded: function () {
+    setLoaded() {
         _loading = false;
 
         this.trigger(_loading);
     }
 });
 
-module.exports = ImageStore;
+export default ImageStore;

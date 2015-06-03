@@ -1,12 +1,14 @@
-var React       = require('react/addons');
-var FilterMixin = require('./FilterMixin');
+import React       from 'react/addons';
+import FilterMixin from './FilterMixin';
 
 var GrayscaleFilter = React.createClass({
+    displayName: 'GrayscaleFilter',
+
     mixins: [FilterMixin],
 
-    getSettingsNodes: function () {
+    getSettingsNodes() {
         return '';
     }
 });
 
-module.exports = GrayscaleFilter;
+export default GrayscaleFilter;

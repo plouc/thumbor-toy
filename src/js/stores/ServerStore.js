@@ -1,24 +1,22 @@
-var Reflux        = require('reflux');
-var _             = require('lodash');
-var config        = require('./../../../config');
-var ServerActions = require('./../actions/ServerActions');
+import Reflux        from 'reflux';
+import ServerActions from './../actions/ServerActions';
 
 var _server = '';
 
 var ServerStore = Reflux.createStore({
-    init: function () {
+    init() {
         this.listenTo(ServerActions.set, this.updateServer);
     },
 
-    updateServer: function (server) {
+    updateServer(server) {
         _server = server;
 
         this.trigger(_server);
     },
 
-    current: function () {
+    current() {
         return _server;
     }
 });
 
-module.exports = ServerStore;
+export default ServerStore;

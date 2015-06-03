@@ -1,24 +1,28 @@
-var React       = require('react/addons');
-var FilterMixin = require('./FilterMixin');
+import React       from 'react/addons';
+import FilterMixin from './FilterMixin';
 
 var MaxBytesFilter = React.createClass({
+    displayName: 'MaxBytesFilter',
+
     mixins: [FilterMixin],
 
-    getSettingsNodes: function () {
-        return <div className="control-group">
-            <label className="control-group__label">bytes</label>
-            <input className="control-group__control"
-                   ref="bytes" type="text"
-                   onChange={this._onChange}
-                   defaultValue={this.props.filter.bytes} />
-        </div>
+    getSettingsNodes() {
+        return (
+            <div className="control-group">
+                <label className="control-group__label">bytes</label>
+                <input className="control-group__control"
+                       ref="bytes" type="text"
+                       onChange={this.onChange}
+                       defaultValue={this.props.filter.bytes} />
+            </div>
+        );
     },
 
-    getSettings: function () {
+    getSettings() {
         return {
             bytes: parseInt(this.refs.bytes.getDOMNode().value, 10)
         };
     }
 });
 
-module.exports = MaxBytesFilter;
+export default MaxBytesFilter;

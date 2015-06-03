@@ -1,8 +1,8 @@
-var Reflux        = require('reflux');
-var FilterActions = require('./../actions/FilterActions');
-var config        = require('./../../../config');
-var baseFilters   = require('./../baseFilters');
-var _             = require('lodash');
+import Reflux        from 'reflux';
+import FilterActions from './../actions/FilterActions';
+import config        from './../../../config';
+import baseFilters   from './../baseFilters';
+import _             from 'lodash';
 
 var _currentFilters   = [];
 var _availableFilters = [];
@@ -21,14 +21,14 @@ _.forEach(config.filters, function (filter) {
 
 
 var FiltersStore = Reflux.createStore({
-    init: function () {
+    init() {
         this.listenTo(FilterActions.update, this.updateFilter);
         this.listenTo(FilterActions.add,    this.addFilter);
         this.listenTo(FilterActions.delete, this.deleteFilter);
         this.listenTo(FilterActions.clear,  this.clearFilters);
     },
 
-    addFilter: function (type) {
+    addFilter(type) {
         var filter = _.find(_availableFilters, { 'type': type });
 
         var filterInstance = _.clone(filter);
@@ -43,7 +43,7 @@ var FiltersStore = Reflux.createStore({
         this.trigger();
     },
 
-    deleteFilter: function (id) {
+    deleteFilter(id) {
         _.remove(_currentFilters, { id: id });
         _.forEach(_currentFilters, function (filter, i) {
             filter.id = i;
@@ -52,25 +52,25 @@ var FiltersStore = Reflux.createStore({
         this.trigger();
     },
 
-    clearFilters: function () {
+    clearFilters() {
         _currentFilters = [];
 
         this.trigger();
     },
 
-    updateFilter: function (id, settings) {
+    updateFilter(id, settings) {
         _.merge(_currentFilters[id], settings);
 
         this.trigger();
     },
 
-    current: function () {
+    current() {
         return _currentFilters;
     },
 
-    available: function () {
+    available() {
         return _availableFilters;
     }
 });
 
-module.exports = FiltersStore;
+export default FiltersStore;

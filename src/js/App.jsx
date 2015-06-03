@@ -1,15 +1,15 @@
-var React          = require('react/addons');
-var ServerSelector = require('./components/ServerSelector.jsx');
-var PresetSelector = require('./components/PresetSelector.jsx');
-var ImageSource    = require('./components/ImageSource.jsx');
-var Image          = require('./components/Image.jsx');
-var Url            = require('./components/Url.jsx');
-var Loader         = require('./components/Loader.jsx');
-var Filters        = require('./components/filters/Filters.jsx');
-var Resize         = require('./components/Resize.jsx');
-var ServerActions  = require('./actions/ServerActions');
-var _              = require('lodash');
-var config         = require('./../../config');
+import React          from 'react/addons';
+import ServerSelector from './components/ServerSelector.jsx';
+import PresetSelector from './components/PresetSelector.jsx';
+import ImageSource    from './components/ImageSource.jsx';
+import Image          from './components/Image.jsx';
+import Url            from './components/Url.jsx';
+import Loader         from './components/Loader.jsx';
+import Filters        from './components/filters/Filters.jsx';
+import Resize         from './components/Resize.jsx';
+import ServerActions  from './actions/ServerActions';
+import _              from 'lodash';
+import config         from './../../config';
 
 var serverSelector = null;
 if (_.isArray(config.server)) {

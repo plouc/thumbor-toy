@@ -1,31 +1,35 @@
-var React       = require('react/addons');
-var FilterMixin = require('./FilterMixin');
+import React       from 'react/addons';
+import FilterMixin from './FilterMixin';
 
 var FormatFilter = React.createClass({
+    displayName: 'FormatFilter',
+
     mixins: [FilterMixin],
 
-    getSettingsNodes: function () {
-        return <div>
-            <div className="control-group">
-                <div className="select-box">
-                    <select ref="format" onChange={this._onChange}
-                            defaultValue={this.props.filter.format}>
-                        <option value="jpeg">jpeg</option>
-                        <option value="gif">gif</option>
-                        <option value="png">png</option>
-                        <option value="webp">webp</option>
-                    </select>
-                    <i className="fa fa-angle-down" />
+    getSettingsNodes() {
+        return (
+            <div>
+                <div className="control-group">
+                    <div className="select-box">
+                        <select ref="format" onChange={this.onChange}
+                                defaultValue={this.props.filter.format}>
+                            <option value="jpeg">jpeg</option>
+                            <option value="gif">gif</option>
+                            <option value="png">png</option>
+                            <option value="webp">webp</option>
+                        </select>
+                        <i className="fa fa-angle-down" />
+                    </div>
                 </div>
             </div>
-        </div>
+        );
     },
 
-    getSettings: function () {
+    getSettings() {
         return {
             format: this.refs.format.getDOMNode().value
         };
     }
 });
 
-module.exports = FormatFilter;
+export default FormatFilter;

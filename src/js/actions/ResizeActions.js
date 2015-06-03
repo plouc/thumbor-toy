@@ -1,9 +1,7 @@
-var Reflux = require('reflux');
+import Reflux from 'reflux';
 
-var ResizeActions = Reflux.createActions([
+export default Reflux.createActions([
     'update',
     'clear',
-    'setPreset',
+    'setPreset'
 ]);
-
-module.exports = ResizeActions;

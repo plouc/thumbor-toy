@@ -1,33 +1,35 @@
-var React       = require('react/addons');
-var Reflux      = require('reflux');
-var LoaderStore = require('./../stores/LoaderStore');
+import React       from 'react/addons';
+import Reflux      from 'reflux';
+import LoaderStore from './../stores/LoaderStore';
 
 var Loader = React.createClass({
+    displayName: 'Loader',
+
     mixins: [Reflux.ListenerMixin],
 
-    getInitialState: function () {
+    getInitialState() {
         return {
             loading: false
         };
     },
 
-    componentWillMount: function () {
-        this.listenTo(LoaderStore, this._onLoaderChange);
+    componentWillMount() {
+        this.listenTo(LoaderStore, this.onLoaderChange);
     },
 
-    render: function () {
-        if (this.state.loading) {
-            return <span className="render__loader">loading</span>
-        }
-
-        return null;
-    },
-
-    _onLoaderChange: function (loading) {
+    onLoaderChange(loading) {
         this.setState({
             loading: loading
         });
+    },
+
+    render() {
+        if (this.state.loading) {
+            return <span className="render__loader">loading</span>;
+        }
+
+        return null;
     }
 });
 
-module.exports = Loader;
+export default Loader;

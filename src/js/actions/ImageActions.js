@@ -1,7 +1,5 @@
-var Reflux = require('reflux');
+import Reflux from 'reflux';
 
-var ImageActions = Reflux.createActions([
+export default Reflux.createActions([
     'set'
 ]);
-
-module.exports = ImageActions;
