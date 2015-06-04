@@ -62,6 +62,9 @@ var FilterMixin = {
 
     render() {
         var settings = this.getSettingsNodes();
+        if (settings === '') {
+            settings = <div className="filter__settings__empty">This filter has no settings</div>;
+        }
 
         var description = null;
         if (this.props.showDescription) {
@@ -75,7 +78,7 @@ var FilterMixin = {
             <div className={this.getClassName()}>
                 <FilterToggle {...this.props}
                     onToggle={this.onToggleSettings}
-                    expandable={!!settings}
+                    expandable={true}
                     expanded={this.state.expanded} />
                 <div className={this.getBodyClassName()}>
                     {description}

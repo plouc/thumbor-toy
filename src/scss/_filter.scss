@@ -75,6 +75,10 @@
     select {
       width: 100%;
     }
+    &__empty {
+      text-align: center;
+      margin-bottom: 7px;
+    }
   }
   &._is-active {
     .filter__header {
