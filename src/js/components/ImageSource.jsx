@@ -4,7 +4,6 @@
 
 import React        from 'react/addons';
 import Reflux       from 'reflux';
-import config       from './../../../config';
 import ImageActions from './../actions/ImageActions';
 
 var ImageSource = React.createClass({
@@ -32,7 +31,7 @@ var ImageSource = React.createClass({
         var sources = [{
             label: '--- select an image ---',
             src:   null
-        }].concat(config.images);
+        }].concat(this.props.images);
 
         var options = sources.map((image, i) => {
             return <option key={`${ image.src }.${ i }`} value={image.src}>{image.label}</option>;

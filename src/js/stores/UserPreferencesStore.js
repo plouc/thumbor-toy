@@ -5,7 +5,9 @@ import ls                     from 'local-storage';
 
 var preferencesKey = 'toy-prefs';
 var defaultPreferences = {
-    showFiltersDescription: true
+    showFiltersDescription: true,
+    'panel.settings':       true,
+    'panel.filters':        true
 };
 var currentPrefs;
 
