@@ -32,6 +32,8 @@ const filterTarget = {
         const item = monitor.getItem();
         if (item.uid !== props.uid) {
             props.onMove(item.position, props.position);
+        } else {
+            props.onAbortedDrop();
         }
     },
 
