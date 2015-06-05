@@ -31,6 +31,11 @@ var FiltersStore = Reflux.createStore({
         filterInstance.active   = true;
         filterInstance.expanded = true;
         filterInstance.uid      = internalId;
+        filterInstance.settings = {};
+
+        filter.settingsConfig.forEach(setting => {
+            filterInstance.settings[setting.key] = setting.default;
+        });
 
         internalId++;
 
@@ -65,7 +70,7 @@ var FiltersStore = Reflux.createStore({
     },
 
     update(uid, settings) {
-        _.merge(_.find(currentFilters, { uid: uid }), settings);
+        _.merge(_.find(currentFilters, { uid: uid }).settings, settings);
 
         this.trigger();
     },

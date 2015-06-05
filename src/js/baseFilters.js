@@ -1,8 +1,5 @@
 import config from './../../config';
 
-import BlurFilter         from './components/filters/BlurFilter.jsx';
-import BrightnessFilter   from './components/filters/BrightnessFilter.jsx';
-import ContrastFilter     from './components/filters/ContrastFilter.jsx';
 import EqualizeFilter     from './components/filters/EqualizeFilter.jsx';
 import FillFilter         from './components/filters/FillFilter.jsx';
 import NoiseFilter        from './components/filters/NoiseFilter.jsx';
@@ -22,16 +19,20 @@ import ExtractFocalFilter from './components/filters/ExtractFocalFilter.jsx';
 import ConvolutionFilter  from './components/filters/ConvolutionFilter.jsx';
 import MaxBytesFilter     from './components/filters/MaxBytesFilter.jsx';
 
+import ImprovedBaseFilter from './components/filters/ImprovedBaseFilter.jsx';
+
 export default [
     {
-        type:      'blur',
-        label:     'Blur',
-        active:    false,
-        radius:    1,
-        component: BlurFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Blur)',
-        stringify() {
-            return this.type + '(' + this.radius + ')';
+        type:           'blur',
+        label:          'Blur',
+        active:         false,
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Blur)',
+        settingsConfig: [
+            { key: 'radius', type: 'text', label: 'Radius', defaultValue: 1, default: 1 }
+        ],
+        component:      ImprovedBaseFilter,
+        stringify()     {
+            return this.type + '(' + this.settings.radius + ')';
         }
     },
     {
@@ -39,27 +40,30 @@ export default [
         label:       'Brightness',
         active:      false,
         amount:      0,
-        component:   BrightnessFilter,
+        settingsConfig:    [
+            { key: 'amount', type: 'text', label: 'Amount', default: 0 }
+        ],
+        component:  ImprovedBaseFilter,
         description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Brightness)',
         stringify() {
-            return this.type + '(' + this.amount + ')';
+            return this.type + '(' + this.settings.amount + ')';
         }
     },
     {
         type:        'contrast',
         label:       'Contrast',
-        active:      false,
-        amount:      1,
-        component:   ContrastFilter,
+        settingsConfig:    [
+            { key: 'amount', type: 'text', label: 'Amount', default: 1 }
+        ],
+        component:  ImprovedBaseFilter,
         description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Contrast)',
         stringify() {
-            return this.type + '(' + this.amount + ')';
+            return this.type + '(' + this.settings.amount + ')';
         }
     },
     {
         type:        'equalize',
         label:       'Equalize',
-        active:      false,
         component:   EqualizeFilter,
         description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Equalize)',
         stringify() {
@@ -69,7 +73,6 @@ export default [
     {
         type:            'fill',
         label:           'Fill',
-        active:          false,
         color:           'auto',
         fillTransparent: false,
         component:       FillFilter,
@@ -81,7 +84,6 @@ export default [
     {
         type:        'noise',
         label:       'Noise',
-        active:      false,
         amount:      0,
         component:   NoiseFilter,
         description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Noise)',
@@ -93,7 +95,6 @@ export default [
     {
         type:        'grayscale',
         label:       'Grayscale',
-        active:      false,
         component:   GrayscaleFilter,
         description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Grayscale)',
         stringify() {
@@ -103,7 +104,6 @@ export default [
     {
         type:        'no_upscale',
         label:       'No upscale',
-        active:      false,
         component:   NoUpscaleFilter,
         description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/No-Upscale)',
         stringify() {
@@ -113,7 +113,6 @@ export default [
     {
         type:         'watermark',
         label:        'Watermark',
-        active:       false,
         image:        config.watermarkImages[0].src,
         x:            10,
         y:            10,
@@ -127,7 +126,6 @@ export default [
     {
         type:        'strip_icc',
         label:       'Strip ICC',
-        active:      false,
         component:   StripIccFilter,
         description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Strip-icc)',
         stringify() {
@@ -138,7 +136,6 @@ export default [
         type:        'quality',
         label:       'Quality',
         amount:      100,
-        active:      false,
         component:   QualityFilter,
         description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Quality)',
         stringify() {
@@ -152,7 +149,6 @@ export default [
         green:       100,
         blue:        100,
         color:       'ff0000',
-        active:      false,
         component:   ColorizeFilter,
         description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Colorize)',
         stringify() {
@@ -165,7 +161,6 @@ export default [
         amount:        3,
         radius:        1.0,
         luminanceOnly: true,
-        active:        false,
         component:     SharpenFilter,
         description:   '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Sharpen)',
         stringify() {
@@ -176,7 +171,6 @@ export default [
         type:        'saturation',
         label:       'Saturation',
         amount:      1.0,
-        active:      false,
         component:   SaturationFilter,
         description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Saturation)',
         stringify() {
@@ -189,7 +183,6 @@ export default [
         red:         0,
         green:       0,
         blue:        0,
-        active:      false,
         component:   RgbFilter,
         description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Rgb)',
         stringify() {
@@ -203,7 +196,6 @@ export default [
         red:         100,
         green:       100,
         blue:        100,
-        active:      false,
         component:   RoundCornerFilter,
         description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Round-corners)',
         stringify() {
@@ -214,7 +206,6 @@ export default [
         type:        'format',
         label:       'Format',
         format:      'gif',
-        active:      false,
         component:   FormatFilter,
         description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Format)',
         stringify() {
@@ -225,7 +216,6 @@ export default [
         type:        'rotate',
         label:       'Rotate',
         angle:       90,
-        active:      false,
         component:   RotateFilter,
         description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Rotate)',
         stringify() {
@@ -235,7 +225,6 @@ export default [
     {
         type:        'extract_focal',
         label:       'Extract focal',
-        active:      false,
         component:   ExtractFocalFilter,
         description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Extract-Focal-Points)',
         stringify() {
@@ -248,7 +237,6 @@ export default [
         matrix:      '-1;-1;-1;-1;8;-1;-1;-1;-1',
         columns:     3,
         normalize:   false,
-        active:      false,
         component:   ConvolutionFilter,
         description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Convolution)',
         stringify() {
@@ -259,7 +247,6 @@ export default [
         type:        'max_bytes',
         label:       'Max bytes',
         bytes:       1000,
-        active:      false,
         component:   MaxBytesFilter,
         description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Max-bytes)',
         stringify() {
