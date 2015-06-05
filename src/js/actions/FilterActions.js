@@ -4,5 +4,6 @@ export default Reflux.createActions([
     'add',
     'delete',
     'update',
-    'clear'
+    'clear',
+    'move'
 ]);

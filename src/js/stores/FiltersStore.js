@@ -4,72 +4,78 @@ import config        from './../../../config';
 import baseFilters   from './../baseFilters';
 import _             from 'lodash';
 
-var _currentFilters   = [];
-var _availableFilters = [];
+var currentFilters   = [];
+var availableFilters = [];
+var internalId       = 0;
 
 _.forEach(config.filters, function (filter) {
     if (_.isString(filter)) {
         var baseFilter = _.findLast(baseFilters, { type: filter });
         if (!baseFilter) {
-            throw "no filter found with type: " + filter;
+            throw `no filter found with type: '${ filter }'`;
         }
-        _availableFilters.push(baseFilter);
+        availableFilters.push(baseFilter);
     } else {
-        _availableFilters.push(filter);
+        availableFilters.push(filter);
     }
 });
 
 
 var FiltersStore = Reflux.createStore({
-    init() {
-        this.listenTo(FilterActions.update, this.updateFilter);
-        this.listenTo(FilterActions.add,    this.addFilter);
-        this.listenTo(FilterActions.delete, this.deleteFilter);
-        this.listenTo(FilterActions.clear,  this.clearFilters);
-    },
+    listenables: FilterActions,
 
-    addFilter(type) {
-        var filter = _.find(_availableFilters, { 'type': type });
+    add(type) {
+        var filter = _.find(availableFilters, { 'type': type });
 
         var filterInstance = _.clone(filter);
-        filterInstance.active = true;
+        filterInstance.active   = true;
+        filterInstance.expanded = true;
+        filterInstance.uid      = internalId;
 
-        _currentFilters.push(filterInstance);
+        internalId++;
 
-        _.forEach(_currentFilters, function (filter, i) {
-            filter.id = i;
-        });
+        currentFilters.push(filterInstance);
 
-        this.trigger();
-    },
-
-    deleteFilter(id) {
-        _.remove(_currentFilters, { id: id });
-        _.forEach(_currentFilters, function (filter, i) {
-            filter.id = i;
-        });
+        _.forEach(currentFilters, (filter, i) => { filter.id = i; });
 
         this.trigger();
     },
 
-    clearFilters() {
-        _currentFilters = [];
+    delete(uid) {
+        _.remove(currentFilters, { uid: uid });
+        _.forEach(currentFilters, (filter, i) => { filter.id = i; });
 
         this.trigger();
     },
 
-    updateFilter(id, settings) {
-        _.merge(_currentFilters[id], settings);
+    clear() {
+        currentFilters = [];
+
+        this.trigger();
+    },
+
+    move(sourceId, targetId) {
+        var pulled = _.pullAt(currentFilters, sourceId);
+        if (pulled.length > 0) {
+            currentFilters.splice(targetId, 0, pulled[0]);
+            _.forEach(currentFilters, (filter, i) => { filter.id = i; });
+
+            this.trigger();
+        }
+    },
+
+    update(uid, settings) {
+        _.merge(_.find(currentFilters, { uid: uid }), settings);
 
         this.trigger();
     },
 
     current() {
-        return _currentFilters;
+        return currentFilters;
     },
 
     available() {
-        return _availableFilters;
+        return availableFilters;
     }
 });
 

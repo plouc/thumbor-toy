@@ -1,9 +1,7 @@
-import React       from 'react/addons';
-import FilterMixin from './FilterMixin';
+import React, { PropTypes } from 'react';
+import FilterMixin          from './FilterMixin';
 
 var BlurFilter = React.createClass({
-    displayName: 'BlurFilter',
-
     mixins: [FilterMixin],
 
     getSettingsNodes() {

@@ -5,7 +5,7 @@ import ImageStore             from './../../stores/ImageStore';
 import UserPreferencesStore   from './../../stores/UserPreferencesStore';
 import UserPreferencesActions from './../../actions/UserPreferencesActions';
 import FilterSelector         from './FilterSelector.jsx';
-
+import FiltersContainer       from './FiltersContainer.jsx';
 
 var Filters = React.createClass({
     displayName: 'Filters',
@@ -46,14 +46,6 @@ var Filters = React.createClass({
     },
 
     render() {
-        var filtersNodes = this.state.filters.map((filter, i) => {
-            return React.createElement(filter.component, {
-                showDescription: this.state.showFiltersDescription,
-                filter:          filter,
-                key:             `${ filter.type }.${ i }`
-            });
-        });
-
         var descriptionNode;
         if (this.state.showFiltersDescription) {
             descriptionNode = (
@@ -80,7 +72,7 @@ var Filters = React.createClass({
                 <div className="panel__content panel__content--filter-selector">
                     <FilterSelector />
                 </div>
-                {filtersNodes}
+                <FiltersContainer showFiltersDescription={this.state.showFiltersDescription} filters={this.state.filters}/>
             </div>
         );
     }

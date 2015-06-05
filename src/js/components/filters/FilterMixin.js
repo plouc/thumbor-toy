@@ -2,6 +2,7 @@ import React         from 'react/addons';
 import marked        from 'marked';
 import FilterActions from './../../actions/FilterActions';
 import FilterToggle  from './FilterToggle.jsx';
+import _             from 'lodash';
 
 var FilterMixin = {
     propTypes: {
@@ -36,16 +37,10 @@ var FilterMixin = {
         };
     },
 
-    getInitialState() {
-        return {
-            expanded: true
-        };
-    },
-
     onToggleSettings() {
-        this.setState({
-            expanded: !this.state.expanded
-        });
+        FilterActions.update(this.props.filter.uid, _.merge(this.props.filter, {
+            expanded: !this.props.filter.expanded
+        }));
     },
 
     onChange() {
@@ -57,7 +52,7 @@ var FilterMixin = {
     },
 
     getBodyClassName() {
-        return `filter__body${ this.state.expanded ? ' _is-expanded' : ''}`;
+        return `filter__body${ this.props.filter.expanded ? ' _is-expanded' : ''}`;
     },
 
     render() {
@@ -77,9 +72,7 @@ var FilterMixin = {
         return (
             <div className={this.getClassName()}>
                 <FilterToggle {...this.props}
-                    onToggle={this.onToggleSettings}
-                    expandable={true}
-                    expanded={this.state.expanded} />
+                    onToggle={this.onToggleSettings} />
                 <div className={this.getBodyClassName()}>
                     {description}
                     <div className="filter__settings">

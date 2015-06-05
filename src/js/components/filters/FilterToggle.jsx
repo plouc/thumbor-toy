@@ -5,12 +5,11 @@ var FilterToggle = React.createClass({
     displayName: 'FilterToggle',
 
     propTypes: {
-        expandable: React.PropTypes.bool.isRequired,
-        expanded:   React.PropTypes.bool.isRequired,
-        filter:     React.PropTypes.shape({
-            id:     React.PropTypes.number.isRequired,
-            label:  React.PropTypes.string.isRequired,
-            active: React.PropTypes.bool.isRequired
+        filter:       React.PropTypes.shape({
+            uid:      React.PropTypes.number.isRequired,
+            label:    React.PropTypes.string.isRequired,
+            active:   React.PropTypes.bool.isRequired,
+            expanded: React.PropTypes.bool.isRequired
         }).isRequired
     },
 
@@ -18,7 +17,7 @@ var FilterToggle = React.createClass({
         e.preventDefault();
         e.stopPropagation();
 
-        FilterActions.delete(this.props.filter.id);
+        FilterActions.delete(this.props.filter.uid);
     },
 
     onToggleVisibility(e) {
@@ -35,15 +34,6 @@ var FilterToggle = React.createClass({
     },
 
     render() {
-        var toggle = '';
-        if (this.props.expandable) {
-            toggle = (
-                <span className="filter__expand" onClick={this.onToggleVisibility}>
-                    <i className={'fa fa-chevron-' + (this.props.expanded ? 'down' : 'right') } />
-                </span>
-            );
-        }
-
         return (
             <div className="filter__header" onClick={this.onToggleActive}>
                 <span className="filter__toggle">
@@ -53,7 +43,9 @@ var FilterToggle = React.createClass({
                 <span className="filter__delete" onClick={this.onDeleteClick} >
                     <i className="fa fa-times" />
                 </span>
-                {toggle}
+                <span className="filter__expand" onClick={this.onToggleVisibility}>
+                    <i className={'fa fa-chevron-' + (this.props.filter.expanded ? 'down' : 'right') } />
+                </span>
             </div>
         );
     }
