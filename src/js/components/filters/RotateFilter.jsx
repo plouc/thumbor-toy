@@ -1,18 +1,15 @@
-import React       from 'react';
-import FilterMixin from './FilterMixin';
+import React      from 'react';
+import BaseFilter from './BaseFilter.jsx';
 
-var RotateFilter = React.createClass({
-    displayName: 'RotateFilter',
 
-    mixins: [FilterMixin],
-
+export default class RotateFilter extends BaseFilter {
     getSettingsNodes() {
         return (
             <div>
                 <div className="control-group">
                     <label className="control-group__label control-group__label--full">Angle</label>
                     <div className="select-box">
-                        <select ref="angle" onChange={this.onChange}
+                        <select ref="angle" onChange={this.onChange.bind(this)}
                                 defaultValue={this.props.filter.angle}>
                             <option value="0">0</option>
                             <option value="90">90</option>
@@ -24,13 +21,11 @@ var RotateFilter = React.createClass({
                 </div>
             </div>
         );
-    },
+    }
 
     getSettings() {
         return {
             angle: parseInt(this.refs.angle.getDOMNode().value, 10)
         };
     }
-});
-
-export default RotateFilter;
+}

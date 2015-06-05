@@ -1,28 +1,23 @@
-import React       from 'react';
-import FilterMixin from './FilterMixin';
+import React      from 'react';
+import BaseFilter from './BaseFilter.jsx';
 
-var MaxBytesFilter = React.createClass({
-    displayName: 'MaxBytesFilter',
 
-    mixins: [FilterMixin],
-
+export default class MaxBytesFilter extends BaseFilter {
     getSettingsNodes() {
         return (
             <div className="control-group">
                 <label className="control-group__label">Max Number (bytes)</label>
                 <input className="control-group__control"
                        ref="bytes" type="text"
-                       onChange={this.onChange}
+                       onChange={this.onChange.bind(this)}
                        defaultValue={this.props.filter.bytes} />
             </div>
         );
-    },
+    }
 
     getSettings() {
         return {
             bytes: parseInt(this.refs.bytes.getDOMNode().value, 10)
         };
     }
-});
-
-export default MaxBytesFilter;
+}

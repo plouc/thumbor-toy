@@ -1,11 +1,8 @@
-import React       from 'react';
-import FilterMixin from './FilterMixin';
+import React      from 'react';
+import BaseFilter from './BaseFilter.jsx';
 
-var RoundCornerFilter = React.createClass({
-    displayName: 'RoundCornerFilter',
 
-    mixins: [FilterMixin],
-
+export default class RoundCornerFilter extends BaseFilter {
     getSettingsNodes() {
         return (
             <div className="control-group">
@@ -13,33 +10,33 @@ var RoundCornerFilter = React.createClass({
                     <label className="control-group__label">Radius</label>
                     <input className="control-group__control"
                            ref="radius" type="text"
-                           onChange={this.onChange}
+                           onChange={this.onChange.bind(this)}
                            defaultValue={this.props.filter.radius} />
                 </div>
                 <div className="control-group">
                     <label className="control-group__label">Red (dec.)</label>
                     <input className="control-group__control"
                            ref="red" type="text"
-                           onChange={this.onChange}
+                           onChange={this.onChange.bind(this)}
                            defaultValue={this.props.filter.red} />
                 </div>
                 <div className="control-group">
                     <label className="control-group__label">Green (dec.)</label>
                     <input className="control-group__control"
                            ref="green" type="text"
-                           onChange={this.onChange}
+                           onChange={this.onChange.bind(this)}
                            defaultValue={this.props.filter.green} />
                 </div>
                 <div className="control-group">
                     <label className="control-group__label">Blue (dec.)</label>
                     <input className="control-group__control"
                            ref="blue" type="text"
-                           onChange={this.onChange}
+                           onChange={this.onChange.bind(this)}
                            defaultValue={this.props.filter.blue} />
                 </div>
             </div>
         );
-    },
+    }
 
     getSettings() {
         return {
@@ -49,6 +46,4 @@ var RoundCornerFilter = React.createClass({
             blue:   parseInt(this.refs.blue.getDOMNode().value, 10)
         };
     }
-});
-
-export default RoundCornerFilter;
+}

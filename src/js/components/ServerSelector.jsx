@@ -30,8 +30,7 @@ var ServerSelector = React.createClass({
                 </h3>
                 <div className="panel__content">
                     <div className="select-box">
-                        <select className="control--full-width"
-                                onChange={this.onChange}>
+                        <select className="control--full-width" onChange={this.onChange}>
                             {options}
                         </select>
                         <i className="fa fa-angle-down" />

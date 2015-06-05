@@ -1,14 +1,6 @@
-import React       from 'react';
-import FilterMixin from './FilterMixin';
+import React      from 'react';
+import BaseFilter from './BaseFilter.jsx';
 
-var StripIccFilter = React.createClass({
-    displayName: 'StripIccFilter',
 
-    mixins: [FilterMixin],
-
-    getSettingsNodes() {
-        return '';
-    }
-});
-
-export default StripIccFilter;
+export default class StripIccFilter extends BaseFilter {
+}

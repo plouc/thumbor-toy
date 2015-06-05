@@ -1,14 +1,6 @@
-import React       from 'react';
-import FilterMixin from './FilterMixin';
+import React      from 'react';
+import BaseFilter from './BaseFilter.jsx';
 
-var NoUpscaleFilter = React.createClass({
-    displayName: 'NoUpscaleFilter',
 
-    mixins: [FilterMixin],
-
-    getSettingsNodes() {
-        return '';
-    }
-});
-
-export default NoUpscaleFilter;
+export default class NoUpscaleFilter extends BaseFilter {
+}

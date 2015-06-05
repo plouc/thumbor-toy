@@ -1,18 +1,15 @@
-import React       from 'react';
-import FilterMixin from './FilterMixin';
+import React      from 'react';
+import BaseFilter from './BaseFilter.jsx';
 
-var FormatFilter = React.createClass({
-    displayName: 'FormatFilter',
 
-    mixins: [FilterMixin],
-
+export default class FormatFilter extends BaseFilter {
     getSettingsNodes() {
         return (
             <div>
                 <div className="control-group">
                     <label className="control-group__label control-group__label--full">Output format</label>
                     <div className="select-box">
-                        <select ref="format" onChange={this.onChange}
+                        <select ref="format" onChange={this.onChange.bind(this)}
                                 defaultValue={this.props.filter.format}>
                             <option value="jpeg">jpeg</option>
                             <option value="gif">gif</option>
@@ -24,13 +21,11 @@ var FormatFilter = React.createClass({
                 </div>
             </div>
         );
-    },
+    }
 
     getSettings() {
         return {
             format: this.refs.format.getDOMNode().value
         };
     }
-});
-
-export default FormatFilter;
+}

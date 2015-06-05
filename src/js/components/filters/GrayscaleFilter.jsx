@@ -1,14 +1,6 @@
-import React       from 'react';
-import FilterMixin from './FilterMixin';
+import React      from 'react';
+import BaseFilter from './BaseFilter.jsx';
 
-var GrayscaleFilter = React.createClass({
-    displayName: 'GrayscaleFilter',
 
-    mixins: [FilterMixin],
-
-    getSettingsNodes() {
-        return '';
-    }
-});
-
-export default GrayscaleFilter;
+export default class GrayscaleFilter extends BaseFilter {
+}

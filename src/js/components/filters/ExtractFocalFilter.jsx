@@ -1,14 +1,6 @@
-import React       from 'react';
-import FilterMixin from './FilterMixin';
+import React      from 'react';
+import BaseFilter from './BaseFilter.jsx';
 
-var ExtractFocalFilter = React.createClass({
-    displayName: 'ExtractFocalFilter',
 
-    mixins: [FilterMixin],
-
-    getSettingsNodes() {
-        return '';
-    }
-});
-
-export default ExtractFocalFilter;
+export default class ExtractFocalFilter extends BaseFilter {
+}

@@ -1,11 +1,8 @@
-import React       from 'react';
-import FilterMixin from './FilterMixin';
+import React      from 'react';
+import BaseFilter from './BaseFilter.jsx';
 
-var ConvolutionFilter = React.createClass({
-    displayName: 'ConvolutionFilter',
 
-    mixins: [FilterMixin],
-
+export default class ConvolutionFilter extends BaseFilter {
     getSettingsNodes() {
         return (
             <div className="control-group">
@@ -13,25 +10,25 @@ var ConvolutionFilter = React.createClass({
                     <label className="control-group__label">Matrix Items</label>
                     <input className="control-group__control"
                            ref="matrix" type="text"
-                           onChange={this.onChange}
+                           onChange={this.onChange.bind(this)}
                            defaultValue={this.props.filter.matrix} />
                 </div>
                 <div className="control-group">
                     <label className="control-group__label">Number of Columns</label>
                     <input className="control-group__control"
                            ref="columns" type="text"
-                           onChange={this.onChange}
+                           onChange={this.onChange.bind(this)}
                            defaultValue={this.props.filter.columns} />
                 </div>
                 <label>
                     <input ref="normalize" type="checkbox"
-                           onChange={this.onChange}
+                           onChange={this.onChange.bind(this)}
                            defaultChecked={this.props.filter.normalize} />
                     Should normalize
                 </label>
             </div>
         );
-    },
+    }
 
     getSettings() {
         return {
@@ -40,6 +37,4 @@ var ConvolutionFilter = React.createClass({
             normalize: this.refs.normalize.getDOMNode().checked
         };
     }
-});
-
-export default ConvolutionFilter;
+}

@@ -1,29 +1,25 @@
-import React       from 'react';
-import FilterMixin from './FilterMixin';
+import React      from 'react';
+import BaseFilter from './BaseFilter.jsx';
 
-var FillFilter = React.createClass({
-    displayName: 'FillFilter',
 
-    mixins: [FilterMixin],
-
+export default class FillFilter extends BaseFilter {
     getSettingsNodes() {
-        //Color(hex)	Fill Transparent (bool)
         return (
             <div className="control-group">
                 <label className="control-group__label">Color (hex)</label>
                 <input className="control-group__control"
                        ref="color" type="text"
-                       onChange={this.onChange}
+                       onChange={this.onChange.bind(this)}
                        defaultValue={this.props.filter.color} />
                 <label>
                     <input ref="fillTransparent" type="checkbox"
-                        onChange={this.onChange}
+                        onChange={this.onChange.bind(this)}
                         defaultChecked={this.props.filter.fillTransparent} />
                     Fill Transparent
                 </label>
             </div>
         );
-    },
+    }
 
     getSettings() {
         return {
@@ -31,6 +27,4 @@ var FillFilter = React.createClass({
             fillTransparent: this.refs.fillTransparent.getDOMNode().checked
         };
     }
-});
-
-export default FillFilter;
+}
