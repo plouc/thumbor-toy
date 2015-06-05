@@ -1,4 +1,4 @@
-import React       from 'react/addons';
+import React       from 'react';
 import FilterMixin from './FilterMixin';
 
 var SaturationFilter = React.createClass({

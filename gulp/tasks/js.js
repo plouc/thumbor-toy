@@ -102,9 +102,11 @@ gulp.task('js:dev', function () {
 
 
 gulp.task('js', ['js:dev'], function () {
-    return gulp.src(config.dest + thumborFileName)
+    return getBundler(false)
+        .bundle()
+        .pipe(source(thumborFileName))
+        .pipe(buffer())
         .pipe(uglify())
-        .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest(config.dest))
     ;
 });

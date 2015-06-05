@@ -2,7 +2,7 @@
  * This component is responsible for image source selection.
  */
 
-import React        from 'react/addons';
+import React        from 'react';
 import Reflux       from 'reflux';
 import ImageActions from './../actions/ImageActions';
 

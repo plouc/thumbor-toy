@@ -1,4 +1,4 @@
-import React                  from 'react/addons';
+import React                  from 'react';
 import Image                  from './components/Image.jsx';
 import Url                    from './components/Url.jsx';
 import Loader                 from './components/Loader.jsx';

@@ -1,4 +1,4 @@
-import React                  from 'react/addons';
+import React                  from 'react';
 import Reflux                 from 'reflux';
 import FiltersStore           from './../../stores/FiltersStore';
 import ImageStore             from './../../stores/ImageStore';

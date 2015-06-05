@@ -1,4 +1,4 @@
-import React         from 'react/addons';
+import React         from 'react';
 import FilterActions from './../../actions/FilterActions';
 
 var FilterToggle = React.createClass({

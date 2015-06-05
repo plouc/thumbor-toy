@@ -1,4 +1,4 @@
-import React         from 'react/addons';
+import React         from 'react';
 import marked        from 'marked';
 import FilterActions from './../../actions/FilterActions';
 import FilterToggle  from './FilterToggle.jsx';
