@@ -16,7 +16,6 @@ gulp.task('styles', function () {
         .on('error', onError)
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(config.dest))
-        .pipe(notify('ok, new css generated'))
     ;
 });
 

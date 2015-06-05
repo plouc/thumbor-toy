@@ -8,7 +8,8 @@ const ItemTypes = {
 const filterSource = {
     beginDrag(props) {
         return {
-            id: props.id
+            uid:      props.uid,
+            position: props.position
         };
     },
 
@@ -17,23 +18,28 @@ const filterSource = {
         const dropResult = monitor.getDropResult();
 
         if (dropResult) {
-            if (item.id !== dropResult.id) {
-                props.onFilterDrop(item.id, dropResult.id);
+            if (item.uid !== dropResult.uid) {
+                props.onDrop(item.position, dropResult.position);
             }
+        } else {
+            props.onAbortedDrop();
         }
     }
 };
 
 const filterTarget = {
     hover(props, monitor) {
-        const draggedId = monitor.getItem().id;
-        if (draggedId !== props.id) {
-            //props.moveFilter(draggedId, props.id);
+        const item = monitor.getItem();
+        if (item.uid !== props.uid) {
+            props.onMove(item.position, props.position);
         }
     },
 
     drop(props) {
-        return { id: props.id };
+        return {
+            uid:      props.uid,
+            position: props.position
+        };
     }
 };
 
@@ -41,21 +47,23 @@ function collectDrag(connect, monitor) {
     return {
         connectDragSource: connect.dragSource(),
         isDragging:        monitor.isDragging()
-    }
+    };
 }
 
 function collectDrop(connect, monitor) {
     return {
         connectDropTarget: connect.dropTarget()
-    }
+    };
 }
 
 class Filter extends Component {
     render() {
-        const { isDragging, connectDragSource, connectDropTarget } = this.props;
+        const { isDragging, connectDragSource, connectDropTarget, cssClasses } = this.props;
+
+        var classes = `filter__dnd ${ isDragging ? '_is-dragging' : '' } ${ cssClasses }`;
 
         return connectDragSource(connectDropTarget(
-            <div>
+            <div className={classes}>
                 {this.props.children}
             </div>
         ));
@@ -65,8 +73,10 @@ class Filter extends Component {
 Filter.propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     isDragging:        PropTypes.bool.isRequired,
-    onFilterDrop:      PropTypes.func.isRequired,
-    onFilterMove:      PropTypes.func.isRequired
+    onMove:            PropTypes.func.isRequired,
+    onDrop:            PropTypes.func.isRequired,
+    onAbortedDrop:     PropTypes.func.isRequired,
+    cssClasses:        PropTypes.string.isRequired
 };
 
 export default DragSource(ItemTypes.FILTER, filterSource, collectDrag)(DropTarget(ItemTypes.FILTER, filterTarget, collectDrop)(Filter));

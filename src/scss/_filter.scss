@@ -104,6 +104,31 @@
   }
 }
 
+.filter__dnd {
+  position: relative;
+  &:after {
+    position: absolute;
+    content: ' ';
+    display: none;
+    background: #7293b7;
+    right:  0;
+    left:   0;
+    height: 4px;
+    z-index: 2000;
+  }
+  &._insert-before:after {
+    top: -2px;
+    display: block;
+  }
+  &._insert-after:after {
+    bottom: -2px;
+    display: block;
+  }
+  &._is-dragging {
+    opacity: 0;
+  }
+}
+
 .filters {
   &__description-control {
     padding: 7px 10px;

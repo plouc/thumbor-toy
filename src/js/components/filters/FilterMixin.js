@@ -44,7 +44,7 @@ var FilterMixin = {
     },
 
     onChange() {
-        FilterActions.update(this.props.filter.id, this.getSettings());
+        FilterActions.update(this.props.filter.uid, this.getSettings());
     },
 
     getClassName() {

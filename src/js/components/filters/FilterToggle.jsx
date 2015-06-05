@@ -28,7 +28,7 @@ var FilterToggle = React.createClass({
     },
 
     onToggleActive() {
-        FilterActions.update(this.props.filter.id, {
+        FilterActions.update(this.props.filter.uid, {
             active: !this.props.filter.active
         });
     },
