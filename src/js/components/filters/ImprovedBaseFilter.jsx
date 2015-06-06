@@ -38,6 +38,22 @@ class ImprovedBaseFilter extends Component {
                         </label>
                     </div>
                 );
+            } else if (setting.type === 'choice') {
+                var options = setting.choices.map(choice => {
+                    return <option key={choice.value} value={choice.value}>{choice.label}</option>;
+                });
+
+                return (
+                    <div key={setting.key} className="control-group">
+                        <label className="control-group__label control-group__label--full">{setting.label}</label>
+                        <div className="select-box">
+                            <select ref={setting.key} onChange={this.onChange.bind(this)}>
+                                {options}
+                            </select>
+                            <i className="fa fa-angle-down" />
+                        </div>
+                    </div>
+                );
             }
         });
     }
@@ -48,7 +64,7 @@ class ImprovedBaseFilter extends Component {
             var value;
             var settingNode = this.refs[setting.key].getDOMNode();
 
-            if (setting.type === 'text') {
+            if (setting.type === 'text' || setting.type === 'choice') {
                 value = settingNode.value;
             } else if (setting.type === 'toggle') {
                 value = settingNode.checked;
@@ -106,8 +122,9 @@ ImprovedBaseFilter.propTypes = {
         type:        PropTypes.string.isRequired,
         label:       PropTypes.string.isRequired,
         active:      PropTypes.bool.isRequired,
+        expanded:    PropTypes.bool.isRequired,
         description: PropTypes.string.isRequired,
-        stringify:   PropTypes.func.isRequired,
+        template:    PropTypes.string,
         settings:    PropTypes.object.isRequired
     }).isRequired
 };

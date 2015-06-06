@@ -178,7 +178,12 @@ export default [
         component:      ImprovedBaseFilter,
         template:       '${ angle }',
         settingsConfig: [
-            { key: 'angle', type: 'text', label: 'Angle', default: 90 }
+            { key: 'angle', type: 'choice', label: 'Angle', default: 0, choices: [
+                { value: 0,   label: 0   },
+                { value: 90,  label: 90  },
+                { value: 180, label: 180 },
+                { value: 270, label: 270 }
+            ]}
         ]
     },
     {
