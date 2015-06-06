@@ -68,10 +68,10 @@ export default [
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Watermark)',
         template:       '${ image },${ x },${ y },${ transparency }',
         settingsConfig: [
-            { key: 'image',        type: 'text', label: 'Image',      default: config.watermarkImages[0].src },
-            { key: 'x',            type: 'text', label: 'X position', default: 10                            },
-            { key: 'y',            type: 'text', label: 'Y position', default: 10                            },
-            { key: 'transparency', type: 'text', label: 'Alpha',      default: 0                             }
+            { key: 'image',        type: 'choice', label: 'Image',      default: null, choices: [] },
+            { key: 'x',            type: 'text',   label: 'X position', default: 10                },
+            { key: 'y',            type: 'text',   label: 'Y position', default: 10                },
+            { key: 'transparency', type: 'text',   label: 'Alpha',      default: 0                 }
         ]
     },
     {

@@ -9,12 +9,18 @@ var availableFilters = [];
 var internalId       = 0;
 
 _.forEach(config.filters, function (filter) {
+    var baseFilter;
     if (_.isString(filter)) {
-        var baseFilter = _.findLast(baseFilters, { type: filter });
+        baseFilter = _.findLast(baseFilters, { type: filter });
         if (!baseFilter) {
             throw `no filter found with type: '${ filter }'`;
         }
         filter = baseFilter;
+    } else {
+        baseFilter = _.findLast(baseFilters, { type: filter.type });
+        if (baseFilter) {
+            filter = _.merge(baseFilter, filter);
+        }
     }
 
     filter.settingsConfig = filter.settingsConfig || [];
