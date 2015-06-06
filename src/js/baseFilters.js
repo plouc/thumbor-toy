@@ -1,256 +1,212 @@
 import config from './../../config';
 
-import EqualizeFilter     from './components/filters/EqualizeFilter.jsx';
-import FillFilter         from './components/filters/FillFilter.jsx';
-import NoiseFilter        from './components/filters/NoiseFilter.jsx';
-import GrayscaleFilter    from './components/filters/GrayscaleFilter.jsx';
-import NoUpscaleFilter    from './components/filters/NoUpscaleFilter.jsx';
-import WatermarkFilter    from './components/filters/WatermarkFilter.jsx';
-import StripIccFilter     from './components/filters/StripIccFilter.jsx';
-import QualityFilter      from './components/filters/QualityFilter.jsx';
-import ColorizeFilter     from './components/filters/ColorizeFilter.jsx';
-import SharpenFilter      from './components/filters/SharpenFilter.jsx';
-import SaturationFilter   from './components/filters/SaturationFilter.jsx';
-import RgbFilter          from './components/filters/RgbFilter.jsx';
-import RoundCornerFilter  from './components/filters/RoundCornerFilter.jsx';
-import FormatFilter       from './components/filters/FormatFilter.jsx';
-import RotateFilter       from './components/filters/RotateFilter.jsx';
-import ExtractFocalFilter from './components/filters/ExtractFocalFilter.jsx';
-import ConvolutionFilter  from './components/filters/ConvolutionFilter.jsx';
-import MaxBytesFilter     from './components/filters/MaxBytesFilter.jsx';
-
 import ImprovedBaseFilter from './components/filters/ImprovedBaseFilter.jsx';
 
 export default [
     {
         type:           'blur',
         label:          'Blur',
-        active:         false,
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Blur)',
+        component:      ImprovedBaseFilter,
+        template:       '${ radius }',
         settingsConfig: [
             { key: 'radius', type: 'text', label: 'Radius', defaultValue: 1, default: 1 }
-        ],
+        ]
+    },
+    {
+        type:           'brightness',
+        label:          'Brightness',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Brightness)',
         component:      ImprovedBaseFilter,
-        stringify()     {
-            return this.type + '(' + this.settings.radius + ')';
-        }
-    },
-    {
-        type:        'brightness',
-        label:       'Brightness',
-        active:      false,
-        amount:      0,
-        settingsConfig:    [
+        template:       '${ amount }',
+        settingsConfig: [
             { key: 'amount', type: 'text', label: 'Amount', default: 0 }
-        ],
-        component:  ImprovedBaseFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Brightness)',
-        stringify() {
-            return this.type + '(' + this.settings.amount + ')';
-        }
+        ]
     },
     {
-        type:        'contrast',
-        label:       'Contrast',
-        settingsConfig:    [
+        type:           'contrast',
+        label:          'Contrast',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Contrast)',
+        component:      ImprovedBaseFilter,
+        template:       '${ amount }',
+        settingsConfig: [
             { key: 'amount', type: 'text', label: 'Amount', default: 1 }
-        ],
-        component:  ImprovedBaseFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Contrast)',
-        stringify() {
-            return this.type + '(' + this.settings.amount + ')';
-        }
+        ]
     },
     {
-        type:        'equalize',
-        label:       'Equalize',
-        component:   EqualizeFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Equalize)',
-        stringify() {
-            return this.type + '()';
-        }
+        type:           'equalize',
+        label:          'Equalize',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Equalize)',
+        component:      ImprovedBaseFilter
     },
     {
-        type:            'fill',
-        label:           'Fill',
-        color:           'auto',
-        fillTransparent: false,
-        component:       FillFilter,
-        description:     '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Filling)',
-        stringify() {
-            return `${ this.type }(${ [this.color, this.fillTransparent].join(',') })`;
-        }
+        type:           'fill',
+        label:          'Fill',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Filling)',
+        component:      ImprovedBaseFilter,
+        template:       '${ color },${ fillTransparent }',
+        settingsConfig: [
+            { key: 'color',           type: 'text',   label: 'Color (hex)',      default: 'auto' },
+            { key: 'fillTransparent', type: 'toggle', label: 'Fill Transparent', default: false  }
+        ]
     },
     {
-        type:        'noise',
-        label:       'Noise',
-        amount:      0,
-        component:   NoiseFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Noise)',
-        stringify() {
-            return this.type + '(' + this.amount + ')';
-        }
-
+        type:           'noise',
+        label:          'Noise',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Noise)',
+        component:      ImprovedBaseFilter,
+        template:       '${ amount }',
+        settingsConfig: [
+            { key: 'amount', type: 'text', label: 'Amount (%)', default: 0 }
+        ]
     },
     {
-        type:        'grayscale',
-        label:       'Grayscale',
-        component:   GrayscaleFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Grayscale)',
-        stringify() {
-            return this.type + '()';
-        }
+        type:           'grayscale',
+        label:          'Grayscale',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Grayscale)',
+        component:      ImprovedBaseFilter
     },
     {
-        type:        'no_upscale',
-        label:       'No upscale',
-        component:   NoUpscaleFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/No-Upscale)',
-        stringify() {
-            return this.type + '()';
-        }
+        type:           'no_upscale',
+        label:          'No upscale',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/No-Upscale)',
+        component:      ImprovedBaseFilter
     },
     {
-        type:         'watermark',
-        label:        'Watermark',
-        image:        config.watermarkImages[0].src,
-        x:            10,
-        y:            10,
-        transparency: 0,
-        component:    WatermarkFilter,
-        description:  '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Watermark)',
-        stringify() {
-            return this.type + '(' + this.image + ',' + this.x + ',' + this.y + ',' + this.transparency + ')';
-        }
+        type:           'watermark',
+        label:          'Watermark',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Watermark)',
+        component:      ImprovedBaseFilter,
+        template:       '${ image },${ x },${ y },${ transparency }',
+        settingsConfig: [
+            { key: 'image',        type: 'text', label: 'Image',      default: config.watermarkImages[0].src },
+            { key: 'x',            type: 'text', label: 'X position', default: 10                            },
+            { key: 'y',            type: 'text', label: 'Y position', default: 10                            },
+            { key: 'transparency', type: 'text', label: 'Alpha',      default: 0                             }
+        ]
     },
     {
-        type:        'strip_icc',
-        label:       'Strip ICC',
-        component:   StripIccFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Strip-icc)',
-        stringify() {
-            return this.type + '()';
-        }
+        type:           'strip_icc',
+        label:          'Strip ICC',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Strip-icc)',
+        component:      ImprovedBaseFilter
     },
     {
-        type:        'quality',
-        label:       'Quality',
-        amount:      100,
-        component:   QualityFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Quality)',
-        stringify() {
-            return this.type + '(' + this.amount + ')';
-        }
+        type:           'quality',
+        label:          'Quality',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Quality)',
+        component:      ImprovedBaseFilter,
+        template:       '${ amount }',
+        settingsConfig: [
+            { key: 'amount', type: 'text', label: 'Amount (%)', default: 100 }
+        ]
     },
     {
-        type:        'colorize',
-        label:       'Colorize',
-        red:         100,
-        green:       100,
-        blue:        100,
-        color:       'ff0000',
-        component:   ColorizeFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Colorize)',
-        stringify() {
-            return this.type + '(' + [this.red, this.green, this.blue, this.color].join(',') + ')';
-        }
+        type:           'colorize',
+        label:          'Colorize',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Colorize)',
+        component:      ImprovedBaseFilter,
+        template:       '${ red },${ green },${ blue },${ color }',
+        settingsConfig: [
+            { key: 'red',   type: 'text', label: 'Red (%)',          default: 100      },
+            { key: 'green', type: 'text', label: 'Green (%)',        default: 100      },
+            { key: 'blue',  type: 'text', label: 'Blue (%)',         default: 100      },
+            { key: 'color', type: 'text', label: 'Fill Color (hex)', default: 'ff0000' }
+        ]
     },
     {
-        type:          'sharpen',
-        label:         'Sharpen',
-        amount:        3,
-        radius:        1.0,
-        luminanceOnly: true,
-        component:     SharpenFilter,
-        description:   '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Sharpen)',
-        stringify() {
-            return this.type + '(' + this.amount + ',' + this.radius + ',' + this.luminanceOnly + ')';
-        }
+        type:           'sharpen',
+        label:          'Sharpen',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Sharpen)',
+        component:      ImprovedBaseFilter,
+        template:       '${ amount },${ radius },${ luminanceOnly }',
+        settingsConfig: [
+            { key: 'amount',        type: 'text',   label: 'Amount',         default: 3    },
+            { key: 'radius',        type: 'text',   label: 'Radius',         default: 1.0  },
+            { key: 'luminanceOnly', type: 'toggle', label: 'Luminance Only', default: true }
+        ]
     },
     {
-        type:        'saturation',
-        label:       'Saturation',
-        amount:      1.0,
-        component:   SaturationFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Saturation)',
-        stringify() {
-            return this.type + '(' + this.amount + ')';
-        }
+        type:           'saturation',
+        label:          'Saturation',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Saturation)',
+        component:      ImprovedBaseFilter,
+        template:       '${ amount }',
+        settingsConfig: [
+            { key: 'amount', type: 'text', label: 'Percentage (%)', default: 1.0 }
+        ]
     },
     {
-        type:        'rgb',
-        label:       'RGB',
-        red:         0,
-        green:       0,
-        blue:        0,
-        component:   RgbFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Rgb)',
-        stringify() {
-            return this.type + '(' + [this.red, this.green, this.blue].join(',') + ')';
-        }
+        type:           'rgb',
+        label:          'RGB',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Rgb)',
+        component:      ImprovedBaseFilter,
+        template:       '${ red },${ green },${ blue }',
+        settingsConfig: [
+            { key: 'red',    type: 'text', label: 'Red Amount',   default: 0 },
+            { key: 'green',  type: 'text', label: 'Green Amount', default: 0 },
+            { key: 'blue',   type: 'text', label: 'Blue Amount',  default: 0 }
+        ]
     },
     {
-        type:        'round_corner',
-        label:       'Round corner',
-        radius:      10,
-        red:         100,
-        green:       100,
-        blue:        100,
-        component:   RoundCornerFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Round-corners)',
-        stringify() {
-            return this.type + '(' + [this.radius, this.red, this.green, this.blue].join(',') + ')';
-        }
+        type:           'round_corner',
+        label:          'Round corner',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Round-corners)',
+        component:      ImprovedBaseFilter,
+        template:       '${ radius },${ red },${ green },${ blue }',
+        settingsConfig: [
+            { key: 'radius', type: 'text', label: 'Radius',       default: 10  },
+            { key: 'red',    type: 'text', label: 'Red (dec.)',   default: 100 },
+            { key: 'green',  type: 'text', label: 'Green (dec.)', default: 100 },
+            { key: 'blue',   type: 'text', label: 'Blue (dec.)',  default: 100 }
+        ]
     },
     {
-        type:        'format',
-        label:       'Format',
-        format:      'gif',
-        component:   FormatFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Format)',
-        stringify() {
-            return this.type + '(' + this.format + ')';
-        }
+        type:           'format',
+        label:          'Format',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Format)',
+        component:      ImprovedBaseFilter,
+        template:       '${ format }',
+        settingsConfig: [
+            { key: 'format', type: 'text', label: 'Output Format', default: 'gif' }
+        ]
     },
     {
-        type:        'rotate',
-        label:       'Rotate',
-        angle:       90,
-        component:   RotateFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Rotate)',
-        stringify() {
-            return `${ this.type }(${ this.angle })`;
-        }
+        type:           'rotate',
+        label:          'Rotate',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Rotate)',
+        component:      ImprovedBaseFilter,
+        template:       '${ angle }',
+        settingsConfig: [
+            { key: 'angle', type: 'text', label: 'Angle', default: 90 }
+        ]
     },
     {
-        type:        'extract_focal',
-        label:       'Extract focal',
-        component:   ExtractFocalFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Extract-Focal-Points)',
-        stringify() {
-            return this.type + '()';
-        }
+        type:           'extract_focal',
+        label:          'Extract focal',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Extract-Focal-Points)',
+        component:      ImprovedBaseFilter
     },
     {
-        type:        'convolution',
-        label:       'Convolution',
-        matrix:      '-1;-1;-1;-1;8;-1;-1;-1;-1',
-        columns:     3,
-        normalize:   false,
-        component:   ConvolutionFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Convolution)',
-        stringify() {
-            return this.type + '(' + [this.matrix, this.columns, this.normalize].join(',') + ')';
-        }
+        type:           'convolution',
+        label:          'Convolution',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Convolution)',
+        component:      ImprovedBaseFilter,
+        template:       '${ matrix },${ columns },${ normalize }',
+        settingsConfig: [
+            { key: 'matrix',    type: 'text',   label: 'Matrix Items',      default: '-1;-1;-1;-1;8;-1;-1;-1;-1' },
+            { key: 'columns',   type: 'text',   label: 'Number of Columns', default: 3                           },
+            { key: 'normalize', type: 'toggle', label: 'Should Normalize',  default: false                       }
+        ]
     },
     {
-        type:        'max_bytes',
-        label:       'Max bytes',
-        bytes:       1000,
-        component:   MaxBytesFilter,
-        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Max-bytes)',
-        stringify() {
-            return this.type + '(' + this.bytes + ')';
-        }
+        type:           'max_bytes',
+        label:          'Max bytes',
+        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Max-bytes)',
+        component:      ImprovedBaseFilter,
+        template:       '${ bytes }',
+        settingsConfig: [
+            { key: 'bytes', type: 'text', label: 'Max Number (bytes)', default: 1000 }
+        ]
     }
 ];

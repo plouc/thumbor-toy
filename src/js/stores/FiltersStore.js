@@ -14,10 +14,12 @@ _.forEach(config.filters, function (filter) {
         if (!baseFilter) {
             throw `no filter found with type: '${ filter }'`;
         }
-        availableFilters.push(baseFilter);
-    } else {
-        availableFilters.push(filter);
+        filter = baseFilter;
     }
+
+    filter.settingsConfig = filter.settingsConfig || [];
+
+    availableFilters.push(filter);
 });
 
 

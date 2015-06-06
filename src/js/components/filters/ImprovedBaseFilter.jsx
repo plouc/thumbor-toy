@@ -5,6 +5,8 @@ import mdRenderer                      from './../../lib/markdownRenderer';
 import marked                          from 'marked';
 import _                               from 'lodash';
 
+import TextInput from './../form/TextInput.jsx';
+
 
 class ImprovedBaseFilter extends Component {
     onToggleSettings() {
@@ -25,6 +27,17 @@ class ImprovedBaseFilter extends Component {
                             defaultValue={this.props.filter.settings[setting.key]} />
                     </div>
                 );
+            } else if (setting.type === 'toggle') {
+                return (
+                    <div key={setting.key} className="control-group">
+                        <label>
+                            <input ref={setting.key} type="checkbox"
+                                onChange={this.onChange.bind(this)}
+                                defaultChecked={this.props.filter.settings[setting.key]} />
+                            {setting.label}
+                        </label>
+                    </div>
+                );
             }
         });
     }
@@ -34,8 +47,11 @@ class ImprovedBaseFilter extends Component {
         this.props.filter.settingsConfig.forEach(setting => {
             var value;
             var settingNode = this.refs[setting.key].getDOMNode();
+
             if (setting.type === 'text') {
                 value = settingNode.value;
+            } else if (setting.type === 'toggle') {
+                value = settingNode.checked;
             }
 
             settings[setting.key] = value;
