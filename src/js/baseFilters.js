@@ -1,13 +1,10 @@
 import config from './../../config';
 
-import ImprovedBaseFilter from './components/filters/ImprovedBaseFilter.jsx';
-
 export default [
     {
         type:           'blur',
         label:          'Blur',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Blur)',
-        component:      ImprovedBaseFilter,
         template:       '${ radius }',
         settingsConfig: [
             { key: 'radius', type: 'text', label: 'Radius', defaultValue: 1, default: 1 }
@@ -17,7 +14,6 @@ export default [
         type:           'brightness',
         label:          'Brightness',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Brightness)',
-        component:      ImprovedBaseFilter,
         template:       '${ amount }',
         settingsConfig: [
             { key: 'amount', type: 'text', label: 'Amount', default: 0 }
@@ -27,7 +23,6 @@ export default [
         type:           'contrast',
         label:          'Contrast',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Contrast)',
-        component:      ImprovedBaseFilter,
         template:       '${ amount }',
         settingsConfig: [
             { key: 'amount', type: 'text', label: 'Amount', default: 1 }
@@ -37,13 +32,11 @@ export default [
         type:           'equalize',
         label:          'Equalize',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Equalize)',
-        component:      ImprovedBaseFilter
     },
     {
         type:           'fill',
         label:          'Fill',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Filling)',
-        component:      ImprovedBaseFilter,
         template:       '${ color },${ fillTransparent }',
         settingsConfig: [
             { key: 'color',           type: 'text',   label: 'Color (hex)',      default: 'auto' },
@@ -54,7 +47,6 @@ export default [
         type:           'noise',
         label:          'Noise',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Noise)',
-        component:      ImprovedBaseFilter,
         template:       '${ amount }',
         settingsConfig: [
             { key: 'amount', type: 'text', label: 'Amount (%)', default: 0 }
@@ -64,19 +56,16 @@ export default [
         type:           'grayscale',
         label:          'Grayscale',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Grayscale)',
-        component:      ImprovedBaseFilter
     },
     {
         type:           'no_upscale',
         label:          'No upscale',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/No-Upscale)',
-        component:      ImprovedBaseFilter
     },
     {
         type:           'watermark',
         label:          'Watermark',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Watermark)',
-        component:      ImprovedBaseFilter,
         template:       '${ image },${ x },${ y },${ transparency }',
         settingsConfig: [
             { key: 'image',        type: 'text', label: 'Image',      default: config.watermarkImages[0].src },
@@ -89,13 +78,11 @@ export default [
         type:           'strip_icc',
         label:          'Strip ICC',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Strip-icc)',
-        component:      ImprovedBaseFilter
     },
     {
         type:           'quality',
         label:          'Quality',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Quality)',
-        component:      ImprovedBaseFilter,
         template:       '${ amount }',
         settingsConfig: [
             { key: 'amount', type: 'text', label: 'Amount (%)', default: 100 }
@@ -105,7 +92,6 @@ export default [
         type:           'colorize',
         label:          'Colorize',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Colorize)',
-        component:      ImprovedBaseFilter,
         template:       '${ red },${ green },${ blue },${ color }',
         settingsConfig: [
             { key: 'red',   type: 'text', label: 'Red (%)',          default: 100      },
@@ -118,7 +104,6 @@ export default [
         type:           'sharpen',
         label:          'Sharpen',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Sharpen)',
-        component:      ImprovedBaseFilter,
         template:       '${ amount },${ radius },${ luminanceOnly }',
         settingsConfig: [
             { key: 'amount',        type: 'text',   label: 'Amount',         default: 3    },
@@ -130,7 +115,6 @@ export default [
         type:           'saturation',
         label:          'Saturation',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Saturation)',
-        component:      ImprovedBaseFilter,
         template:       '${ amount }',
         settingsConfig: [
             { key: 'amount', type: 'text', label: 'Percentage (%)', default: 1.0 }
@@ -140,7 +124,6 @@ export default [
         type:           'rgb',
         label:          'RGB',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Rgb)',
-        component:      ImprovedBaseFilter,
         template:       '${ red },${ green },${ blue }',
         settingsConfig: [
             { key: 'red',    type: 'text', label: 'Red Amount',   default: 0 },
@@ -152,7 +135,6 @@ export default [
         type:           'round_corner',
         label:          'Round corner',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Round-corners)',
-        component:      ImprovedBaseFilter,
         template:       '${ radius },${ red },${ green },${ blue }',
         settingsConfig: [
             { key: 'radius', type: 'text', label: 'Radius',       default: 10  },
@@ -165,17 +147,20 @@ export default [
         type:           'format',
         label:          'Format',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Format)',
-        component:      ImprovedBaseFilter,
         template:       '${ format }',
         settingsConfig: [
-            { key: 'format', type: 'text', label: 'Output Format', default: 'gif' }
+            { key: 'format', type: 'choice', label: 'Output Format', default: 'gif', choices: [
+                { value: 'jpeg', label: 'jpeg' },
+                { value: 'gif',  label: 'gif'  },
+                { value: 'png',  label: 'png'  },
+                { value: 'webp', label: 'webp' }
+            ]}
         ]
     },
     {
         type:           'rotate',
         label:          'Rotate',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Rotate)',
-        component:      ImprovedBaseFilter,
         template:       '${ angle }',
         settingsConfig: [
             { key: 'angle', type: 'choice', label: 'Angle', default: 0, choices: [
@@ -190,13 +175,11 @@ export default [
         type:           'extract_focal',
         label:          'Extract focal',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Extract-Focal-Points)',
-        component:      ImprovedBaseFilter
     },
     {
         type:           'convolution',
         label:          'Convolution',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Convolution)',
-        component:      ImprovedBaseFilter,
         template:       '${ matrix },${ columns },${ normalize }',
         settingsConfig: [
             { key: 'matrix',    type: 'text',   label: 'Matrix Items',      default: '-1;-1;-1;-1;8;-1;-1;-1;-1' },
@@ -208,7 +191,6 @@ export default [
         type:           'max_bytes',
         label:          'Max bytes',
         description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Max-bytes)',
-        component:      ImprovedBaseFilter,
         template:       '${ bytes }',
         settingsConfig: [
             { key: 'bytes', type: 'text', label: 'Max Number (bytes)', default: 1000 }
