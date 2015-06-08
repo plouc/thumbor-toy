@@ -31,5 +31,8 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^3.2.1"
+  },
+  "scripts": {
+    "test": "gulp build:dev && gulp build"
   }
 }
