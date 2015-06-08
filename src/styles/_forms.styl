@@ -1,51 +1,42 @@
-button, input, select, textarea {
-  font-family: inherit;
-  font-size: 14px;
-  margin: 0;
-}
+button, input, select, textarea
+  font-family inherit
+  font-size 14px
+  margin 0
 
-.control-group {
-  margin-bottom: 7px;
-  &__label {
-    width: 40%;
-    display: inline-block;
-    &--full {
-      display: block;
-      width: 100%;
-      margin-bottom: 7px;
-    }
-  }
-  &__control {
-    width: 60%;
-  }
-}
+.control-group
+  margin-bottom 7px
+  &__label
+    width 40%
+    display inline-block
+    &--full
+      display block
+      width 100%;
+      margin-bottom 7px
+  &__control
+    width 60%
 
-input[type="checkbox"] {
-  margin-right: 7px;
-}
+input[type="checkbox"]
+  margin-right 7px
 
-select {
-  font-size: 16px;
-}
+select
+  font-size 16px
 
-.control--full-width {
-  width: 100%;
-}
+.control--full-width
+  width 100%
 
-input[type="text"] {
-  background-color: $control-bg-color;
-  border: none;
-  border-radius: 2px;
-  padding: 7px 10px;
+input[type="text"]
+  color inherit
+  background-color $control-bg-color
+  border none
+  border-radius 2px
+  padding 7px 10px
 
-  box-shadow: 0 1px 0 darken($panel-bg-color, 13) inset;
+  box-shadow 0 1px 0 darken($panel-bg-color, 13) inset
 
-  &:focus {
-    background-color: $bg-color;
-    color:            $font-highlight-color;
+  &:focus
+    background-color $bg-color
+    color            $font-highlight-color
 
-    outline: none;
+    outline none
 
-    box-shadow: 0 1px 0 lighten($panel-bg-color, 10);
-  }
-}
+    box-shadow 0 1px 0 lighten($panel-bg-color, 10)

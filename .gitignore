@@ -1,9 +1,6 @@
 .idea
-.sass-cache
 node_modules
 config.js
-bower_components
 thumbor-toy.js
-thumbor-toy.min.css
+thumbor-toy.css
 fonts
-extra

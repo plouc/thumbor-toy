@@ -1,57 +1,50 @@
-.select-box {
-  position: relative;
-  overflow: hidden;
+.select-box
+  position relative
+  overflow hidden
 
-  cursor: pointer;
+  cursor pointer
 
-  background-color: $control-embossed-bg-color;
-  border-radius: 2px;
+  background-color $control-embossed-bg-color
+  border-radius 2px
 
-  box-shadow: 0 2px 0 $control-embossed-shade-color;
+  box-shadow 0 2px 0 $control-embossed-shade-color
 
-  font-weight: 300;
+  font-weight 300
 
-  color: lighten($font-color, 10);
+  color lighten($font-color, 10)
 
-  .fa {
-    position: absolute;
-    top: 0;
-    right: 10px;
-    font-size: 20px;
-    top: 50%;
-    margin-top: -10px;
-    color: lighten($font-color, 10);
-  }
+  .fa
+    position absolute
+    top 0
+    right 10px
+    font-size 20px
+    top 50%
+    margin-top -10px
+    color lighten($font-color, 10)
 
-  &:hover {
-    color: $font-highlight-color;
-    background-color: $control-embossed-bg-color-highlight;
-    .fa {
-      color: $font-highlight-color;
-    }
-  }
+  &:hover
+    color $font-highlight-color
+    background-color $control-embossed-bg-color-highlight
+    .fa
+      color $font-highlight-color
 
-  select {
-    font-size: 14px;
-    position: relative;
+  select
+    color inherit
+    font-size 14px
+    position relative
     //font-weight: 300;
-    z-index: 1;
-    display: block;
-    width: 150%;
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
-    border: none;
-    -webkit-border-radius: 0;
-            border-radius: 0;
-
-    background-color: transparent;
-
-    padding: 9px 50px 9px 10px;
-    &:focus {
-      outline: none;
-      background-color: $control-embossed-bg-color-highlight;
-      color: #fff;
-    }
-  }
-}
+    z-index 1
+    display block
+    width 150%
+    -webkit-appearance none
+    -moz-appearance none
+    appearance none
+    border none
+    -webkit-border-radius 0
+    border-radius 0
+    background-color transparent
+    padding 9px 50px 9px 10px
+    &:focus
+      outline none
+      background-color $control-embossed-bg-color-highlight
+      color #fff
