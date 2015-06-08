@@ -10,7 +10,6 @@ Want to see it in action ? check the [demo](http://plouc.github.io/thumbor-toy/)
 
 ```
 npm install
-bower install
 ```
 
 ### Configuration

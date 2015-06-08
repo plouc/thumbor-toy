@@ -1,5 +1,5 @@
 module.exports = {
-    src:      './src',
-    bowerSrc: './bower_components',
-    dest:     '.'
+    src:    './src',
+    npmSrc: './node_modules',
+    dest:   '.'
 };
