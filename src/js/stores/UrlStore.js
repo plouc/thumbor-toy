@@ -17,8 +17,14 @@ var UrlStore = Reflux.createStore({
         var currentFilters = _.filter(FiltersStore.current(), { 'active': true });
         var filters        = '';
         if (currentFilters.length) {
-            filters = 'filters:' + _.map(currentFilters, function (filter) {
-                return filter.stringify();
+            filters = 'filters:' + _.map(currentFilters, filter => {
+                var settings = '';
+                if (filter.template) {
+                    var compiled = _.template(filter.template);
+                    settings = compiled(filter.settings);
+                }
+
+                return `${ filter.type }(${ settings })`;
             }).join(':') + '/';
         }
 

@@ -9,15 +9,23 @@ var availableFilters = [];
 var internalId       = 0;
 
 _.forEach(config.filters, function (filter) {
+    var baseFilter;
     if (_.isString(filter)) {
-        var baseFilter = _.findLast(baseFilters, { type: filter });
+        baseFilter = _.findLast(baseFilters, { type: filter });
         if (!baseFilter) {
             throw `no filter found with type: '${ filter }'`;
         }
-        availableFilters.push(baseFilter);
+        filter = baseFilter;
     } else {
-        availableFilters.push(filter);
+        baseFilter = _.findLast(baseFilters, { type: filter.type });
+        if (baseFilter) {
+            filter = _.merge(baseFilter, filter);
+        }
     }
+
+    filter.settingsConfig = filter.settingsConfig || [];
+
+    availableFilters.push(filter);
 });
 
 
@@ -31,6 +39,11 @@ var FiltersStore = Reflux.createStore({
         filterInstance.active   = true;
         filterInstance.expanded = true;
         filterInstance.uid      = internalId;
+        filterInstance.settings = {};
+
+        filter.settingsConfig.forEach(setting => {
+            filterInstance.settings[setting.key] = setting.default;
+        });
 
         internalId++;
 
@@ -65,7 +78,7 @@ var FiltersStore = Reflux.createStore({
     },
 
     update(uid, settings) {
-        _.merge(_.find(currentFilters, { uid: uid }), settings);
+        _.merge(_.find(currentFilters, { uid: uid }).settings, settings);
 
         this.trigger();
     },

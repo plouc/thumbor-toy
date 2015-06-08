@@ -1,84 +1,95 @@
 import React, { Component, PropTypes } from 'react';
-import { DragSource, DropTarget }      from 'react-dnd';
+import FilterActions                   from './../../actions/FilterActions';
+import FilterToggle                    from './FilterToggle.jsx';
+import mdRenderer                      from './../../lib/markdownRenderer';
+import marked                          from 'marked';
+import _                               from 'lodash';
+import TextSetting                     from './settings/TextSetting.jsx';
+import ToggleSetting                   from './settings/ToggleSetting.jsx';
+import ChoiceSetting                   from './settings/ChoiceSetting.jsx';
 
-const ItemTypes = {
-    FILTER: 'filter'
-};
-
-const filterSource = {
-    beginDrag(props) {
-        return {
-            uid:      props.uid,
-            position: props.position
-        };
-    },
-
-    endDrag(props, monitor) {
-        const item       = monitor.getItem();
-        const dropResult = monitor.getDropResult();
-
-        if (dropResult) {
-            if (item.uid !== dropResult.uid) {
-                props.onDrop(item.position, dropResult.position);
-            }
-        } else {
-            props.onAbortedDrop();
-        }
-    }
-};
-
-const filterTarget = {
-    hover(props, monitor) {
-        const item = monitor.getItem();
-        if (item.uid !== props.uid) {
-            props.onMove(item.position, props.position);
-        } else {
-            props.onAbortedDrop();
-        }
-    },
-
-    drop(props) {
-        return {
-            uid:      props.uid,
-            position: props.position
-        };
-    }
-};
-
-function collectDrag(connect, monitor) {
-    return {
-        connectDragSource: connect.dragSource(),
-        isDragging:        monitor.isDragging()
-    };
-}
-
-function collectDrop(connect, monitor) {
-    return {
-        connectDropTarget: connect.dropTarget()
-    };
-}
 
 class Filter extends Component {
+    onToggleSettings() {
+        FilterActions.update(this.props.filter.uid, _.merge(this.props.filter, {
+            expanded: !this.props.filter.expanded
+        }));
+    }
+
+    getSettingsNodes() {
+        return this.props.filter.settingsConfig.map(setting => {
+            if (setting.type === 'text') {
+                return (
+                    <TextSetting key={setting.key} setting={setting} onChange={this.onChange.bind(this)}
+                        defaultValue={this.props.filter.settings[setting.key]}/>
+                );
+            } else if (setting.type === 'toggle') {
+                return (
+                    <ToggleSetting key={setting.key} setting={setting} onChange={this.onChange.bind(this)}
+                        defaultValue={this.props.filter.settings[setting.key]}/>
+                );
+            } else if (setting.type === 'choice') {
+                return (
+                    <ChoiceSetting key={setting.key} setting={setting} onChange={this.onChange.bind(this)}
+                        defaultValue={this.props.filter.settings[setting.key]}/>
+                );
+            }
+        });
+    }
+
+    onChange(settingKey, settingValue) {
+        FilterActions.update(this.props.filter.uid, _.merge(this.props.filter.settings, {
+            [settingKey]: settingValue
+        }));
+    }
+
+    getClassName() {
+        return `filter${ this.props.filter.active ? ' _is-active' : '' }`;
+    }
+
+    getBodyClassName() {
+        return `filter__body${ this.props.filter.expanded ? ' _is-expanded' : ''}`;
+    }
+
     render() {
-        const { isDragging, connectDragSource, connectDropTarget, cssClasses } = this.props;
+        var settings = this.getSettingsNodes();
+        if (settings === '') {
+            settings = <div className="filter__settings__empty">This filter has no settings</div>;
+        }
 
-        var classes = `filter__dnd ${ isDragging ? '_is-dragging' : '' } ${ cssClasses }`;
+        var description = null;
+        if (this.props.showDescription) {
+            description = (
+                <div className="filter__description"
+                    dangerouslySetInnerHTML={{ __html: marked(this.props.filter.description, { renderer: mdRenderer }) }}/>
+            );
+        }
 
-        return connectDragSource(connectDropTarget(
-            <div className={classes}>
-                {this.props.children}
+        return (
+            <div className={this.getClassName()}>
+                <FilterToggle {...this.props} onToggle={this.onToggleSettings.bind(this)} />
+                <div className={this.getBodyClassName()}>
+                    {description}
+                    <div className="filter__settings">
+                        {settings}
+                    </div>
+                </div>
             </div>
-        ));
+        );
     }
 }
 
 Filter.propTypes = {
-    connectDragSource: PropTypes.func.isRequired,
-    isDragging:        PropTypes.bool.isRequired,
-    onMove:            PropTypes.func.isRequired,
-    onDrop:            PropTypes.func.isRequired,
-    onAbortedDrop:     PropTypes.func.isRequired,
-    cssClasses:        PropTypes.string.isRequired
+    showDescription: PropTypes.bool.isRequired,
+    filter:          PropTypes.shape({
+        type:        PropTypes.string.isRequired,
+        label:       PropTypes.string.isRequired,
+        active:      PropTypes.bool.isRequired,
+        expanded:    PropTypes.bool.isRequired,
+        description: PropTypes.string.isRequired,
+        template:    PropTypes.string,
+        settings:    PropTypes.object.isRequired
+    }).isRequired
 };
 
-export default DragSource(ItemTypes.FILTER, filterSource, collectDrag)(DropTarget(ItemTypes.FILTER, filterTarget, collectDrop)(Filter));
+export default Filter;

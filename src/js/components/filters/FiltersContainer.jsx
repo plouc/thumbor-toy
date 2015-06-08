@@ -2,7 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { DragDropContext }             from 'react-dnd';
 import HTML5Backend                    from 'react-dnd/modules/backends/HTML5';
 import FilterActions                   from './../../actions/FilterActions';
+import SortableFilter                  from './SortableFilter.jsx';
 import Filter                          from './Filter.jsx';
+
 
 class FiltersContainer extends Component {
     constructor(props) {
@@ -43,19 +45,13 @@ class FiltersContainer extends Component {
                 }
             }
 
-            return React.createElement(Filter, {
-                key:           i,
-                position:      i,
-                uid:           filter.uid,
-                onDrop:        this.onFilterDrop.bind(this),
-                onMove:        this.onFilterMove.bind(this),
-                onAbortedDrop: this.onAbortedFilterDrop.bind(this),
-                cssClasses:    cssClasses
-            },  React.createElement(filter.component, {
-                    showDescription: this.props.showFiltersDescription,
-                    filter:          filter,
-                    key:             filter.uid
-                })
+            return (
+                <SortableFilter key={i} position={i} uid={filter.uid}
+                    onDrop={this.onFilterDrop.bind(this)} onMove={this.onFilterMove.bind(this)}
+                    onAbortedDrop={this.onAbortedFilterDrop.bind(this)} cssClasses={cssClasses}
+                >
+                    <Filter key={filter.uid} showDescription={this.props.showFiltersDescription} filter={filter} />
+                </SortableFilter>
             );
         });
 
