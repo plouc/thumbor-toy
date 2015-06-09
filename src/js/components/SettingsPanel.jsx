@@ -7,6 +7,7 @@ import ServerSelector from './ServerSelector.jsx';
 import PresetSelector from './PresetSelector.jsx';
 import PanelsStore    from './../stores/PanelsStore';
 import PanelsActions  from './../actions/PanelsActions';
+import ServerActions  from './../actions/ServerActions';
 
 var SettingsPanel = React.createClass({
     displayName: 'SettingsPanel',

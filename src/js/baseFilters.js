@@ -1,5 +1,3 @@
-import config from './../../config';
-
 export default [
     {
         type:           'blur',
@@ -29,9 +27,9 @@ export default [
         ]
     },
     {
-        type:           'equalize',
-        label:          'Equalize',
-        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Equalize)',
+        type:        'equalize',
+        label:       'Equalize',
+        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Equalize)'
     },
     {
         type:           'fill',
@@ -53,14 +51,14 @@ export default [
         ]
     },
     {
-        type:           'grayscale',
-        label:          'Grayscale',
-        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Grayscale)',
+        type:        'grayscale',
+        label:       'Grayscale',
+        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Grayscale)'
     },
     {
-        type:           'no_upscale',
-        label:          'No upscale',
-        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/No-Upscale)',
+        type:        'no_upscale',
+        label:       'No upscale',
+        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/No-Upscale)'
     },
     {
         type:           'watermark',
@@ -75,9 +73,9 @@ export default [
         ]
     },
     {
-        type:           'strip_icc',
-        label:          'Strip ICC',
-        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Strip-icc)',
+        type:        'strip_icc',
+        label:       'Strip ICC',
+        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Strip-icc)'
     },
     {
         type:           'quality',
@@ -172,9 +170,9 @@ export default [
         ]
     },
     {
-        type:           'extract_focal',
-        label:          'Extract focal',
-        description:    '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Extract-Focal-Points)',
+        type:        'extract_focal',
+        label:       'Extract focal',
+        description: '[Official thumbor documentation](https://github.com/thumbor/thumbor/wiki/Extract-Focal-Points)'
     },
     {
         type:           'convolution',

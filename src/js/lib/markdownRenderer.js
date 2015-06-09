@@ -19,5 +19,4 @@ renderer.link = function (href, title, text) {
             </a>`;
 };
 
-
 export default renderer;

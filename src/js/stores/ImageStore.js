@@ -1,7 +1,7 @@
 import Reflux       from 'reflux';
 import ImageActions from './../actions/ImageActions';
 
-var _image = '';
+var currentImage = '';
 
 var ImageStore = Reflux.createStore({
     init() {
@@ -9,13 +9,13 @@ var ImageStore = Reflux.createStore({
     },
 
     setImage(image) {
-        _image = image;
+        currentImage = image;
 
         this.trigger();
     },
 
     get() {
-        return _image;
+        return currentImage;
     }
 });
 

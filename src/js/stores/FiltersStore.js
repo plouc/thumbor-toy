@@ -49,7 +49,7 @@ var FiltersStore = Reflux.createStore({
 
         currentFilters.push(filterInstance);
 
-        _.forEach(currentFilters, (filter, i) => { filter.id = i; });
+        _.forEach(currentFilters, (f, i) => { f.id = i; });
 
         this.trigger();
     },

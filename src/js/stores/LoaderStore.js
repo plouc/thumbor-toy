@@ -1,7 +1,7 @@
 import Reflux        from 'reflux';
 import LoaderActions from './../actions/LoaderActions';
 
-var _loading = false;
+var currentLoading = false;
 
 var ImageStore = Reflux.createStore({
     init() {
@@ -10,15 +10,15 @@ var ImageStore = Reflux.createStore({
     },
 
     setLoading() {
-        _loading = true;
+        currentLoading = true;
 
-        this.trigger(_loading);
+        this.trigger(currentLoading);
     },
 
     setLoaded() {
-        _loading = false;
+        currentLoading = false;
 
-        this.trigger(_loading);
+        this.trigger(currentLoading);
     }
 });
 

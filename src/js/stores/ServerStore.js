@@ -1,7 +1,7 @@
 import Reflux        from 'reflux';
 import ServerActions from './../actions/ServerActions';
 
-var _server = '';
+var currentServer = '';
 
 var ServerStore = Reflux.createStore({
     init() {
@@ -9,13 +9,13 @@ var ServerStore = Reflux.createStore({
     },
 
     updateServer(server) {
-        _server = server;
+        currentServer = server;
 
-        this.trigger(_server);
+        this.trigger(currentServer);
     },
 
     current() {
-        return _server;
+        return currentServer;
     }
 });
 

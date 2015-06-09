@@ -2,7 +2,7 @@ import Reflux        from 'reflux';
 import ResizeActions from './../actions/ResizeActions';
 import _             from 'lodash';
 
-var _resizeConfig = {
+var currentResizeConfig = {
     active: false,
     width:  300,
     height: 300,
@@ -19,13 +19,13 @@ var ResizeStore = Reflux.createStore({
     },
 
     updateResize(config) {
-        _resizeConfig = _.merge(_resizeConfig, config);
+        currentResizeConfig = _.merge(currentResizeConfig, config);
 
         this.trigger();
     },
 
     clearResize() {
-        _resizeConfig = {
+        currentResizeConfig = {
             active: false,
             width:  300,
             height: 300,
@@ -38,7 +38,7 @@ var ResizeStore = Reflux.createStore({
     },
 
     presetResize(preset) {
-        _resizeConfig = _.merge(_resizeConfig, {
+        currentResizeConfig = _.merge(currentResizeConfig, {
             width:  preset.width,
             height: preset.height
         });
@@ -47,7 +47,7 @@ var ResizeStore = Reflux.createStore({
     },
 
     config() {
-        return _resizeConfig;
+        return currentResizeConfig;
     }
 });
 
