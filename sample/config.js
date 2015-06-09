@@ -36,7 +36,7 @@ export default {
         {
             type:           'fit_watermark',
             label:          'Fit Watermark',
-            description:    'Custom Canal+ filter to add resized watermark',
+            description:    'Resized watermark to fit original image',
             template:       '${ image },${ transparency }',
             settingsConfig: [
                 { key: 'image',        type: 'choice', label: 'Image',        default: null, choices: watermarkImages },
@@ -46,7 +46,7 @@ export default {
         {
             type:           'overlay',
             label:          'Overlay',
-            description:    'Custom Canal+ infosheet filter **Overlay**',
+            description:    '**Overlay** filter',
             template:       '${ image },${ transparency },${ width },${ height },${ x },${ y }',
             settingsConfig: [
                 { key: 'image',        type: 'choice', label: 'Image',        default: null, choices: watermarkImages },
