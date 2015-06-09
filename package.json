@@ -26,6 +26,7 @@
     "react": "^0.13.3",
     "react-dnd": "^1.1.1",
     "react-tools": "*",
+    "react-zeroclipboard": "^1.1.0",
     "reactify": "^0.15.2",
     "reflux": "^0.2.7",
     "vinyl-buffer": "^1.0.0",

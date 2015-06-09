@@ -10,7 +10,7 @@
   left  0
   right 0
 
-  padding 9px 10px 0
+  padding 9px 54px 0 10px
 
   font-size 16px
 
@@ -37,3 +37,38 @@
     color $url-status-color-unknown
   &._has-error
     color $url-status-color-error
+
+.url__copy
+  cursor pointer
+  background $copy-btn-bg-color
+  color      $copy-btn-color
+  line-height 1em
+  position absolute
+  top   9px
+  right 10px
+  padding 9px
+  display block
+  border-radius 2px
+
+  &__tooltip
+    line-height 1em
+    position absolute
+    top 13px
+    right 54px
+    padding 7px 9px
+    display none
+    background $copy-btn-bg-color
+    color      $copy-btn-color
+    font-size 12px
+    border-radius 2px
+
+.zeroclipboard-is-hover,
+.url__copy:hover
+  background $copy-btn-bg-color-hover
+  color      $copy-btn-color-hover
+
+.zeroclipboard-is-hover + .url__copy__tooltip,
+.url__copy:hover + .url__copy__tooltip
+    display block
+
+
