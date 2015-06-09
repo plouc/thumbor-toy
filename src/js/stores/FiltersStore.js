@@ -77,6 +77,13 @@ var FiltersStore = Reflux.createStore({
         }
     },
 
+    toggle(uid) {
+        var filter = _.find(currentFilters, { uid: uid });
+        filter.active = !filter.active;
+
+        this.trigger();
+    },
+
     update(uid, settings) {
         _.merge(_.find(currentFilters, { uid: uid }).settings, settings);
 

@@ -5,19 +5,30 @@
 
   background: $panel-bg-color;
 
+  margin: 0 10px 7px 10px;
+
+  background-color: $filter-bg-color;
+
+  box-shadow none
+  border-radius 2px
+
+  overflow hidden
+
   &__toggle,
   &__delete,
   &__expand {
     position: absolute;
     top: 0;
     display: block;
-    width:       30px;
-    height:      30px;
-    line-height: 30px;
+    width:       $filter-header-height;
+    height:      $filter-header-height;
+    line-height: $filter-header-height;
     text-align: center;
+    color: $filter-btn-icon-color;
+    cursor: pointer;
     &:hover {
-      background-color: rgba(255, 255, 255, 0.15);
-      cursor: pointer;
+      background-color: $filter-btn-bg-color-hover;
+      color:            $filter-btn-icon-color-hover;
     }
   }
   &__toggle {
@@ -25,7 +36,7 @@
     font-size: 12px;
   }
   &__delete {
-    right: 30px;
+    right: $filter-header-height;
     font-size: 10px;
   }
   &__expand {
@@ -36,13 +47,11 @@
   &__header {
     position: relative;
     display: block;
-    padding: 0 0 0 37px;
+    padding: 0 0 0 ($filter-header-height + 10px);
     cursor: pointer;
-    height:      31px;
-    line-height: 30px;
+    height:      $filter-header-height;
+    line-height: $filter-header-height;
     font-weight: 300;
-
-    background-color: #35394b;
 
     cursor: move;
 
@@ -86,6 +95,7 @@
     }
   }
   &._is-active {
+    box-shadow 0 1px 3px rgba(0, 0, 0, 0.15)
     .filter__header {
       color: $font-highlight-color;
     }
@@ -129,19 +139,14 @@
   }
 }
 
-.filters {
-  &__description-control {
-    padding: 7px 10px;
-    cursor: pointer;
-    margin-bottom: 7px;
-    .fa {
-      margin-right: 7px;
-    }
+.filters
+  &__description-control
+    padding 7px 10px
+    cursor pointer
+    margin-bottom 7px
+    .fa
+      margin-right 7px
 
-    &--active {
-      .fa {
-        color: $font-highlight-color;
-      }
-    }
-  }
-}
+    &--active
+      .fa
+        color $font-highlight-color

@@ -34,6 +34,11 @@ class Filter extends Component {
                         defaultValue={this.props.filter.settings[setting.key]}/>
                 );
             }
+
+            return React.createComponent(
+                <ToggleSetting key={setting.key} setting={setting} onChange={this.onChange.bind(this)}
+                    defaultValue={this.props.filter.settings[setting.key]}/>
+            );
         });
     }
 
