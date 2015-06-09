@@ -1,17 +1,11 @@
 .filter {
   color: $font-color;
-
   border-bottom: 1px solid $panel-bg-color;
-
   background: $panel-bg-color;
-
   margin: 0 10px 7px 10px;
-
   background-color: $filter-bg-color;
-
   box-shadow none
-  border-radius 2px
-
+  border-radius 3px
   overflow hidden
 
   &__toggle,
@@ -52,10 +46,9 @@
     height:      $filter-header-height;
     line-height: $filter-header-height;
     font-weight: 300;
-
     cursor: move;
-
     &:hover {
+      background $filter-header-bg-color-hover
     }
   }
 
@@ -95,7 +88,7 @@
     }
   }
   &._is-active {
-    box-shadow 0 1px 3px rgba(0, 0, 0, 0.15)
+    box-shadow 0 1px 2px rgba(0, 0, 0, 0.2)
     .filter__header {
       color: $font-highlight-color;
     }
@@ -141,7 +134,7 @@
 
 .filters
   &__description-control
-    padding 7px 10px
+    padding 7px 15px
     cursor pointer
     margin-bottom 7px
     .fa

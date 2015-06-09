@@ -1,25 +1,35 @@
 import Reflux        from 'reflux';
 import LoaderActions from './../actions/LoaderActions';
 
-var currentLoading = false;
+var isLoading = false;
+var hasError  = false;
 
-var ImageStore = Reflux.createStore({
+var LoaderStore = Reflux.createStore({
     init() {
         this.listenTo(LoaderActions.loading, this.setLoading);
         this.listenTo(LoaderActions.loaded,  this.setLoaded);
+        this.listenTo(LoaderActions.errored, this.setErrored);
     },
 
     setLoading() {
-        currentLoading = true;
+        isLoading = true;
 
-        this.trigger(currentLoading);
+        this.trigger(isLoading, hasError);
     },
 
     setLoaded() {
-        currentLoading = false;
+        isLoading = false;
+        hasError  = false;
 
-        this.trigger(currentLoading);
+        this.trigger(isLoading, hasError);
+    },
+
+    setErrored() {
+        hasError  = true;
+        isLoading = false;
+
+        this.trigger(isLoading, hasError);
     }
 });
 
-export default ImageStore;
+export default LoaderStore;

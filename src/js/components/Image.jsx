@@ -33,15 +33,13 @@ var ImageComponent = React.createClass({
     onUrlChange(url) {
         LoaderActions.loading();
         this.img.src = url;
-        this.img.onload = function () {
-            this.setState({
-                src: url
-            });
+        this.img.onload = (e) => {
+            this.setState({ src: url });
             LoaderActions.loaded();
-        }.bind(this);
+        };
 
-        this.img.onerror = function () {
-            LoaderActions.loaded();
+        this.img.onerror = function (e) {
+            LoaderActions.errored();
         };
     },
 

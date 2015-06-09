@@ -68,10 +68,10 @@ var Filters = React.createClass({
                 <h3 className="panel__title">
                     Filters <i className="fa fa-magic" />
                 </h3>
-                {descriptionNode}
                 <div className="panel__content panel__content--filter-selector">
                     <FilterSelector />
                 </div>
+                {descriptionNode}
                 <FiltersContainer showFiltersDescription={this.state.showFiltersDescription} filters={this.state.filters}/>
             </div>
         );

@@ -17,9 +17,9 @@ var Loader = React.createClass({
         this.listenTo(LoaderStore, this.onLoaderChange);
     },
 
-    onLoaderChange(loading) {
+    onLoaderChange(isLoading, hasError) {
         this.setState({
-            loading: loading
+            loading: isLoading
         });
     },
 

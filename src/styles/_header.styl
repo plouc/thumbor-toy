@@ -1,4 +1,4 @@
-.url
+.header
   z-index 200
 
   height      $header-height
@@ -16,9 +16,24 @@
 
   background-color $header-bg-color
 
+  &._has-error
+    padding-left 40px
+
   input[type="text"]
     vertical-align top
     font-family consolas, menlo, monaco, monospace;
     background-color $bg-color
     width 100%
-    padding 9px
+    padding 9px 9px 9px 46px
+
+.url__status
+  color $url-status-color-ok
+  line-height 1em
+  position absolute
+  font-size 20px
+  top 14px
+  left 24px
+  &._is-unkown
+    color $url-status-color-unknown
+  &._has-error
+    color $url-status-color-error
