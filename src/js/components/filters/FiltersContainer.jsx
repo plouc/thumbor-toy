@@ -56,8 +56,10 @@ class FiltersContainer extends Component {
         });
 
         return (
-            <div>
-                {filtersNodes}
+            <div className="filters__container__wrapper">
+                <div className="filters__container">
+                    {filtersNodes}
+                </div>
             </div>
         );
     }

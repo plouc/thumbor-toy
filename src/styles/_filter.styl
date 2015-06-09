@@ -88,7 +88,7 @@
     }
   }
   &._is-active {
-    box-shadow 0 1px 2px rgba(0, 0, 0, 0.2)
+    box-shadow 0 1px 2px rgba(0, 0, 0, 0.35)
     .filter__header {
       color: $font-highlight-color;
     }
@@ -133,6 +133,19 @@
 }
 
 .filters
+  &__container
+    &__wrapper
+      position absolute
+      top   130px
+      right 0
+      left  0
+      width 100%
+      bottom 42px
+      overflow auto
+      padding-top 3px
+      // added to fix scrollbar position
+      -webkit-transform translateZ(0)
+
   &__description-control
     padding 7px 15px
     cursor pointer
