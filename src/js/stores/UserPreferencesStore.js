@@ -38,8 +38,6 @@ var UserPreferencesStore = Reflux.createStore({
     set(key, value) {
         ensurePrefExists(key);
 
-        console.log('UserPreferencesStore.set()', key, value);
-
         currentPrefs[key] = value;
         ls.set(preferencesKey, currentPrefs);
 

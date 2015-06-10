@@ -40,7 +40,6 @@ var Modal = React.createClass({
     },
 
     onSettingChange(settingKey, settingValue) {
-        console.log('onSettingChange', settingKey, settingValue);
         if (settingKey === 'theme') {
             UserPreferencesActions.set(UserPreferencesTypes.THEME, settingValue);
         } else if (settingKey === 'showFiltersDescription') {
