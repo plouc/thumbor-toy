@@ -6,12 +6,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-import React         from 'react';
-import Reflux        from 'reflux';
-import PanelTypes    from './../stores/PanelTypes';
-import PanelsStore   from './../stores/PanelsStore';
-import PanelsActions from './../actions/PanelsActions';
-import Filters       from './filters/Filters.jsx';
+import React                  from 'react';
+import Reflux                 from 'reflux';
+import PanelTypes             from './../stores/PanelTypes';
+import UserPreferencesActions from './../actions/UserPreferencesActions';
+import UserPreferencesStore   from './../stores/UserPreferencesStore';
+import UserPreferencesTypes   from './../stores/UserPreferencesTypes';
+import Filters                from './filters/Filters.jsx';
 
 var FiltersPanel = React.createClass({
     displayName: 'FiltersPanel',
@@ -22,20 +23,20 @@ var FiltersPanel = React.createClass({
 
     getInitialState() {
         return {
-            opened: PanelsStore.get(PanelTypes.FILTERS_PANEL)
+            opened: UserPreferencesStore.get(UserPreferencesTypes.FILTERS_PANEL_OPENED)
         };
     },
 
     componentWillMount() {
-        this.listenTo(PanelsStore, () => {
+        this.listenTo(UserPreferencesStore, () => {
             this.setState({
-                opened: PanelsStore.get(PanelTypes.FILTERS_PANEL)
+                opened: UserPreferencesStore.get(UserPreferencesTypes.FILTERS_PANEL_OPENED)
             });
         });
     },
 
     onToggleClick() {
-        PanelsActions.toggle(PanelTypes.FILTERS_PANEL);
+        UserPreferencesActions.set(UserPreferencesTypes.FILTERS_PANEL_OPENED, !this.state.opened);
     },
 
     render() {

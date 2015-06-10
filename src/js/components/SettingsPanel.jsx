@@ -6,17 +6,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-import React          from 'react';
-import Reflux         from 'reflux';
-import _              from 'lodash';
-import ImageSource    from './ImageSource.jsx';
-import Resize         from './Resize.jsx';
-import ServerSelector from './ServerSelector.jsx';
-import PresetSelector from './PresetSelector.jsx';
-import PanelsStore    from './../stores/PanelsStore';
-import PanelsActions  from './../actions/PanelsActions';
-import ServerActions  from './../actions/ServerActions';
-import PanelTypes     from './../stores/PanelTypes';
+import React                  from 'react';
+import Reflux                 from 'reflux';
+import _                      from 'lodash';
+import ImageSource            from './ImageSource.jsx';
+import Resize                 from './Resize.jsx';
+import ServerSelector         from './ServerSelector.jsx';
+import PresetSelector         from './PresetSelector.jsx';
+import UserPreferencesActions from './../actions/UserPreferencesActions';
+import UserPreferencesStore   from './../stores/UserPreferencesStore';
+import UserPreferencesTypes   from './../stores/UserPreferencesTypes';
+import ServerActions          from './../actions/ServerActions';
+import PanelTypes             from './../stores/PanelTypes';
 
 var SettingsPanel = React.createClass({
     displayName: 'SettingsPanel',
@@ -27,20 +28,20 @@ var SettingsPanel = React.createClass({
 
     getInitialState() {
         return {
-            opened: PanelsStore.get(PanelTypes.SETTINGS_PANEL)
+            opened: UserPreferencesStore.get(UserPreferencesTypes.SETTINGS_PANEL_OPENED)
         };
     },
 
     componentWillMount() {
-        this.listenTo(PanelsStore, () => {
+        this.listenTo(UserPreferencesStore, () => {
             this.setState({
-                opened: PanelsStore.get(PanelTypes.SETTINGS_PANEL)
+                opened: UserPreferencesStore.get(UserPreferencesTypes.SETTINGS_PANEL_OPENED)
             });
         });
     },
 
     onToggleClick() {
-        PanelsActions.toggle(PanelTypes.SETTINGS_PANEL);
+        UserPreferencesActions.set(UserPreferencesTypes.SETTINGS_PANEL_OPENED, !this.state.opened);
     },
 
     render() {

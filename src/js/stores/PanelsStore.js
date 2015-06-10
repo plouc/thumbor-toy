@@ -15,19 +15,13 @@ import PanelTypes             from './PanelTypes';
 import UserPreferencesTypes   from './UserPreferencesTypes';
 
 var panelsState = {
-    [PanelTypes.SETTINGS_PANEL]: UserPreferencesStore.get(UserPreferencesTypes.SETTINGS_PANEL_OPENED),
-    [PanelTypes.FILTERS_PANEL]:  UserPreferencesStore.get(UserPreferencesTypes.FILTERS_PANEL_OPENED),
-    [PanelTypes.SETTINGS]:       false
+    [PanelTypes.SETTINGS]: false
 };
 
 export default Reflux.createStore({
     listenables: PanelsActions,
 
     updated(panelId) {
-        if (panelId.indexOf('panel.') === 0) {
-            UserPreferencesActions.set(panelId, panelsState[panelId]);
-        }
-
         this.trigger(panelId, panelsState[panelId]);
     },
 
