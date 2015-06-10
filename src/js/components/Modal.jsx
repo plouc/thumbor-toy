@@ -23,7 +23,7 @@ var Modal = React.createClass({
 
     getInitialState() {
         return {
-            opened: PanelsStore.get(PanelTypes.SETTINGS)
+            opened: true //PanelsStore.get(PanelTypes.SETTINGS)
         };
     },
 
@@ -62,7 +62,7 @@ var Modal = React.createClass({
             key:     'theme',
             label:   'theme',
             choices: [
-                { value: 'dark',  label: 'Dark theme' },
+                { value: 'dark',  label: 'Dark theme'  },
                 { value: 'light', label: 'Light theme' }
             ]
         };
@@ -71,9 +71,9 @@ var Modal = React.createClass({
             <div className={classes}>
                 <div className="modal__overlay" onClick={this.onCloseClick}/>
                 <div className="modal__container">
-                    <div className="panel panel--img-src">
+                    <div className="panel panel--settings">
                         <h3 className="panel__title">
-                            <i className="fa fa-cog"/>
+                            <i className="fa fa-close" onClick={this.onCloseClick}/>
                             Settings
                         </h3>
                         <div className="panel__content">

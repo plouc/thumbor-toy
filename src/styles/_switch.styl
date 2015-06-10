@@ -1,3 +1,42 @@
+.toggle
+  & + label
+    margin-left 10px
+    vertical-align super
+    cursor pointer
+
+  input
+    position absolute
+    margin-left -9999px
+    visibility hidden
+
+  label
+    transition background 200ms
+    outline none
+    position relative
+    display inline-block
+    width 36px
+    height 18px
+    border-radius 18px
+    t(background, 'toggle-bg')
+    cursor pointer
+    &:after
+      transition transform 200ms, background 200ms
+      content ' '
+      display inline-block
+      position absolute
+      transform translate3d(2px, 2px, 0)
+      width  14px
+      height 14px
+      border-radius 7px
+      t(background, 'toggle-pill-color')
+
+  input:checked + label
+    t(background, 'toggle-bg-on')
+    &:after
+      transform translate3d(20px, 2px, 0)
+      t(background, 'toggle-pill-color-on')
+
+
 .switch {
   position: relative;
 

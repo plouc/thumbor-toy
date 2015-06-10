@@ -11,6 +11,12 @@ import Setting from './Setting.jsx';
 
 
 export default class ToggleSetting extends Setting {
+    constructor(props) {
+        super(props);
+        this.uid = ToggleSetting.counter;
+        ToggleSetting.counter++;
+    }
+
     onChange() {
         var { setting, onChange } = this.props;
         var value = this.refs[setting.key].getDOMNode().checked;
@@ -21,15 +27,20 @@ export default class ToggleSetting extends Setting {
     render() {
         var { setting, defaultValue } = this.props;
 
+        var id = `toggle-${this.uid}`;
+
         return (
             <div key={setting.key} className="control-group">
-                <label>
-                    <input ref={setting.key} type="checkbox"
-                        onChange={this.onChange.bind(this)}
-                        defaultChecked={defaultValue} />
+                <span className="toggle">
+                    <input id={id} ref={setting.key} type="checkbox" onChange={this.onChange.bind(this)} defaultChecked={defaultValue}/>
+                    <label htmlFor={id}/>
+                </span>
+                <label htmlFor={id}>
                     {setting.label}
                 </label>
             </div>
         );
     }
 }
+
+ToggleSetting.counter = 0;
