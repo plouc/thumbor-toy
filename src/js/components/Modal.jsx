@@ -11,8 +11,8 @@ import Reflux                  from 'reflux';
 import PanelsActions           from './../actions/PanelsActions';
 import PanelTypes              from './../stores/PanelTypes';
 import PanelsStore             from './../stores/PanelsStore';
-import ToggleSetting           from './filters/settings/ToggleSetting.jsx';
-import ChoiceSetting           from './filters/settings/ChoiceSetting.jsx';
+import ToggleControl           from './form/ToggleControl.jsx';
+import ChoiceControl           from './form/ChoiceControl.jsx';
 import UserPreferencesStore    from './../stores/UserPreferencesStore';
 import UserPreferencesActions  from './../actions/UserPreferencesActions';
 import UserPreferencesTypes    from './../stores/UserPreferencesTypes';
@@ -77,12 +77,12 @@ var Modal = React.createClass({
                             Settings
                         </h3>
                         <div className="panel__content">
-                            <ToggleSetting
+                            <ToggleControl
                                 setting={showFiltersDescriptionSetting}
                                 onChange={this.onSettingChange}
                                 defaultValue={UserPreferencesStore.get(UserPreferencesTypes.SHOW_FILTERS_DESCRIPTION)}
                             />
-                            <ChoiceSetting
+                            <ChoiceControl
                                 setting={themeSetting}
                                 onChange={this.onSettingChange}
                                 defaultValue={UserPreferencesStore.get(UserPreferencesTypes.THEME)}

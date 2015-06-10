@@ -7,14 +7,14 @@
  * file that was distributed with this source code.
  */
 import React   from 'react';
-import Setting from './Setting.jsx';
+import Control from './Control.jsx';
 
 
-class ToggleSetting extends Setting {
+class ToggleControl extends Control {
     constructor(props) {
         super(props);
-        this.uid = ToggleSetting.counter;
-        ToggleSetting.counter++;
+        this.uid = ToggleControl.counter;
+        ToggleControl.counter++;
     }
 
     onChange() {
@@ -30,7 +30,7 @@ class ToggleSetting extends Setting {
         var id = `toggle-${this.uid}`;
 
         return (
-            <div key={setting.key} className="control-group">
+            <div key={setting.key} className={this.props.wrapperClass}>
                 <span className="toggle">
                     <input id={id} ref={setting.key} type="checkbox" onChange={this.onChange.bind(this)} defaultChecked={defaultValue}/>
                     <label htmlFor={id}/>
@@ -44,6 +44,6 @@ class ToggleSetting extends Setting {
 }
 
 // Maintain id uniqueness
-ToggleSetting.counter = 0;
+ToggleControl.counter = 0;
 
-export default ToggleSetting;
+export default ToggleControl;

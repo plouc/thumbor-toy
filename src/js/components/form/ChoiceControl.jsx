@@ -7,10 +7,10 @@
  * file that was distributed with this source code.
  */
 import React   from 'react';
-import Setting from './Setting.jsx';
+import Control from './Control.jsx';
 
 
-export default class ChoiceSetting extends Setting {
+class ChoiceControl extends Control {
     onChange() {
         var { setting, onChange } = this.props;
         var value = this.refs[setting.key].getDOMNode().value;
@@ -26,7 +26,7 @@ export default class ChoiceSetting extends Setting {
         });
 
         return (
-            <div key={setting.key} className="control-group">
+            <div key={setting.key} className={this.props.wrapperClass}>
                 <label className="control-group__label control-group__label--full">{setting.label}</label>
                 <div className="select-box">
                     <select ref={setting.key} onChange={this.onChange.bind(this)} defaultValue={defaultValue}>
@@ -38,3 +38,5 @@ export default class ChoiceSetting extends Setting {
         );
     }
 }
+
+export default ChoiceControl;

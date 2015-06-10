@@ -7,10 +7,10 @@
  * file that was distributed with this source code.
  */
 import React   from 'react';
-import Setting from './Setting.jsx';
+import Control from './Control.jsx';
 
 
-export default class TextSetting extends Setting {
+export default class TextControl extends Control {
     onChange() {
         var { setting, onChange } = this.props;
         var value = this.refs[setting.key].getDOMNode().value;
@@ -22,7 +22,7 @@ export default class TextSetting extends Setting {
         var { setting, defaultValue } = this.props;
 
         return (
-            <div key={setting.key} className="control-group">
+            <div key={setting.key} className={this.props.wrapperClass}>
                 <label className="control-group__label">{setting.label}</label>
                 <input className="control-group__control"
                     ref={setting.key} type="text"

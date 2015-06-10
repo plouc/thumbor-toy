@@ -7,63 +7,35 @@
  * file that was distributed with this source code.
  */
 import React         from 'react';
-import Reflux        from 'reflux';
+import _             from 'lodash';
 import ResizeActions from './../actions/ResizeActions';
+import ResizeStore   from './../stores/ResizeStore';
+import ToggleControl from './form/ToggleControl.jsx';
+import TextControl   from './form/TextControl.jsx';
+import SwitchControl from './form/SwitchControl.jsx';
+
 
 var Resize = React.createClass({
     displayName: 'Resize',
 
-    mixins: [Reflux.ListenerMixin],
-
-    props: {
-        presets: React.PropTypes.array
-    },
-
-    onPresetChange(e) {
-        var preset = this.props.presets[e.target.value-1];
-        this.refs.width.getDOMNode().value  = preset.width;
-        this.refs.height.getDOMNode().value = preset.height;
-        ResizeActions.setPreset(preset);
-    },
-
-    onChange() {
-        var config = {
-            active: this.refs.active.getDOMNode().checked,
-            width:  this.refs.width.getDOMNode().value,
-            height: this.refs.height.getDOMNode().value,
-            smart:  this.refs.smart.getDOMNode().checked,
-            debug:  this.refs.debug.getDOMNode().checked,
-            fit:    this.refs.fit.getDOMNode().checked
+    getInitialState() {
+        return {
+            resize: ResizeStore.config()
         };
+    },
 
-        ResizeActions.update(config);
+    onChange(key, value) {
+        ResizeActions.update(_.merge(this.state.resize, {
+            [key]: value
+        }));
     },
 
     render() {
-        var selectNode = '';
-
-        if (this.props.presets && this.props.presets.length > 0) {
-            presets = [{
-                label:  '--- select an image ratio ---',
-                width:  null,
-                height: null
-            }].concat(this.props.presets);
-
-            var options = presets.map(function (preset, i) {
-                return <option key={i} value={i}>{preset.label}</option>;
-            });
-
-            selectNode = (
-                <div className="select-box">
-                    <select className="control--full-width"
-                        ref="presets"
-                        onChange={this.onPresetChange}>
-                        {options}
-                    </select>
-                    <i className="fa fa-angle-down" />
-                </div>
-            );
-        }
+        var resizeModes = [
+            { label: 'default', value: 'default' },
+            { label: 'smart',   value: 'smart'   },
+            { label: 'fit',     value: 'fit'     }
+        ];
 
         return (
             <div className="panel panel--resize">
@@ -72,49 +44,36 @@ var Resize = React.createClass({
                 </h3>
                 <div className="panel__content">
                     <div className="control-group">
-                        <label className="resize__switch">
-                            <input ref="active" type="checkbox"
-                                   onChange={this.onChange} />
-                            active
-                        </label>
-                        <label className="resize__switch">
-                            <input ref="debug" type="checkbox"
-                                   onChange={this.onChange} />
-                            debug
-                        </label>
+                        <ToggleControl
+                            setting={{ key: 'active', label: 'active' }}
+                            onChange={this.onChange}
+                            defaultValue={this.state.resize.active}
+                            wrapperClass='resize__switch'
+                        />
+                        <ToggleControl
+                            setting={{ key: 'debug', label: 'debug'  }}
+                            onChange={this.onChange}
+                            defaultValue={this.state.resize.debug}
+                            wrapperClass='resize__switch'
+                        />
                     </div>
-                    <div className="switch switch--3">
-                        <input type="radio" className="switch__radio--0"
-                               id="resize_mode_default" name="resize_mode"
-                               defaultChecked="true"
-                               onChange={this.onChange} />
-                        <label htmlFor="resize_mode_default">default</label>
-
-                        <input ref="smart" type="radio" className="switch__radio--1"
-                               id="resize_mode_smart" name="resize_mode"
-                               onChange={this.onChange} />
-                        <label htmlFor="resize_mode_smart">smart</label>
-
-                        <input ref="fit" type="radio" className="switch__radio--2"
-                               id="resize_mode_fit" name="resize_mode"
-                               onChange={this.onChange} />
-                        <label htmlFor="resize_mode_fit">fit</label>
-
-                        <i />
-                    </div>
-                    {selectNode}
-                    <div className="control-group">
-                        <label className="control-group__label">width</label>
-                        <input className="control-group__control"
-                               type="text" ref="height"
-                               ref="width" onChange={this.onChange} defaultValue="100" />
-                    </div>
-                    <div className="control-group">
-                        <label className="control-group__label">height</label>
-                        <input className="control-group__control"
-                               type="text" ref="height"
-                               onChange={this.onChange} defaultValue="100" />
-                    </div>
+                    <SwitchControl
+                        setting={{ label: 'mode', key: 'mode' }}
+                        defaultValue='default'
+                        options={resizeModes}
+                        onChange={this.onChange}
+                        defaultValue={this.state.resize.mode}
+                    />
+                    <TextControl
+                        setting={{ key: 'width',  label: 'width' }}
+                        defaultValue={this.state.resize.width}
+                        onChange={this.onChange}
+                    />
+                    <TextControl
+                        setting={{ key: 'height', label: 'height' }}
+                        defaultValue={this.state.resize.height}
+                        onChange={this.onChange}
+                    />
                 </div>
             </div>
         );

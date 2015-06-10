@@ -39,17 +39,17 @@ var UrlStore = Reflux.createStore({
         var resizeConfig = ResizeStore.config();
         var resize       = '';
         if (resizeConfig.active) {
-            if (resizeConfig.debug) {
+            if (resizeConfig.debug === true && resizeConfig.mode === 'smart') {
                 resize += 'debug/';
             }
 
-            if (resizeConfig.fit) {
+            if (resizeConfig.mode === 'fit') {
                 resize += 'fit-in/';
             }
 
             resize += resizeConfig.width + 'x' + resizeConfig.height + '/';
 
-            if (resizeConfig.smart) {
+            if (resizeConfig.mode === 'smart') {
                 resize += 'smart/';
             }
         }

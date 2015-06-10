@@ -9,10 +9,9 @@
 import React, { Component, PropTypes } from 'react';
 
 
-class Setting extends Component {}
+class Control extends Component {}
 
-
-Setting.propTypes = {
+Control.propTypes = {
     onChange: PropTypes.func.isRequired,
     setting:  PropTypes.shape({
         key:   PropTypes.string.isRequired,
@@ -20,5 +19,8 @@ Setting.propTypes = {
     }).isRequired
 };
 
+Control.defaultProps = {
+    wrapperClass: 'control-group'
+};
 
-export default Setting;
+export default Control;

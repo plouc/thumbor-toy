@@ -12,9 +12,9 @@ import FilterToggle                    from './FilterToggle.jsx';
 import mdRenderer                      from './../../lib/markdownRenderer';
 import marked                          from 'marked';
 import _                               from 'lodash';
-import TextSetting                     from './settings/TextSetting.jsx';
-import ToggleSetting                   from './settings/ToggleSetting.jsx';
-import ChoiceSetting                   from './settings/ChoiceSetting.jsx';
+import TextControl                     from './../form/TextControl.jsx';
+import ToggleControl                   from './../form/ToggleControl.jsx';
+import ChoiceControl                   from './../form/ChoiceControl.jsx';
 
 
 class Filter extends Component {
@@ -28,25 +28,21 @@ class Filter extends Component {
         return this.props.filter.settingsConfig.map(setting => {
             if (setting.type === 'text') {
                 return (
-                    <TextSetting key={setting.key} setting={setting} onChange={this.onChange.bind(this)}
+                    <TextControl key={setting.key} setting={setting} onChange={this.onChange.bind(this)}
                         defaultValue={this.props.filter.settings[setting.key]}/>
                 );
             } else if (setting.type === 'toggle') {
                 return (
-                    <ToggleSetting key={setting.key} setting={setting} onChange={this.onChange.bind(this)}
+                    <ToggleControl key={setting.key} setting={setting} onChange={this.onChange.bind(this)}
                         defaultValue={this.props.filter.settings[setting.key]}/>
                 );
             } else if (setting.type === 'choice') {
                 return (
-                    <ChoiceSetting key={setting.key} setting={setting} onChange={this.onChange.bind(this)}
+                    <ChoiceControl key={setting.key} setting={setting} onChange={this.onChange.bind(this)}
                         defaultValue={this.props.filter.settings[setting.key]}/>
                 );
             }
-
-            return React.createComponent(
-                <ToggleSetting key={setting.key} setting={setting} onChange={this.onChange.bind(this)}
-                    defaultValue={this.props.filter.settings[setting.key]}/>
-            );
+            // @todo throw for invalid type
         });
     }
 
