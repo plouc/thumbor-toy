@@ -4,27 +4,26 @@
 
   cursor pointer
 
-  background-color $control-embossed-bg-color
+  t(background-color, 'control-embossed-bg-color')
   border-radius 2px
 
-  box-shadow 0 2px 0 $control-embossed-shade-color
+  t(box-shadow, 'control-embossed-shadow')
 
   font-weight 300
 
-  color lighten($font-color, 10)
+  //color lighten($font-color, 10)
 
   .fa
     position absolute
-    top 0
     right 10px
     font-size 20px
     top 50%
     margin-top -10px
-    color lighten($font-color, 10)
+    //color lighten($font-color, 10)
 
   &:hover
     color $font-highlight-color
-    background-color $control-embossed-bg-color-highlight
+    t(background-color, 'control-embossed-bg-color-highlight')
     .fa
       color $font-highlight-color
 
@@ -32,7 +31,6 @@
     color inherit
     font-size 14px
     position relative
-    //font-weight: 300;
     z-index 1
     display block
     width 150%
@@ -46,5 +44,5 @@
     padding 9px 50px 9px 10px
     &:focus
       outline none
-      background-color $control-embossed-bg-color-highlight
+      t(background-color, 'control-embossed-bg-color-highlight')
       color #fff

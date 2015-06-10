@@ -14,7 +14,7 @@
 
   font-size 16px
 
-  background-color $header-bg-color
+  t(background-color, 'header-bg-color')
 
   &._has-error
     padding-left 40px
@@ -22,7 +22,7 @@
   input[type="text"]
     vertical-align top
     font-family consolas, menlo, monaco, monospace;
-    background-color $bg-color
+    t(background-color, 'url-bg-color')
     width 100%
     padding 9px 9px 9px 46px
 
@@ -40,8 +40,8 @@
 
 .url__copy
   cursor pointer
-  background $copy-btn-bg-color
-  color      $copy-btn-color
+  t(background, 'copy-btn-bg-color')
+  t(color,      'copy-btn-color')
   line-height 1em
   position absolute
   top   9px
@@ -57,15 +57,15 @@
     right 54px
     padding 7px 9px
     display none
-    background $copy-btn-bg-color
-    color      $copy-btn-color
+    t(background, 'copy-btn-bg-color')
+    t(color,      'copy-btn-color')
     font-size 12px
     border-radius 2px
 
 .zeroclipboard-is-hover,
 .url__copy:hover
-  background $copy-btn-bg-color-hover
-  color      $copy-btn-color-hover
+  t(background, 'copy-btn-bg-color-hover')
+  t(color,      'copy-btn-color-hover')
 
 .zeroclipboard-is-hover + .url__copy__tooltip,
 .url__copy:hover + .url__copy__tooltip

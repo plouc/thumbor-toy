@@ -1,11 +1,10 @@
 .filter {
-  color: $font-color;
-  border-bottom: 1px solid $panel-bg-color;
-  background: $panel-bg-color;
+  t(background, 'filter-bg-color-inactive')
+  t(color,      'filter-color-inactive')
+  t(box-shadow, 'filter-shadow-inactive')
+
   margin: 0 10px 7px 10px;
-  background-color: $filter-bg-color;
-  box-shadow none
-  border-radius 3px
+  border-radius 2px
   overflow hidden
 
   &__toggle,
@@ -20,6 +19,7 @@
     text-align: center;
     color: $filter-btn-icon-color;
     cursor: pointer;
+    font-size: $filter-btn-icon-size;
     &:hover {
       background-color: $filter-btn-bg-color-hover;
       color:            $filter-btn-icon-color-hover;
@@ -27,15 +27,13 @@
   }
   &__toggle {
     left: 0;
-    font-size: 12px;
   }
   &__delete {
     right: $filter-header-height;
-    font-size: 10px;
   }
   &__expand {
     right: 0;
-    font-size: 10px;
+    font-size: ($filter-btn-icon-size - 2px);
   }
 
   &__header {
@@ -46,8 +44,9 @@
     line-height: $filter-header-height;
     font-weight: 300;
     cursor: move;
+    t(color, 'filter-header-inactive-color')
     &:hover {
-      background $filter-header-bg-color-hover
+      t(background, 'filter-header-bg-color-hover')
     }
   }
 
@@ -59,10 +58,10 @@
     a {
       .fa {
         margin-left: 3px;
-        color: darken($font-color, 10);
+        //color: darken($font-color, 10);
       }
       &:hover {
-        color: lighten($font-color, 10);
+        //color: lighten($font-color, 10);
       }
     }
   }
@@ -75,7 +74,6 @@
   }
 
   &__settings {
-    color: $settings-color;
     font-weight: 300;
     padding: 7px 10px 0 10px;
     select {
@@ -87,9 +85,12 @@
     }
   }
   &._is-active {
-    box-shadow 0 1px 2px rgba(0, 0, 0, 0.35)
+    t(background, 'filter-bg-color-active')
+    t(color,      'filter-color-active')
+    t(box-shadow, 'filter-shadow-active');
+
     .filter__header {
-      color: $filter-header-active-color;
+      t(color, 'filter-header-active-color')
     }
   }
 

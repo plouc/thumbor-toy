@@ -3,7 +3,7 @@
 
   font-weight: 300;
 
-  background-color: $control-bg-color;
+  t(background-color, 'control-bg-color')
   border-radius: 2px;
 
   display: table;
@@ -11,8 +11,6 @@
   width: 100%;
 
   overflow: hidden;
-
-  box-shadow: 0 1px 0 darken($panel-bg-color, 13) inset;
 
   margin-bottom: 7px;
 
@@ -30,10 +28,10 @@
 
     text-align: center;
 
-    color: lighten($panel-bg-color, 15);
+    //color: lighten($panel-bg-color, 15);
 
     &:hover {
-      color: lighten($font-color, 10);
+      //color: lighten($font-color, 10);
     }
   }
 
@@ -55,9 +53,9 @@
     height: 100%;
 
     border-radius: 2px;
-    background-color: $control-embossed-bg-color;
+    t(background-color, 'control-embossed-bg-color')
 
-    box-shadow: 0 -2px 0 $control-embossed-shade-color inset;
+    t(box-shadow, 'control-embossed-shadow-inset')
 
     -webkit-transition: left 0.3s;
             transition: left 0.3s;
@@ -67,7 +65,7 @@
   &__radio--1:checked ~ i { left: 50%; }
 
   input:checked + label {
-    color: lighten($font-color, 10);
+    //color: lighten($font-color, 10);
   }
 
   &--3 {

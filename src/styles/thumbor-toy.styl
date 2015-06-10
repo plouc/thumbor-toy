@@ -3,24 +3,34 @@
 $fa-font-path = 'fonts'
 @require './../../node_modules/font-awesome-stylus/stylus/index.styl'
 
-@require '__vars.styl'
 
-body
+
+@require 'themes/light-theme.styl'
+@require 'themes/dark-theme.styl'
+$themes = {
+  'light': $light-theme,
+  'dark':  $dark-theme
+}
+@require 'functions/themify.styl'
+
+html, body
   font-size 14px
 
   height 100%
   width  100%
 
-  background-color $bg-color
-  color            $font-color
-
   font-family 'Lato', sans-serif
 
+.main
+  height 100%
+  width  100%
+
+  t(background-color, 'bg-color',   false)
+  t(color,            'font-color', false)
+
 a
-  color $font-color
+  color inherit
   text-decoration none
-  &:hover
-    color #fff
 
 *, *:before, *:after
   box-sizing border-box

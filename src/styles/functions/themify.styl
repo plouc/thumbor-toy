@@ -1,0 +1,30 @@
+t(prop, key, prepend-theme = true)
+  for theme, values in $themes
+    if not key in values
+      error('key "' + key + '" does not exists in theme "' + theme + '"')
+    if  prepend-theme
+      .theme-{theme} &
+        {prop}: values[key]
+    else
+      &.theme-{theme}
+        {prop}: values[key]
+
+
+t-all(props, key, prepend-theme = true)
+  for prop in props
+    t(prop, key, prepend-theme)
+
+
+t-fn(prop, keys, fn, prepend-theme = true)
+  for theme, values in $themes
+    keyValues = {}
+    for key in keys
+      if not key in values
+        error('key "' + key + '" does not exists in theme "' + theme + '"')
+      keyValues[key] = values[key]
+    if  prepend-theme
+      .theme-{theme} &
+        {prop}: fn(values(keyValues))
+    else
+      &.theme-{theme}
+        {prop}: fn(values(keyValues))

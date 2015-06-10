@@ -26,12 +26,12 @@ select
 
 input[type="text"]
   color inherit
-  background-color $control-bg-color
+  t(background-color, 'control-bg-color')
   border none
   border-radius 2px
   padding 7px 10px
 
-  box-shadow 0 1px 0 darken($panel-bg-color, 13) inset
+  //box-shadow 0 1px 0 darken($panel-bg-color, 13) inset
 
   &:focus
     background-color $control-bg-color-focus
@@ -39,4 +39,4 @@ input[type="text"]
 
     outline none
 
-    box-shadow 0 1px 0 lighten($panel-bg-color, 10)
+    //box-shadow 0 1px 0 lighten($panel-bg-color, 10)

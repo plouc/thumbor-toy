@@ -7,62 +7,60 @@
 
   width: 20%;
 
-  background-color: $panel-bg-color;
+  t(background-color, 'panel-bg-color')
 
   transition: transform 200ms;
 
   &._is-opened {
     transform: translate3d(0, 0, 0);
     .sidebar__toggle {
-      width:  $panel-toggle-close-size;
-      height: $panel-toggle-close-size;
-
-      line-height: $panel-toggle-close-size;
-
-      top: $panel-toggle-close-offset;
+      props = width, height, line-height
+      t-all(props, 'panel-toggle-close-size')
 
       box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 
-      background: $panel-toggle-close-bg-color;
-      color:      $panel-toggle-close-txt-color;
+      t(background, 'panel-toggle-close-bg-color')
+      t(color,      'panel-toggle-close-txt-color')
 
-      border-radius: ($panel-toggle-close-size / 2);
+      t-fn(border-radius, 'panel-toggle-close-size', @(list) { return (list[0] / 2) })
 
-      font-size: $panel-toggle-close-txt-size;
+      t(font-size, 'panel-toggle-close-txt-size')
 
       &:hover {
-        background: $panel-toggle-close-bg-color-hover;
-        color:      $panel-toggle-close-txt-color-hover;
+        t(background, 'panel-toggle-close-bg-color-hover')
+        t(color,      'panel-toggle-close-txt-color-hover')
       }
     }
   }
 
   &--settings._is-opened {
     .sidebar__toggle {
-      right: ($panel-toggle-close-offset + $panel-toggle-close-size) * -1;
-    }
+      keys = 'panel-toggle-close-offset', 'panel-toggle-close-size'
+      t-fn('right', keys, @(list) { return (list[0] + list[1]) * -1 })
+}
   }
   &--filters._is-opened {
     .sidebar__toggle {
-      left: ($panel-toggle-close-offset + $panel-toggle-close-size) * -1;
+      keys = 'panel-toggle-close-offset', 'panel-toggle-close-size'
+      t-fn('left', keys, @(list) { return (list[0] + list[1]) * -1 })
     }
   }
 
   &--settings {
     left: 0;
-    border-right: 1px solid $bg-color;
     transform: translate3d(-100%, 0, 0);
     .sidebar__toggle {
-      right: ($panel-toggle-open-offset + $panel-toggle-open-size) * -1;
+      keys = 'panel-toggle-open-offset', 'panel-toggle-open-size'
+      t-fn('right', keys, @(list) { return (list[0] + list[1]) * -1 })
     }
   }
 
   &--filters {
     right: 0;
-    border-left: 1px solid $bg-color;
     transform: translate3d(100%, 0, 0);
     .sidebar__toggle {
-      left: ($panel-toggle-open-offset + $panel-toggle-open-size) * -1;
+      keys = 'panel-toggle-open-offset', 'panel-toggle-open-size'
+      t-fn('left', keys, @(list) { return (list[0] + list[1]) * -1 })
     }
   }
 
@@ -75,25 +73,23 @@
 
     display: block;
 
-    top: $panel-toggle-open-offset;
+    t(top, 'panel-toggle-open-offset');
 
-    width:  $panel-toggle-open-size;
-    height: $panel-toggle-open-size;
+    props = width, height, line-height
+    t-all(props, 'panel-toggle-open-size')
 
-    line-height: $panel-toggle-open-size;
+    t-fn(border-radius, 'panel-toggle-open-size', @(list) { return (list[0] / 2) })
 
-    border-radius: ($panel-toggle-open-size / 2);
+    t(background, 'panel-toggle-open-bg-color');
+    t(color,      'panel-toggle-open-txt-color');
 
-    background: $panel-toggle-open-bg-color;
-    color:      $panel-toggle-open-txt-color;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
 
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
-
-    font-size: $panel-toggle-open-txt-size;
+    t(font-size, 'panel-toggle-open-txt-size');
 
     &:hover {
-      background: $panel-toggle-open-bg-color-hover;
-      color:      $panel-toggle-open-txt-color-hover;
+      t(background, 'panel-toggle-open-bg-color-hover');
+      t(color,      'panel-toggle-open-txt-color-hover');
     }
   }
 }

@@ -1,14 +1,14 @@
 .panel
-  border-bottom 1px solid darken($panel-bg-color, 5)
+  //border-bottom 1px solid darken($panel-bg-color, 5)
   &__title
     margin 0
-    font $panel-title-font
+    t(font, 'panel-title-font')
     padding 12px 10px
     position relative
-    color $panel-title-color
+    t(color, 'panel-title-color')
     text-transform uppercase
     .fa
-      color $panel-icon-color
+      t(color, 'panel-icon-color')
       position absolute
       right 15px
       top   15px
