@@ -1,8 +1,7 @@
 .header
   z-index 200
 
-  height      $header-height
-  line-height $header-height
+  height $header-height
 
   position absolute
 
@@ -10,8 +9,9 @@
   left  0
   right 0
 
-  padding 9px 54px 0 10px
+  padding (($header-height - $header-inner-height) / 2) (($header-height - $header-inner-height) * 1.5 + $header-inner-height * 2) 0 (($header-height - $header-inner-height) / 2)
 
+  box-shadow 0 0 3px rgba(0, 0, 0, 0.35)
   font-size 16px
 
   t(background-color, 'header-bg-color')
@@ -24,15 +24,36 @@
     font-family consolas, menlo, monaco, monospace;
     t(background-color, 'url-bg-color')
     width 100%
+    height $header-inner-height
     padding 9px 9px 9px 46px
+    box-sizing border-box
+
+  &__settings
+    t(background, 'copy-btn-bg-color')
+    t(color,      'copy-btn-color')
+    position absolute
+    text-align center
+    cursor pointer
+    width       $header-inner-height
+    height      $header-inner-height
+    line-height $header-inner-height
+    top   (($header-height - $header-inner-height) / 2)
+    right (($header-height - $header-inner-height) / 2)
+    border-radius 2px
+    &:hover
+      t(background, 'copy-btn-bg-color-hover')
+      t(color,      'copy-btn-color-hover')
 
 .url__status
   color $url-status-color-ok
-  line-height 1em
+  width       $header-inner-height
+  height      $header-inner-height
+  line-height $header-inner-height
   position absolute
   font-size 20px
-  top 14px
-  left 24px
+  text-align center
+  top  (($header-height - $header-inner-height) / 2)
+  left (($header-height - $header-inner-height) / 2)
   &._is-unkown
     color $url-status-color-unknown
   &._has-error
@@ -42,20 +63,23 @@
   cursor pointer
   t(background, 'copy-btn-bg-color')
   t(color,      'copy-btn-color')
-  line-height 1em
   position absolute
-  top   9px
-  right 10px
-  padding 9px
+  width       $header-inner-height
+  height      $header-inner-height
+  line-height $header-inner-height
+  text-align center
+  top   (($header-height - $header-inner-height) / 2)
+  right ($header-height - $header-inner-height) + $header-inner-height
   display block
   border-radius 2px
 
   &__tooltip
-    line-height 1em
     position absolute
-    top 13px
-    right 54px
-    padding 7px 9px
+    top   (($header-height - $header-inner-height) / 2)
+    right (($header-height - $header-inner-height) * 1.5 + $header-inner-height * 2)
+    height      $header-inner-height
+    line-height $header-inner-height
+    padding 0 11px
     display none
     t(background, 'copy-btn-bg-color')
     t(color,      'copy-btn-color')

@@ -38,6 +38,9 @@ var Header = React.createClass({
         return (
             <div className="header">
                 <Url url={this.state.url} error={this.state.hasError} />
+                <span className="header__settings">
+                    <i className="fa fa-cog"/>
+                </span>
             </div>
         );
     }
