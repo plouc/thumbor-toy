@@ -10,7 +10,7 @@ import React   from 'react';
 import Setting from './Setting.jsx';
 
 
-export default class ToggleSetting extends Setting {
+class ToggleSetting extends Setting {
     constructor(props) {
         super(props);
         this.uid = ToggleSetting.counter;
@@ -43,4 +43,7 @@ export default class ToggleSetting extends Setting {
     }
 }
 
+// Maintain id uniqueness
 ToggleSetting.counter = 0;
+
+export default ToggleSetting;

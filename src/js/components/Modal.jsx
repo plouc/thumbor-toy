@@ -23,7 +23,7 @@ var Modal = React.createClass({
 
     getInitialState() {
         return {
-            opened: true //PanelsStore.get(PanelTypes.SETTINGS)
+            opened: PanelsStore.get(PanelTypes.SETTINGS)
         };
     },
 
