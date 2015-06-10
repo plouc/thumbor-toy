@@ -1,4 +1,13 @@
 {
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plouc/thumbor-toy.git"
+  },
+  "author": {
+    "name": "Raphaël Benitte",
+    "email": "thumbor-toy@rbenitte.com"
+  },
+  "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^3.1.10",
     "babelify": "^6.1.2",
@@ -26,6 +35,7 @@
     "react": "^0.13.3",
     "react-dnd": "^1.1.1",
     "react-tools": "*",
+    "react-tween-state": "0.0.5",
     "react-zeroclipboard": "^1.1.0",
     "reactify": "^0.15.2",
     "reflux": "^0.2.7",
