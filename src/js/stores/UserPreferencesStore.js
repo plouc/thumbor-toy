@@ -1,15 +1,31 @@
+/*
+ * This file is part of thumbor-toy project.
+ *
+ * (c) Raphaël Benitte <thumbor-toy@rbenitte.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 import Reflux                 from 'reflux';
 import UserPreferencesActions from './../actions/UserPreferencesActions';
 import _                      from 'lodash';
 import ls                     from 'local-storage';
+import UserPreferencesTypes   from './UserPreferencesTypes';
 
 var preferencesKey = 'toy-prefs';
 var defaultPreferences = {
-    showFiltersDescription: true,
-    'panel.settings':       true,
-    'panel.filters':        true
+    [UserPreferencesTypes.SHOW_FILTERS_DESCRIPTION]: true,
+    [UserPreferencesTypes.SETTINGS_PANEL_OPENED]:    true,
+    [UserPreferencesTypes.FILTERS_PANEL_OPENED]:     true,
+    [UserPreferencesTypes.THEME]:                    'dark'
 };
 var currentPrefs;
+
+function ensurePrefExists(key) {
+    if (!_.has(currentPrefs, key)) {
+        throw Error(`No preference found for setting key '${ key }'`);
+    }
+}
 
 var UserPreferencesStore = Reflux.createStore({
     listenables: UserPreferencesActions,
@@ -20,9 +36,9 @@ var UserPreferencesStore = Reflux.createStore({
     },
 
     set(key, value) {
-        if (!_.has(currentPrefs, key)) {
-            throw Error(`No preference found for key '${ key }'`);
-        }
+        ensurePrefExists(key);
+
+        console.log('UserPreferencesStore.set()', key, value);
 
         currentPrefs[key] = value;
         ls.set(preferencesKey, currentPrefs);
@@ -31,9 +47,7 @@ var UserPreferencesStore = Reflux.createStore({
     },
 
     get(key) {
-        if (!_.has(currentPrefs, key)) {
-            throw Error(`No preference found for key '${ key }'`);
-        }
+        ensurePrefExists(key);
 
         return currentPrefs[key];
     },

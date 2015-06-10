@@ -1,8 +1,16 @@
+/*
+ * This file is part of thumbor-toy project.
+ *
+ * (c) Raphaël Benitte <thumbor-toy@rbenitte.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 import React         from 'react';
 import Reflux        from 'reflux';
+import PanelTypes    from './../stores/PanelTypes';
 import PanelsStore   from './../stores/PanelsStore';
 import PanelsActions from './../actions/PanelsActions';
-import ThemeActions  from './../actions/ThemeActions';
 import Filters       from './filters/Filters.jsx';
 
 var FiltersPanel = React.createClass({
@@ -14,34 +22,20 @@ var FiltersPanel = React.createClass({
 
     getInitialState() {
         return {
-            opened: PanelsStore.get('filters')
+            opened: PanelsStore.get(PanelTypes.FILTERS_PANEL)
         };
     },
 
     componentWillMount() {
         this.listenTo(PanelsStore, () => {
             this.setState({
-                opened: PanelsStore.get('filters')
+                opened: PanelsStore.get(PanelTypes.FILTERS_PANEL)
             });
         });
     },
 
     onToggleClick() {
-        PanelsActions.toggle('filters');
-    },
-
-    onDarkThemeClick(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        ThemeActions.set('dark');
-    },
-
-    onLightThemeClick(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        ThemeActions.set('light');
+        PanelsActions.toggle(PanelTypes.FILTERS_PANEL);
     },
 
     render() {
@@ -60,8 +54,6 @@ var FiltersPanel = React.createClass({
                 <a className="app-info" href="https://github.com/plouc/thumbor-toy">
                     <i className="fa fa-github" />
                     thumbor-toy
-                    &nbsp;<span onClick={this.onDarkThemeClick}>dark</span>
-                    &nbsp;<span onClick={this.onLightThemeClick}>light</span>
                 </a>
                 <span className="sidebar__toggle" onClick={this.onToggleClick}>
                     <i className={toggleIconClasses}/>

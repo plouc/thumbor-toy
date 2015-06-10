@@ -1,3 +1,11 @@
+/*
+ * This file is part of thumbor-toy project.
+ *
+ * (c) Raphaël Benitte <thumbor-toy@rbenitte.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 import React          from 'react';
 import Reflux         from 'reflux';
 import _              from 'lodash';
@@ -8,6 +16,7 @@ import PresetSelector from './PresetSelector.jsx';
 import PanelsStore    from './../stores/PanelsStore';
 import PanelsActions  from './../actions/PanelsActions';
 import ServerActions  from './../actions/ServerActions';
+import PanelTypes     from './../stores/PanelTypes';
 
 var SettingsPanel = React.createClass({
     displayName: 'SettingsPanel',
@@ -18,20 +27,20 @@ var SettingsPanel = React.createClass({
 
     getInitialState() {
         return {
-            opened: PanelsStore.get('settings')
+            opened: PanelsStore.get(PanelTypes.SETTINGS_PANEL)
         };
     },
 
     componentWillMount() {
         this.listenTo(PanelsStore, () => {
             this.setState({
-                opened: PanelsStore.get('settings')
+                opened: PanelsStore.get(PanelTypes.SETTINGS_PANEL)
             });
         });
     },
 
     onToggleClick() {
-        PanelsActions.toggle('settings');
+        PanelsActions.toggle(PanelTypes.SETTINGS_PANEL);
     },
 
     render() {

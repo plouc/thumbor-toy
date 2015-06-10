@@ -1,8 +1,18 @@
-import React       from 'react';
-import Reflux      from 'reflux';
-import UrlStore    from './../stores/UrlStore';
-import LoaderStore from './../stores/LoaderStore';
-import Url         from './Url.jsx';
+/*
+ * This file is part of thumbor-toy project.
+ *
+ * (c) Raphaël Benitte <thumbor-toy@rbenitte.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+import React         from 'react';
+import Reflux        from 'reflux';
+import UrlStore      from './../stores/UrlStore';
+import LoaderStore   from './../stores/LoaderStore';
+import PanelsActions from './../actions/PanelsActions';
+import Url           from './Url.jsx';
+import PanelTypes    from './../stores/PanelTypes';
 
 
 var Header = React.createClass({
@@ -34,11 +44,15 @@ var Header = React.createClass({
         });
     },
 
+    onSettingsClick() {
+        PanelsActions.open(PanelTypes.SETTINGS);
+    },
+
     render() {
         return (
             <div className="header">
                 <Url url={this.state.url} error={this.state.hasError} />
-                <span className="header__settings">
+                <span className="header__settings" onClick={this.onSettingsClick}>
                     <i className="fa fa-cog"/>
                 </span>
             </div>

@@ -6,10 +6,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-import Reflux from 'reflux';
-
-export default Reflux.createActions([
-    'loading',
-    'loaded',
-    'errored'
-]);
+export default {
+    SETTINGS_PANEL: 'panel.settings',
+    FILTERS_PANEL:  'panel.filters',
+    SETTINGS:       'settings'
+};

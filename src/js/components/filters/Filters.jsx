@@ -1,8 +1,17 @@
+/*
+ * This file is part of thumbor-toy project.
+ *
+ * (c) Raphaël Benitte <thumbor-toy@rbenitte.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 import React                  from 'react';
 import Reflux                 from 'reflux';
 import FiltersStore           from './../../stores/FiltersStore';
 import ImageStore             from './../../stores/ImageStore';
 import UserPreferencesStore   from './../../stores/UserPreferencesStore';
+import UserPreferencesTypes   from './../../stores/UserPreferencesTypes';
 import UserPreferencesActions from './../../actions/UserPreferencesActions';
 import FilterSelector         from './FilterSelector.jsx';
 import FiltersContainer       from './FiltersContainer.jsx';
@@ -15,7 +24,7 @@ var Filters = React.createClass({
     getInitialState() {
         return {
             filters:                [],
-            showFiltersDescription: UserPreferencesStore.get('showFiltersDescription')
+            showFiltersDescription: UserPreferencesStore.get(UserPreferencesTypes.SHOW_FILTERS_DESCRIPTION)
         };
     },
 
@@ -35,34 +44,13 @@ var Filters = React.createClass({
         });
     },
 
-    onUserPreferencesChange(preferences) {
+    onUserPreferencesChange() {
         this.setState({
-            showFiltersDescription: preferences.showFiltersDescription
+            showFiltersDescription: UserPreferencesStore.get(UserPreferencesTypes.SHOW_FILTERS_DESCRIPTION)
         });
     },
 
-    onShowDescriptionToggle() {
-        UserPreferencesActions.set('showFiltersDescription', !this.state.showFiltersDescription);
-    },
-
     render() {
-        var descriptionNode;
-        if (this.state.showFiltersDescription) {
-            descriptionNode = (
-                <div className="filters__description-control filters__description-control--active" onClick={this.onShowDescriptionToggle}>
-                    <i className="fa fa-info-circle"/>
-                    hide filters description
-                </div>
-            );
-        } else {
-            descriptionNode = (
-                <div className="filters__description-control" onClick={this.onShowDescriptionToggle}>
-                    <i className="fa fa-info-circle"/>
-                    show filters description
-                </div>
-            );
-        }
-
         return (
             <div className="filters__list">
                 <h3 className="panel__title">
@@ -71,7 +59,6 @@ var Filters = React.createClass({
                 <div className="panel__content panel__content--filter-selector">
                     <FilterSelector />
                 </div>
-                {descriptionNode}
                 <FiltersContainer showFiltersDescription={this.state.showFiltersDescription} filters={this.state.filters}/>
             </div>
         );

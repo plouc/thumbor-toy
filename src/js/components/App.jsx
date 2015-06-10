@@ -1,29 +1,39 @@
-import React         from 'react';
-import Reflux        from 'reflux';
-import Image         from './Image.jsx';
-import Header        from './Header.jsx';
-import Loader        from './Loader.jsx';
-import SettingsPanel from './SettingsPanel.jsx';
-import FiltersPanel  from './FiltersPanel.jsx';
-import ThemeStore    from './../stores/ThemeStore.js';
-import config        from './../../../config';
+/*
+ * This file is part of thumbor-toy project.
+ *
+ * (c) Raphaël Benitte <thumbor-toy@rbenitte.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+import React                 from 'react';
+import Reflux                from 'reflux';
+import Image                 from './Image.jsx';
+import Header                from './Header.jsx';
+import Loader                from './Loader.jsx';
+import SettingsPanel         from './SettingsPanel.jsx';
+import Modal                 from './Modal.jsx';
+import FiltersPanel          from './FiltersPanel.jsx';
+import UserPreferencesStore  from './../stores/UserPreferencesStore';
+import UserPreferencesTypes  from './../stores/UserPreferencesTypes';
+import config                from './../../../config';
 
 var App = React.createClass({
     mixins: [Reflux.ListenerMixin],
 
     getInitialState() {
         return {
-            theme: ThemeStore.get()
+            theme: UserPreferencesStore.get(UserPreferencesTypes.THEME)
         };
     },
 
     componentWillMount() {
-        this.listenTo(ThemeStore, this.onThemeUpdate);
+        this.listenTo(UserPreferencesStore, this.onPreferencesUpdate);
     },
 
-    onThemeUpdate(theme) {
+    onPreferencesUpdate() {
         this.setState({
-            theme: theme
+            theme: UserPreferencesStore.get(UserPreferencesTypes.THEME)
         });
     },
 
@@ -37,6 +47,7 @@ var App = React.createClass({
                     <Loader />
                     <Image />
                 </div>
+                <Modal/>
             </div>
         );
     }
