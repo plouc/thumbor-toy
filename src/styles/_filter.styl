@@ -6,139 +6,115 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-.filter {
+.filter
   t(background, 'filter-bg-color-inactive')
   t(color,      'filter-color-inactive')
   t(box-shadow, 'filter-shadow-inactive')
 
-  margin: 0 10px 7px 10px;
+  margin 0 10px 7px 10px
   border-radius 2px
   overflow hidden
 
   &__toggle,
   &__delete,
-  &__expand {
-    position: absolute;
-    top: 0;
-    display: block;
-    width:       $filter-header-height;
-    height:      $filter-header-height;
-    line-height: $filter-header-height;
-    text-align: center;
-    color: $filter-btn-icon-color;
-    cursor: pointer;
-    font-size: $filter-btn-icon-size;
-    &:hover {
-      background-color: $filter-btn-bg-color-hover;
-      color:            $filter-btn-icon-color-hover;
-    }
-  }
-  &__toggle {
-    left: 0;
-  }
-  &__delete {
-    right: $filter-header-height;
-  }
-  &__expand {
-    right: 0;
-    font-size: ($filter-btn-icon-size - 2px);
-  }
+  &__expand
+    position absolute
+    top 0
+    display block
+    width       $filter-header-height
+    height      $filter-header-height
+    line-height $filter-header-height
+    text-align center
+    cursor pointer
+    font-size $filter-btn-icon-size
+    t(color, 'filter-btn-icon-color')
+    &:hover
+      t(color, 'filter-btn-icon-color-hover')
 
-  &__header {
-    position: relative;
-    display: block;
-    padding: 0 0 0 ($filter-header-height + 10px);
-    height:      $filter-header-height;
-    line-height: $filter-header-height;
-    font-weight: 300;
-    cursor: move;
+  &__toggle
+    left 0
+
+  &__delete
+    right $filter-header-height
+
+  &__expand
+    right 0
+    font-size ($filter-btn-icon-size - 2px)
+
+  &__header
+    position relative
+    display block
+    padding 0 0 0 ($filter-header-height + 10px)
+    height      $filter-header-height
+    line-height $filter-header-height
+    font-weight 300
+    cursor move
     t(color, 'filter-header-inactive-color')
-    &:hover {
+    &:hover
       t(background, 'filter-header-bg-color-hover')
-    }
-  }
 
-  &__description {
-    padding: 10px 10px;
-    p {
-      margin: 0;
-    }
-    a {
-      .fa {
-        margin-left: 3px;
-        //color: darken($font-color, 10);
-      }
-      &:hover {
-        //color: lighten($font-color, 10);
-      }
-    }
-  }
+  &__description
+    padding 10px 10px
+    p
+      margin 0
+    a
+      .fa
+        margin-left 3px
+        //color darken($font-color, 10)
 
-  &__body {
-    display: none;
-    &._is-expanded {
-      display: block;
-    }
-  }
+  &__body
+    display none
+    &._is-expanded
+      display block
 
-  &__settings {
-    font-weight: 300;
-    padding: 7px 10px 0 10px;
-    select {
-      width: 100%;
-    }
-    &__empty {
-      text-align: center;
-      margin-bottom: 7px;
-    }
-  }
-  &._is-active {
+  &__settings
+    font-weight 300
+    padding 7px 10px 0 10px
+    select
+      width 100%
+    &__empty
+      text-align center
+      margin-bottom 7px
+
+  &._is-active
     t(background, 'filter-bg-color-active')
     t(color,      'filter-color-active')
-    t(box-shadow, 'filter-shadow-active');
+    t(box-shadow, 'filter-shadow-active')
 
-    .filter__header {
+    .filter__header
       t(color, 'filter-header-active-color')
-    }
-  }
 
-  &__setting {
-    &--text {
-      width: 100%;
-      border: none;
-      border-radius: 2px;
-      padding: 3px 10px;
-      &:focus {
-        outline: 0 none;
-      }
-    }
-  }
-}
+  &__setting
+    &--text
+      width 100%
+      border none
+      border-radius 2px
+      padding 3px 10px
+      &:focus
+        outline 0 none
 
-.filter__dnd {
-  position: relative;
-  &:after {
-    position: absolute;
-    content: ' ';
-    display: none;
-    background: #7293b7;
-    right:  0;
-    left:   0;
-    height: 4px;
-    z-index: 2000;
-  }
-  &._insert-before:after {
-    top: -2px;
-    display: block;
-  }
-  &._insert-after:after {
-    bottom: -2px;
-    display: block;
-  }
-  &._is-dragging {
-    opacity: 0;
-  }
-}
+.filter__dnd
+  position relative
+  &:after
+    position absolute
+    content ' '
+    display none
+    background #7293b7
+    right  0
+    left   0
+    height 4px
+    z-index 2000
+
+  &._insert-before:after
+    top -2px
+    display block
+
+  &._insert-after:after
+    bottom -2px
+    display block
+
+  &._is-dragging
+    opacity 0
 
 .filters
   &__container
