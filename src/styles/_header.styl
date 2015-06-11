@@ -37,6 +37,7 @@
     box-sizing border-box
 
   &__settings
+    @extends $unselectable
     t(background, 'copy-btn-bg-color')
     t(color,      'copy-btn-color')
     position absolute
@@ -85,6 +86,7 @@
     color $url-status-color-error
 
 .url__copy
+  @extends $unselectable
   cursor pointer
   t(background, 'copy-btn-bg-color')
   t(color,      'copy-btn-color')
