@@ -8,6 +8,8 @@
  */
 import React, { Component } from 'react';
 import ReactZeroClipboard   from 'react-zeroclipboard';
+import SourceStore          from './../stores/SourceStore';
+
 
 class Url extends Component {
     constructor(props) {
@@ -36,7 +38,7 @@ class Url extends Component {
         if (this.props.error === true) {
             statusClasses += ' _has-error';
             statusNode = <i className="fa fa-warning"/>;
-        } else if (this.props.url === '') {
+        } else if (this.props.url === '' || !SourceStore.isValid()) {
             statusClasses += ' _is-unkown';
             statusNode = <i className="fa fa-question"/>;
         } else {

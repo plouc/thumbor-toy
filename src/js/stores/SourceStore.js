@@ -15,6 +15,13 @@ var currentImage  = '';
 var SourceStore = Reflux.createStore({
     listenables: SourceActions,
 
+    set(server, image) {
+        currentServer = server;
+        currentImage  = image;
+
+        this.trigger(currentServer, currentImage);
+    },
+
     setServer(server) {
         currentServer = server;
 

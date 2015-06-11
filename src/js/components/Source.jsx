@@ -10,6 +10,7 @@ import React         from 'react';
 import Reflux        from 'reflux';
 import _             from 'lodash';
 import SourceActions from './../actions/SourceActions';
+import SourceStore   from './../stores/SourceStore';
 import SwitchControl from './form/SwitchControl.jsx';
 import ChoiceControl from './form/ChoiceControl.jsx';
 import TextControl   from './form/TextControl.jsx';
@@ -18,21 +19,34 @@ import TextControl   from './form/TextControl.jsx';
 var Source = React.createClass({
     displayName: 'ImageSource',
 
+    mixins: [Reflux.ListenerMixin],
+
+    componentWillMount() {
+        this.listenTo(SourceStore, () => {
+            this.setState({
+                server: SourceStore.server(),
+                image:  SourceStore.image()
+            });
+            var server = _.find(this.props.config.servers, { value: SourceStore.server() });
+            if (server !== undefined) {
+                this.setState({
+                    images: server.images
+                });
+            }
+        });
+    },
+
     getInitialState() {
         return {
             sourceType: 'static',
+            server:     SourceStore.server(),
+            image:      SourceStore.image(),
             images:     []
         };
     },
 
     onServerChange(key, server) {
-        SourceActions.setServer(server);
-        var server = _.find(this.props.config.servers, { value: server });
-        if (server !== undefined) {
-            this.setState({
-                images: server.images
-            });
-        }
+        SourceActions.set(server, '');
     },
 
     onTypeChange(key, type) {
@@ -51,12 +65,18 @@ var Source = React.createClass({
             value: ''
         }].concat(this.state.images);
 
+        var servers = [{
+            label: '--- select a server ---',
+            value: ''
+        }].concat(this.props.config.servers);
+
         var sourceControl;
         if (this.state.sourceType === 'static') {
             sourceControl = (
                 <ChoiceControl
                     propKey="image" choices={images}
                     onChange={this.onImageChange}
+                    defaultValue={this.state.image}
                 />
             );
         } else {
@@ -65,19 +85,30 @@ var Source = React.createClass({
                     propKey="image" label=""
                     fullWidth={true}
                     onChange={this.onImageChange}
+                    defaultValue={this.state.image}
                 />
             );
         }
-
-        var servers = [{
-            label: '--- select a server ---',
-            value: ''
-        }].concat(this.props.config.servers);
 
         var imageSourceTypes = [
             { label: 'predefined', value: 'static'  },
             { label: 'manual',     value: 'dynamic' }
         ];
+
+        var imageSource = null;
+        if (this.state.server !== '') {
+            imageSource = (
+                <div>
+                    <SwitchControl
+                        propKey="image_source_type" label="image"
+                        choices={imageSourceTypes}
+                        onChange={this.onTypeChange}
+                        defaultValue={this.state.sourceType}
+                    />
+                    {sourceControl}
+                </div>
+            );
+        }
 
         return (
             <div className="panel panel--img-src">
@@ -89,14 +120,9 @@ var Source = React.createClass({
                         label="server"
                         propKey="server" choices={servers}
                         onChange={this.onServerChange}
+                        defaultValue={this.state.server}
                     />
-                    <SwitchControl
-                        propKey="image_source_type" label="image"
-                        choices={imageSourceTypes}
-                        onChange={this.onTypeChange}
-                        defaultValue={this.state.sourceType}
-                    />
-                    {sourceControl}
+                    {imageSource}
                 </div>
             </div>
         );

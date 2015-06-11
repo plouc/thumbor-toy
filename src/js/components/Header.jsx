@@ -10,6 +10,7 @@ import React         from 'react';
 import Reflux        from 'reflux';
 import UrlStore      from './../stores/UrlStore';
 import LoaderStore   from './../stores/LoaderStore';
+import SourceStore   from './../stores/SourceStore';
 import PanelsActions from './../actions/PanelsActions';
 import Url           from './Url.jsx';
 import PanelTypes    from './../stores/PanelTypes';
@@ -23,24 +24,32 @@ var Header = React.createClass({
     getInitialState() {
         return {
             url:      '',
-            hasError: false
+            hasError: false,
+            validUrl: SourceStore.isValid()
         };
     },
 
     componentWillMount() {
-        this.listenTo(UrlStore,    this.onUrlChange);
-        this.listenTo(LoaderStore, this.onLoaderStore);
+        this.listenTo(UrlStore,    this.onUrlUpdate);
+        this.listenTo(LoaderStore, this.onLoaderUpdate);
+        this.listenTo(SourceStore, this.onSourceUpdate);
     },
 
-    onUrlChange(url) {
+    onUrlUpdate(url) {
         this.setState({
             url: url
         });
     },
 
-    onLoaderStore(isLoading, hasError) {
+    onLoaderUpdate(isLoading, hasError) {
         this.setState({
             hasError: hasError
+        });
+    },
+
+    onSourceUpdate() {
+        this.setState({
+            validUrl: SourceStore.isValid()
         });
     },
 
@@ -49,12 +58,18 @@ var Header = React.createClass({
     },
 
     render() {
+        var urlNotice = null;
+        if (this.state.validUrl === false) {
+            urlNotice = <div className="header__notice"><i className="fa fa-warning"/> Url is incomplete</div>;
+        }
+
         return (
             <div className="header">
                 <Url url={this.state.url} error={this.state.hasError} />
                 <span className="header__settings" onClick={this.onSettingsClick}>
                     <i className="fa fa-cog"/>
                 </span>
+                {urlNotice}
             </div>
         );
     }

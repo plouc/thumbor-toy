@@ -38,7 +38,17 @@ var ImageComponent = React.createClass({
         });
     },
 
-    onUrlChange(url) {
+    onUrlChange() {
+        if (SourceStore.isValid() === false) {
+            LoaderActions.loaded();
+            this.setState({
+                src: null
+            });
+
+            return;
+        }
+
+        var url = UrlStore.get();
         LoaderActions.loading();
         this.img.src = url;
         this.img.onload = (e) => {
@@ -52,7 +62,7 @@ var ImageComponent = React.createClass({
     },
 
     render() {
-        if (!this.state.src || !SourceStore.isValid()) {
+        if (!this.state.src) {
             return null;
         }
 

@@ -40,18 +40,22 @@ _.forEach(config.filters, function (filter) {
 var FiltersStore = Reflux.createStore({
     listenables: FilterActions,
 
-    add(type) {
+    add(type, settings = {}) {
         var filter = _.find(availableFilters, { 'type': type });
+        if (filter === undefined) {
+            throw `invalid filter type: '${ type }'`;
+        }
+
+        var defaults = _.reduce(filter.settingsConfig, (result, config) => {
+            result[config.key] = config.default;
+            return result;
+        }, {});
 
         var filterInstance = _.clone(filter);
         filterInstance.active   = true;
         filterInstance.expanded = true;
         filterInstance.uid      = internalId;
-        filterInstance.settings = {};
-
-        filter.settingsConfig.forEach(setting => {
-            filterInstance.settings[setting.key] = setting.default;
-        });
+        filterInstance.settings = _.extend({}, defaults, settings);
 
         internalId++;
 

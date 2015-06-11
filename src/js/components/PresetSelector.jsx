@@ -31,9 +31,9 @@ var PresetSelector = React.createClass({
         ResizeActions.clear();
         ResizeActions.update(imageData.resize);
         FilterActions.clear();
-        _.forEach(imageData.filters, function (filter, index) {
+        _.forEach(imageData.filters, function (filter) {
             FilterActions.add(filter.type);
-            FilterActions.update(index, filter.settings);
+            //FilterActions.update(index, filter.settings);
         });
     },
 

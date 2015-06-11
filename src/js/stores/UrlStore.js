@@ -12,6 +12,7 @@ import SourceStore  from './SourceStore';
 import FiltersStore from './FiltersStore';
 import ResizeStore  from './ResizeStore';
 
+var currentUrl = '';
 
 var UrlStore = Reflux.createStore({
     init() {
@@ -53,9 +54,13 @@ var UrlStore = Reflux.createStore({
             }
         }
 
-        var url = SourceStore.server() + 'unsafe/' + resize + filters + SourceStore.image();
+        currentUrl = SourceStore.server() + 'unsafe/' + resize + filters + SourceStore.image();
 
-        this.trigger(url);
+        this.trigger(currentUrl);
+    },
+
+    get() {
+        return currentUrl;
     }
 });
 

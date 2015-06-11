@@ -52,6 +52,23 @@
       t(background, 'copy-btn-bg-color-hover')
       t(color,      'copy-btn-color-hover')
 
+  &__notice
+    position absolute
+    top  115%
+    left 35%
+    width 30%
+    display block
+    text-align center
+    border-radius 2px
+    padding 9px 12px
+    font-size 14px
+    t(background,  'notice-bg-color')
+    t(color,       'notice-txt-color')
+    t(box-shadow , 'notice-shadow')
+    .fa
+      margin-right 7px
+      t(color, 'notice-icon-color')
+
 .url__status
   color $url-status-color-ok
   width       $header-inner-height
