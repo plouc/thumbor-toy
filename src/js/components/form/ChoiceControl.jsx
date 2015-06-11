@@ -6,30 +6,31 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-import React   from 'react';
-import Control from './Control.jsx';
+import React, { PropTypes } from 'react';
+import _                    from 'lodash';
+import Control              from './Control.jsx';
 
 
 class ChoiceControl extends Control {
     onChange() {
-        var { setting, onChange } = this.props;
-        var value = this.refs[setting.key].getDOMNode().value;
+        var { propKey, onChange } = this.props;
+        var value = this.refs[propKey].getDOMNode().value;
 
-        onChange(setting.key, value);
+        onChange(propKey, value);
     }
 
     render() {
-        var { setting, defaultValue } = this.props;
+        var { label, propKey, choices, defaultValue } = this.props;
 
-        var options = setting.choices.map(choice => {
+        var options = choices.map(choice => {
             return <option key={choice.value} value={choice.value}>{choice.label}</option>;
         });
 
         return (
-            <div key={setting.key} className={this.props.wrapperClass}>
-                <label className="control-group__label control-group__label--full">{setting.label}</label>
+            <div className={this.props.wrapperClass}>
+                <label className="control-group__label control-group__label--full">{label}</label>
                 <div className="select-box">
-                    <select ref={setting.key} onChange={this.onChange.bind(this)} defaultValue={defaultValue}>
+                    <select ref={propKey} onChange={this.onChange.bind(this)} defaultValue={defaultValue}>
                         {options}
                     </select>
                     <i className="fa fa-angle-down" />
@@ -38,5 +39,9 @@ class ChoiceControl extends Control {
         );
     }
 }
+
+ChoiceControl.propTypes = _.extend({
+    choices: PropTypes.array.isRequired
+}, Control.propTypes);
 
 export default ChoiceControl;

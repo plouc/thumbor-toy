@@ -1,28 +1,35 @@
+/*
+ * This file is part of thumbor-toy project.
+ *
+ * (c) Raphaël Benitte <thumbor-toy@rbenitte.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 button, input, select, textarea
   font-family inherit
   font-size 14px
   margin 0
 
 .control-group
-  margin-bottom 7px
+  margin-bottom 9px
   &__label
     width 40%
     display inline-block
     &--full
       display block
       width 100%;
-      margin-bottom 7px
+      margin-bottom 9px
   &__control
     width 60%
+    &--full
+      width 100%
 
 input[type="checkbox"]
   margin-right 7px
 
 select
   font-size 16px
-
-.control--full-width
-  width 100%
 
 input[type="text"]
   color inherit
@@ -34,8 +41,8 @@ input[type="text"]
   //box-shadow 0 1px 0 darken($panel-bg-color, 13) inset
 
   &:focus
-    background-color $control-bg-color-focus
-    color            $font-highlight-color
+    t(background-color, 'control-bg-color-focus')
+    t(color,            'control-txt-color-focus')
 
     outline none
 

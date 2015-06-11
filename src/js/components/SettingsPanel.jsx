@@ -9,14 +9,12 @@
 import React                  from 'react';
 import Reflux                 from 'reflux';
 import _                      from 'lodash';
-import ImageSource            from './ImageSource.jsx';
+import Source                 from './Source.jsx';
 import Resize                 from './Resize.jsx';
-import ServerSelector         from './ServerSelector.jsx';
 import PresetSelector         from './PresetSelector.jsx';
 import UserPreferencesActions from './../actions/UserPreferencesActions';
 import UserPreferencesStore   from './../stores/UserPreferencesStore';
 import UserPreferencesTypes   from './../stores/UserPreferencesTypes';
-import ServerActions          from './../actions/ServerActions';
 import PanelTypes             from './../stores/PanelTypes';
 
 var SettingsPanel = React.createClass({
@@ -50,13 +48,6 @@ var SettingsPanel = React.createClass({
             presetSelector = <PresetSelector />;
         }
 
-        var serverSelector = null;
-        if (_.isArray(this.props.config.server)) {
-            serverSelector = <ServerSelector />;
-        } else {
-            ServerActions.set(this.props.config.server);
-        }
-
         var classes           = 'sidebar sidebar--settings';
         var toggleIconClasses = 'fa fa-';
         if (this.state.opened) {
@@ -69,8 +60,7 @@ var SettingsPanel = React.createClass({
         return (
             <div className={classes}>
                 {presetSelector}
-                {serverSelector}
-                <ImageSource images={this.props.config.images} />
+                <Source config={this.props.config.source} />
                 <Resize presets={this.props.config.presetsResize || []} />
                 <span className="sidebar__toggle" onClick={this.onToggleClick}>
                     <i className={toggleIconClasses}/>

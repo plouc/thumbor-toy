@@ -12,20 +12,33 @@ import Control from './Control.jsx';
 
 export default class TextControl extends Control {
     onChange() {
-        var { setting, onChange } = this.props;
-        var value = this.refs[setting.key].getDOMNode().value;
+        var { propKey, onChange } = this.props;
+        var value = this.refs[propKey].getDOMNode().value;
 
-        onChange(setting.key, value);
+        onChange(propKey, value);
     }
 
     render() {
-        var { setting, defaultValue } = this.props;
+        var { propKey, label, defaultValue, wrapperClass } = this.props;
+
+        var inputClasses = 'control-group__control';
+        var labelClasses = 'control-group__label';
+
+        if (this.props.fullWidth && this.props.fullWidth === true) {
+            inputClasses += ' control-group__control--full';
+            labelClasses += ' control-group__label--full';
+        }
+
+        var labelNode = null;
+        if (label && label !== '') {
+            labelNode = <label className={labelClasses}>{label}</label>;
+        }
 
         return (
-            <div key={setting.key} className={this.props.wrapperClass}>
-                <label className="control-group__label">{setting.label}</label>
-                <input className="control-group__control"
-                    ref={setting.key} type="text"
+            <div className={wrapperClass}>
+                {labelNode}
+                <input className={inputClasses}
+                    ref={propKey} type="text"
                     onChange={this.onChange.bind(this)}
                     defaultValue={defaultValue} />
             </div>

@@ -1,11 +1,26 @@
+/*
+ * This file is part of thumbor-toy project.
+ *
+ * (c) Raphaël Benitte <thumbor-toy@rbenitte.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 var watermarkImages = [
 ];
 
 export default {
-    server: [
-        { label: 'thumbor demo site', url: 'http://thumbor.thumborize.me/' },
-    ],
-
+    source: {
+        serverInput: true,
+        servers: [
+            { label: 'thumbor demo site', value: 'http://thumbor.thumborize.me/' }
+        ],
+        imageInput: true,
+        images: [
+            { label: 'sample image', value: 'thumborize.me/static/img/beach.jpg' }
+        ],
+        customInput: true
+    },
     filters: [
         'blur',
         'brightness',
@@ -57,9 +72,5 @@ export default {
                 { key: 'transparency', type: 'text',   label: 'Transparency', default: 0    }
             ]
         }
-    ],
-
-    images: [
-        { label: 'sample image', src: 'thumborize.me/static/img/beach.jpg' }
     ]
 };

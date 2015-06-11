@@ -18,25 +18,25 @@ class ToggleControl extends Control {
     }
 
     onChange() {
-        var { setting, onChange } = this.props;
-        var value = this.refs[setting.key].getDOMNode().checked;
+        var { propKey, onChange } = this.props;
+        var value = this.refs[propKey].getDOMNode().checked;
 
-        onChange(setting.key, value);
+        onChange(propKey, value);
     }
 
     render() {
-        var { setting, defaultValue } = this.props;
+        var { propKey, label, defaultValue, wrapperClass } = this.props;
 
         var id = `toggle-${this.uid}`;
 
         return (
-            <div key={setting.key} className={this.props.wrapperClass}>
+            <div className={wrapperClass}>
                 <span className="toggle">
-                    <input id={id} ref={setting.key} type="checkbox" onChange={this.onChange.bind(this)} defaultChecked={defaultValue}/>
+                    <input id={id} ref={propKey} type="checkbox" onChange={this.onChange.bind(this)} defaultChecked={defaultValue}/>
                     <label htmlFor={id}/>
                 </span>
                 <label htmlFor={id}>
-                    {setting.label}
+                    {label}
                 </label>
             </div>
         );

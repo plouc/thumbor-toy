@@ -9,7 +9,6 @@
 import React                  from 'react';
 import Reflux                 from 'reflux';
 import FiltersStore           from './../../stores/FiltersStore';
-import ImageStore             from './../../stores/ImageStore';
 import UserPreferencesStore   from './../../stores/UserPreferencesStore';
 import UserPreferencesTypes   from './../../stores/UserPreferencesTypes';
 import UserPreferencesActions from './../../actions/UserPreferencesActions';
@@ -30,12 +29,7 @@ var Filters = React.createClass({
 
     componentWillMount() {
         this.listenTo(FiltersStore,         this.onFiltersChange);
-        this.listenTo(ImageStore,           this.onImageChange);
         this.listenTo(UserPreferencesStore, this.onUserPreferencesChange);
-    },
-
-    onImageChange() {
-        //console.log('img src', ImageStore.get());
     },
 
     onFiltersChange() {

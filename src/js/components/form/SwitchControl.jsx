@@ -1,13 +1,13 @@
-import React   from 'react';
-import _       from 'lodash';
-import Control from './Control.jsx';
+import React, { PropTypes } from 'react';
+import _                    from 'lodash';
+import Control              from './Control.jsx';
 
 
-class Switch extends Control {
+class SwitchControl extends Control {
     constructor(props) {
         super(props)
-        this.uid = `switch.${ Switch.counter }`;
-        Switch.counter++;
+        this.uid = `switch.${ SwitchControl.counter }`;
+        SwitchControl.counter++;
     }
 
     onChange() {
@@ -18,29 +18,37 @@ class Switch extends Control {
             }
         });
 
-        this.props.onChange(this.props.setting.key, foundValue);
+        this.props.onChange(this.props.propKey, foundValue);
     }
 
     render() {
-        var classes = `switch switch--${ this.props.options.length }`;
+        var classes = `switch switch--${ this.props.choices.length }`;
 
         var nodes = [];
-        this.props.options.forEach((option, index) => {
-            var id = `${ option.value }.${ index }`;
+        this.props.choices.forEach((choice, index) => {
+            var id = `${ choice.value }.${ index }`;
             nodes.push(
                 <input
-                    ref={option.value} key={`${ id }.input`}
+                    ref={choice.value} key={`${ id }.input`}
                     name={this.uid} id={id}
                     type="radio" className={`switch__radio--${index}`}
                     onChange={this.onChange.bind(this)}
-                    defaultChecked={option.value === this.props.defaultValue}
+                    defaultChecked={choice.value === this.props.defaultValue}
                 />
             );
-            nodes.push(<label key={`${ id }.label`} htmlFor={id}>{option.label}</label>);
+            nodes.push(<label key={`${ id }.label`} htmlFor={id}>{choice.label}</label>);
         });
 
+        var label = null;
+        if (this.props.label && this.props.label !== '') {
+            label = (
+                <label className="control-group__label control-group__label--full">{this.props.label}</label>
+            );
+        }
+
         return (
-            <div>
+            <div className={this.props.wrapperClass}>
+                {label}
                 <div className={classes}>
                     {nodes}
                     <i/>
@@ -51,6 +59,10 @@ class Switch extends Control {
 }
 
 // Maintain uniqueness
-Switch.counter = 0;
+SwitchControl.counter = 0;
 
-export default Switch;
+SwitchControl.propTypes = _.extend({
+    choices: PropTypes.array.isRequired
+}, Control.propTypes);
+
+export default SwitchControl;

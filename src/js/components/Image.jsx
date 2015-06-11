@@ -9,7 +9,7 @@
 import React         from 'react';
 import Reflux        from 'reflux';
 import UrlStore      from './../stores/UrlStore';
-import ImageStore    from './../stores/ImageStore';
+import SourceStore   from './../stores/SourceStore';
 import LoaderActions from './../actions/LoaderActions';
 import $             from 'jquery';
 
@@ -52,7 +52,7 @@ var ImageComponent = React.createClass({
     },
 
     render() {
-        if (!this.state.src || !ImageStore.get()) {
+        if (!this.state.src || !SourceStore.isValid()) {
             return null;
         }
 

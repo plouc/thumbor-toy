@@ -1,70 +1,80 @@
+/*
+ * This file is part of thumbor-toy project.
+ *
+ * (c) Raphaël Benitte <thumbor-toy@rbenitte.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 $light-theme = {
-  bg-color:                            #fff, //#e8eaee,
-  font-color:                          #555,
+  bg-color:                              #fff, //#e8eaee,
+  font-color:                            #555,
 
-  header-bg-color:                     #fff,
+  header-bg-color:                       #fff,
 
-  panel-bg-color:                      #e8eaee,
-
-
-  filter-color-active:                 #555,
-  filter-bg-color-active:              #fff,
-  filter-shadow-active:                0 4px 0 #c1cbe6,
-  filter-header-active-color:          #000,
-
-  filter-color-inactive:               #999,
-  filter-bg-color-inactive:            #e8eaee,
-  filter-shadow-inactive:              0 1px 1px rgba(0, 0, 0, 0.15),
-  filter-header-inactive-color:        #999,
-
-  filter-header-bg-color-hover:        #f5f5f5,
+  panel-bg-color:                        #e8eaee,
 
 
-  panel-toggle-open-bg-color:          #fff
-  panel-toggle-open-txt-color:         #6f86ff,
-  panel-toggle-open-bg-color-hover:    #fff,
-  panel-toggle-open-txt-color-hover:   #2f56ff,
-  panel-toggle-open-txt-size:          26px,
-  panel-toggle-open-size:              46px,
-  panel-toggle-open-offset:            26px,
+  filter-color-active:                   #555,
+  filter-bg-color-active:                #fff,
+  filter-shadow-active:                  0 2px 0 #c1cbe6,
+  filter-header-active-color:            #000,
 
-  panel-toggle-close-bg-color:         #f5f5f5,
-  panel-toggle-close-txt-color:        #6f86ff,
-  panel-toggle-close-bg-color-hover:   #fff,
-  panel-toggle-close-txt-color-hover:  #2f56ff,
-  panel-toggle-close-txt-size:         16px,
-  panel-toggle-close-size:             32px,
-  panel-toggle-close-offset:           12px,
+  filter-color-inactive:                 #999,
+  filter-bg-color-inactive:              #e8eaee,
+  filter-shadow-inactive:                0 1px 1px rgba(0, 0, 0, 0.15),
+  filter-header-inactive-color:          #999,
+
+  filter-header-bg-color-hover:          #f5f5f5,
 
 
-  panel-title-color:                   #000,
-  panel-title-font:                    unquote("300 20px 'Lato', sans-serif"),
-  panel-icon-color:                    #6f86ff,
+  panel-toggle-open-bg-color:            #fff
+  panel-toggle-open-txt-color:           #6f86ff,
+  panel-toggle-open-bg-color-hover:      #fff,
+  panel-toggle-open-txt-color-hover:     #2f56ff,
+  panel-toggle-open-txt-size:            26px,
+  panel-toggle-open-size:                46px,
+  panel-toggle-open-offset:              26px,
 
-  url-bg-color:                        #ddd,
+  panel-toggle-close-bg-color:           #f5f5f5,
+  panel-toggle-close-txt-color:          #6f86ff,
+  panel-toggle-close-bg-color-hover:     #fff,
+  panel-toggle-close-txt-color-hover:    #2f56ff,
+  panel-toggle-close-txt-size:           16px,
+  panel-toggle-close-size:               32px,
+  panel-toggle-close-offset:             12px,
 
-  control-bg-color:                    #ddd,
 
-  control-embossed-bg-color:           #fff,
-  control-embossed-bg-color-highlight: #fff,
-  control-embossed-shadow:             0 2px 0 #c1cbe6,
-  control-embossed-shadow-inset:       0 -2px 0 #c1cbe6 inset,
+  panel-title-color:                     #000,
+  panel-title-font:                      unquote("300 20px 'Lato', sans-serif"),
+  panel-icon-color:                      #6f86ff,
+
+  url-bg-color:                          #ddd,
+
+  control-bg-color:                      #ddd,
+
+  control-embossed-bg-color:             #fff,
+  control-embossed-icon-color:           #6f86ff,
+  control-embossed-bg-color-highlight:   #fff,
+  control-embossed-txt-color-highlight:  #000,
+  control-embossed-icon-color-highlight: #2542c5
+  control-embossed-shadow:               0 2px 0 #c1cbe6,
+  control-embossed-shadow-inset:         0 -2px 0 #c1cbe6 inset,
 
 
-  copy-btn-bg-color:                   #ddd,
-  copy-btn-color:                      #6f86ff,
-  copy-btn-bg-color-hover:             #fff,
-  copy-btn-color-hover:                #2f56ff
+  copy-btn-bg-color:                     #ddd,
+  copy-btn-color:                        #6f86ff,
+  copy-btn-bg-color-hover:               #fff,
+  copy-btn-color-hover:                  #2f56ff
 
-  toggle-bg:                           #ccc,
-  toggle-pill-color:                   #eee,
-  toggle-bg-on:                        #8ba5ff,
-  toggle-pill-color-on:                #fff,
+  toggle-bg:                             #ccc,
+  toggle-pill-color:                     #eee,
+  toggle-bg-on:                          #8ba5ff,
+  toggle-pill-color-on:                  #fff,
+
+  control-bg-color-focus:                #fff,
+  control-txt-color-focus:               #000000,
 }
-
-// colors
-$control-bg-color-focus              = #fff
-$font-highlight-color                = #cdd7ef
 
 $url-status-color-unknown            = #6f86ff
 $url-status-color-error              = #ea491f

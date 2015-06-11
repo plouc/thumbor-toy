@@ -28,18 +28,28 @@ class Filter extends Component {
         return this.props.filter.settingsConfig.map(setting => {
             if (setting.type === 'text') {
                 return (
-                    <TextControl key={setting.key} setting={setting} onChange={this.onChange.bind(this)}
-                        defaultValue={this.props.filter.settings[setting.key]}/>
+                    <TextControl key={setting.key}
+                        propKey={setting.key} label={setting.label}
+                        onChange={this.onChange.bind(this)}
+                        defaultValue={this.props.filter.settings[setting.key]}
+                    />
                 );
             } else if (setting.type === 'toggle') {
                 return (
-                    <ToggleControl key={setting.key} setting={setting} onChange={this.onChange.bind(this)}
-                        defaultValue={this.props.filter.settings[setting.key]}/>
+                    <ToggleControl key={setting.key}
+                        propKey={setting.key} label={setting.label}
+                        onChange={this.onChange.bind(this)}
+                        defaultValue={this.props.filter.settings[setting.key]}
+                    />
                 );
             } else if (setting.type === 'choice') {
                 return (
-                    <ChoiceControl key={setting.key} setting={setting} onChange={this.onChange.bind(this)}
-                        defaultValue={this.props.filter.settings[setting.key]}/>
+                    <ChoiceControl key={setting.key}
+                        propKey={setting.key} label={setting.label}
+                        onChange={this.onChange.bind(this)}
+                        defaultValue={this.props.filter.settings[setting.key]}
+                        choices={setting.choices}
+                    />
                 );
             }
             // @todo throw for invalid type

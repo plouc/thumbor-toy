@@ -8,17 +8,16 @@
  */
 import Reflux       from 'reflux';
 import _            from 'lodash';
-import ImageStore   from './ImageStore';
+import SourceStore  from './SourceStore';
 import FiltersStore from './FiltersStore';
 import ResizeStore  from './ResizeStore';
-import ServerStore  from './ServerStore';
+
 
 var UrlStore = Reflux.createStore({
     init() {
-        this.listenTo(ImageStore,   this.update);
+        this.listenTo(SourceStore,  this.update);
         this.listenTo(FiltersStore, this.update);
         this.listenTo(ResizeStore,  this.update);
-        this.listenTo(ServerStore,  this.update);
     },
 
     update() {
@@ -54,7 +53,7 @@ var UrlStore = Reflux.createStore({
             }
         }
 
-        var url = ServerStore.current() + 'unsafe/' + resize + filters + ImageStore.get();
+        var url = SourceStore.server() + 'unsafe/' + resize + filters + SourceStore.image();
 
         this.trigger(url);
     }

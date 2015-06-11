@@ -1,3 +1,11 @@
+/*
+ * This file is part of thumbor-toy project.
+ *
+ * (c) Raphaël Benitte <thumbor-toy@rbenitte.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 .filter {
   t(background, 'filter-bg-color-inactive')
   t(color,      'filter-color-inactive')
@@ -136,7 +144,7 @@
   &__container
     &__wrapper
       position absolute
-      top   130px
+      top   105px
       right 0
       left  0
       width 100%
@@ -145,14 +153,3 @@
       padding-top 3px
       // added to fix scrollbar position
       -webkit-transform translateZ(0)
-
-  &__description-control
-    padding 7px 15px
-    cursor pointer
-    margin-bottom 7px
-    .fa
-      margin-right 7px
-
-    &--active
-      .fa
-        color $font-highlight-color

@@ -1,3 +1,11 @@
+/*
+ * This file is part of thumbor-toy project.
+ *
+ * (c) Raphaël Benitte <thumbor-toy@rbenitte.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 .select-box
   position relative
   overflow hidden
@@ -19,13 +27,13 @@
     font-size 20px
     top 50%
     margin-top -10px
-    //color lighten($font-color, 10)
+    t(color, 'control-embossed-icon-color')
 
   &:hover
-    color $font-highlight-color
     t(background-color, 'control-embossed-bg-color-highlight')
+    t(color,            'control-embossed-txt-color-highlight')
     .fa
-      color $font-highlight-color
+      t(color, 'control-embossed-icon-color-highlight')
 
   select
     color inherit
@@ -45,4 +53,4 @@
     &:focus
       outline none
       t(background-color, 'control-embossed-bg-color-highlight')
-      color #fff
+      t(color,            'control-embossed-txt-color-highlight')

@@ -13,10 +13,8 @@ class Control extends Component {}
 
 Control.propTypes = {
     onChange: PropTypes.func.isRequired,
-    setting:  PropTypes.shape({
-        key:   PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired
-    }).isRequired
+    propKey:  PropTypes.string.isRequired,
+    label:    PropTypes.string
 };
 
 Control.defaultProps = {

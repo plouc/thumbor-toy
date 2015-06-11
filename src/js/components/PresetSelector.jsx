@@ -9,8 +9,7 @@
 import React         from 'react';
 import Reflux        from 'reflux';
 import config        from './../../../config';
-import ImageActions  from './../actions/ImageActions';
-import ServerActions from './../actions/ServerActions';
+import SourceActions from './../actions/SourceActions';
 import ResizeActions from './../actions/ResizeActions';
 import FilterActions from './../actions/FilterActions';
 import _             from 'lodash';
@@ -27,8 +26,8 @@ var PresetSelector = React.createClass({
             return;
         }
 
-        ServerActions.set(imageData.server);
-        ImageActions.set(imageData.image);
+        SourceActions.setServer(imageData.server);
+        SourceActions.setImage(imageData.image);
         ResizeActions.clear();
         ResizeActions.update(imageData.resize);
         FilterActions.clear();

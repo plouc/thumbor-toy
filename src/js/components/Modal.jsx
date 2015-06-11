@@ -53,19 +53,10 @@ var Modal = React.createClass({
             classes += ' _is-opened';
         }
 
-        var showFiltersDescriptionSetting = {
-            key:   'showFiltersDescription',
-            label: 'show filters description'
-        };
-
-        var themeSetting = {
-            key:     'theme',
-            label:   'theme',
-            choices: [
-                { value: 'dark',  label: 'Dark theme'  },
-                { value: 'light', label: 'Light theme' }
-            ]
-        };
+        var themes = [
+            { value: 'dark',  label: 'Dark theme'  },
+            { value: 'light', label: 'Light theme' }
+        ];
 
         return (
             <div className={classes}>
@@ -78,12 +69,13 @@ var Modal = React.createClass({
                         </h3>
                         <div className="panel__content">
                             <ToggleControl
-                                setting={showFiltersDescriptionSetting}
+                                propKey="showFiltersDescription" label="show filters description"
                                 onChange={this.onSettingChange}
                                 defaultValue={UserPreferencesStore.get(UserPreferencesTypes.SHOW_FILTERS_DESCRIPTION)}
                             />
                             <ChoiceControl
-                                setting={themeSetting}
+                                propKey="theme" label="theme"
+                                choices={themes}
                                 onChange={this.onSettingChange}
                                 defaultValue={UserPreferencesStore.get(UserPreferencesTypes.THEME)}
                             />

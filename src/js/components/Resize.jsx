@@ -7,9 +7,11 @@
  * file that was distributed with this source code.
  */
 import React         from 'react';
+import Reflux        from 'reflux';
 import _             from 'lodash';
 import ResizeActions from './../actions/ResizeActions';
 import ResizeStore   from './../stores/ResizeStore';
+import SourceStore   from './../stores/SourceStore';
 import ToggleControl from './form/ToggleControl.jsx';
 import TextControl   from './form/TextControl.jsx';
 import SwitchControl from './form/SwitchControl.jsx';
@@ -18,10 +20,23 @@ import SwitchControl from './form/SwitchControl.jsx';
 var Resize = React.createClass({
     displayName: 'Resize',
 
+    mixins: [Reflux.ListenerMixin],
+
+    componentWillMount() {
+        this.listenTo(SourceStore, this.onSourceUpdate);
+    },
+
     getInitialState() {
         return {
+            active: SourceStore.isValid(),
             resize: ResizeStore.config()
         };
+    },
+
+    onSourceUpdate() {
+        this.setState({
+            active: SourceStore.isValid()
+        });
     },
 
     onChange(key, value) {
@@ -37,6 +52,15 @@ var Resize = React.createClass({
             { label: 'fit',     value: 'fit'     }
         ];
 
+        var contentClasses = 'panel__content';
+        if (this.state.active === false) {
+            contentClasses += ' _is-hidden';
+        }
+
+        if (this.state.active === true) {
+        } else {
+        }
+
         return (
             <div className="panel panel--resize">
                 <h3 className="panel__title">
@@ -45,32 +69,31 @@ var Resize = React.createClass({
                 <div className="panel__content">
                     <div className="control-group">
                         <ToggleControl
-                            setting={{ key: 'active', label: 'active' }}
+                            propKey="active" label="active"
                             onChange={this.onChange}
                             defaultValue={this.state.resize.active}
                             wrapperClass='resize__switch'
                         />
                         <ToggleControl
-                            setting={{ key: 'debug', label: 'debug'  }}
+                            propKey="debug" label="debug"
                             onChange={this.onChange}
                             defaultValue={this.state.resize.debug}
                             wrapperClass='resize__switch'
                         />
                     </div>
                     <SwitchControl
-                        setting={{ label: 'mode', key: 'mode' }}
-                        defaultValue='default'
-                        options={resizeModes}
+                        propKey="mode" label=""
+                        choices={resizeModes}
                         onChange={this.onChange}
                         defaultValue={this.state.resize.mode}
                     />
                     <TextControl
-                        setting={{ key: 'width',  label: 'width' }}
+                        propKey="width" label="width"
                         defaultValue={this.state.resize.width}
                         onChange={this.onChange}
                     />
                     <TextControl
-                        setting={{ key: 'height', label: 'height' }}
+                        propKey="height" label="height"
                         defaultValue={this.state.resize.height}
                         onChange={this.onChange}
                     />
