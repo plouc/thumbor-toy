@@ -11,15 +11,15 @@ var watermarkImages = [
 
 export default {
     source: {
-        serverInput: true,
         servers: [
-            { label: 'thumbor demo site', value: 'http://thumbor.thumborize.me/' }
-        ],
-        imageInput: true,
-        images: [
-            { label: 'sample image', value: 'thumborize.me/static/img/beach.jpg' }
-        ],
-        customInput: true
+            {
+                label:  'thumbor demo site',
+                value:  'http://thumbor.thumborize.me/',
+                images: [
+                    { label: 'sample image', value: 'thumborize.me/static/img/beach.jpg' }
+                ]
+            }
+        ]
     },
     filters: [
         'blur',
@@ -46,30 +46,6 @@ export default {
             type: 'watermark',
             settingsConfig: [
                 { choices: watermarkImages }
-            ]
-        },
-        {
-            type:           'fit_watermark',
-            label:          'Fit Watermark',
-            description:    'Resized watermark to fit original image',
-            template:       '${ image },${ transparency }',
-            settingsConfig: [
-                { key: 'image',        type: 'choice', label: 'Image',        default: null, choices: watermarkImages },
-                { key: 'transparency', type: 'text',   label: 'Transparency', default: 0 }
-            ]
-        },
-        {
-            type:           'overlay',
-            label:          'Overlay',
-            description:    '**Overlay** filter',
-            template:       '${ image },${ transparency },${ width },${ height },${ x },${ y }',
-            settingsConfig: [
-                { key: 'image',        type: 'choice', label: 'Image',        default: null, choices: watermarkImages },
-                { key: 'width',        type: 'text',   label: 'Width',        default: 900  },
-                { key: 'height',       type: 'text',   label: 'Height',       default: 506  },
-                { key: 'x',            type: 'text',   label: 'X position',   default: 450  },
-                { key: 'y',            type: 'text',   label: 'Y position',   default: -230 },
-                { key: 'transparency', type: 'text',   label: 'Transparency', default: 0    }
             ]
         }
     ]
