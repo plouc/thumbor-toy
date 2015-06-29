@@ -17,7 +17,7 @@ import TextControl   from './form/TextControl.jsx';
 import SwitchControl from './form/SwitchControl.jsx';
 
 
-var Resize = React.createClass({
+const Resize = React.createClass({
     displayName: 'Resize',
 
     mixins: [Reflux.ListenerMixin],

@@ -41,7 +41,10 @@
     "reflux": "^0.2.7",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
-    "watchify": "^3.2.1"
+    "watchify": "^3.2.1",
+    "bluebird": "^2.9.30",
+    "superagent": "^1.2.0",
+    "superagent-bluebird-promise": "^2.0.2"
   },
   "scripts": {
     "test": "gulp build:dev && gulp build"

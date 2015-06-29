@@ -14,6 +14,7 @@ import SourceStore   from './../stores/SourceStore';
 import PanelsActions from './../actions/PanelsActions';
 import Url           from './Url.jsx';
 import PanelTypes    from './../stores/PanelTypes';
+import ShortenerUrl  from './ShortenerUrl.jsx';
 
 
 var Header = React.createClass({
@@ -66,6 +67,7 @@ var Header = React.createClass({
         return (
             <div className="header">
                 <Url url={this.state.url} error={this.state.hasError} />
+                <ShortenerUrl/>
                 <span className="header__settings" onClick={this.onSettingsClick}>
                     <i className="fa fa-cog"/>
                 </span>

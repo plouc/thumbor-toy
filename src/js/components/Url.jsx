@@ -33,8 +33,8 @@ class Url extends Component {
     }
 
     render() {
-        var statusClasses = 'url__status';
-        var statusNode = null;
+        let statusClasses = 'url__status';
+        let statusNode    = null;
         if (this.props.error === true) {
             statusClasses += ' _has-error';
             statusNode = <i className="fa fa-warning"/>;
@@ -46,8 +46,8 @@ class Url extends Component {
         }
 
         return (
-            <div>
-                <input type="text" readOnly value={this.props.url} />
+            <div className="url">
+                <input className="url__field" type="text" readOnly value={this.props.url} />
                 <span className={statusClasses}>
                     {statusNode}
                 </span>
