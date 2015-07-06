@@ -16,7 +16,6 @@ import Modal                 from './Modal.jsx';
 import FiltersPanel          from './FiltersPanel.jsx';
 import UserPreferencesStore  from './../stores/UserPreferencesStore';
 import UserPreferencesTypes  from './../stores/UserPreferencesTypes';
-import config                from './../../../config';
 
 var App = React.createClass({
     mixins: [Reflux.ListenerMixin],
@@ -41,7 +40,7 @@ var App = React.createClass({
         return (
             <div className={`main theme-${ this.state.theme }`}>
                 <Header />
-                <SettingsPanel config={config}/>
+                <SettingsPanel/>
                 <FiltersPanel/>
                 <div className="content">
                     <Loader />

@@ -10,43 +10,46 @@ var watermarkImages = [
 ];
 
 export default {
-    source: {
-        servers: [
+    common: {
+        modes: [],
+        source: {
+            servers: [
+                {
+                    label:  'thumbor demo site',
+                    value:  'http://thumbor.thumborize.me/',
+                    images: [
+                        { label: 'sample image', value: 'thumborize.me/static/img/beach.jpg' }
+                    ]
+                }
+            ]
+        },
+        filters: [
+            'blur',
+            'brightness',
+            'colorize',
+            'contrast',
+            'convolution',
+            'equalize',
+            'extract_focal',
+            'fill',
+            'format',
+            'grayscale',
+            'max_bytes',
+            'noise',
+            'no_upscale',
+            'quality',
+            'rgb',
+            'rotate',
+            'round_corner',
+            'saturation',
+            'sharpen',
+            'strip_icc',
             {
-                label:  'thumbor demo site',
-                value:  'http://thumbor.thumborize.me/',
-                images: [
-                    { label: 'sample image', value: 'thumborize.me/static/img/beach.jpg' }
+                type: 'watermark',
+                settingsConfig: [
+                    { choices: watermarkImages }
                 ]
             }
         ]
     },
-    filters: [
-        'blur',
-        'brightness',
-        'colorize',
-        'contrast',
-        'convolution',
-        'equalize',
-        'extract_focal',
-        'fill',
-        'format',
-        'grayscale',
-        'max_bytes',
-        'noise',
-        'no_upscale',
-        'quality',
-        'rgb',
-        'rotate',
-        'round_corner',
-        'saturation',
-        'sharpen',
-        'strip_icc',
-        {
-            type: 'watermark',
-            settingsConfig: [
-                { choices: watermarkImages }
-            ]
-        }
-    ]
 };

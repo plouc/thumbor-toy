@@ -8,7 +8,7 @@
  */
 import Reflux        from 'reflux';
 import FilterActions from './../actions/FilterActions';
-import config        from './../../../config';
+import ConfigStore   from './../stores/ConfigStore';
 import baseFilters   from './../baseFilters';
 import _             from 'lodash';
 
@@ -16,7 +16,7 @@ var currentFilters   = [];
 var availableFilters = [];
 var internalId       = 0;
 
-_.forEach(config.filters, function (filter) {
+_.forEach(ConfigStore.get('filters'), function (filter) {
     var baseFilter;
     if (_.isString(filter)) {
         baseFilter = _.findLast(baseFilters, { type: filter });

@@ -15,6 +15,7 @@ import UserPreferencesTypes   from './UserPreferencesTypes';
 var preferencesKey = 'toy-prefs';
 var defaultPreferences = {
     [UserPreferencesTypes.SHOW_FILTERS_DESCRIPTION]: true,
+    [UserPreferencesTypes.MODE]:                     'common',
     [UserPreferencesTypes.SETTINGS_PANEL_OPENED]:    true,
     [UserPreferencesTypes.FILTERS_PANEL_OPENED]:     true,
     [UserPreferencesTypes.THEME]:                    'dark'

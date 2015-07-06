@@ -27,7 +27,7 @@ var Source = React.createClass({
                 server: SourceStore.server(),
                 image:  SourceStore.image()
             });
-            var server = _.find(this.props.config.servers, { value: SourceStore.server() });
+            var server = _.find(this.props.source.servers, { value: SourceStore.server() });
             if (server !== undefined) {
                 this.setState({
                     images: server.images
@@ -68,7 +68,7 @@ var Source = React.createClass({
         var servers = [{
             label: '--- select a server ---',
             value: ''
-        }].concat(this.props.config.servers);
+        }].concat(this.props.source.servers);
 
         var sourceControl;
         if (this.state.sourceType === 'static') {
