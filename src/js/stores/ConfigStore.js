@@ -8,6 +8,7 @@
  */
 import Reflux               from 'reflux';
 import UserPreferencesStore from './UserPreferencesStore';
+import ConfigActions        from './../actions/ConfigActions';
 import UserPreferencesTypes from './UserPreferencesTypes';
 import _                    from 'lodash';
 import config               from './../../../config';
@@ -21,6 +22,8 @@ function ensureModeExists(key) {
 var currentConfig;
 
 var ConfigStore = Reflux.createStore({
+    listenables: ConfigActions,
+
     init() {
         this.listenTo(UserPreferencesStore, this.update);
         this.update();
@@ -32,12 +35,10 @@ var ConfigStore = Reflux.createStore({
 
         currentConfig = _.cloneDeep(config.common);
         if (currentMode != 'common') {
-            currentConfig = _.merge(currentConfig, config[currentMode], function(a, b) {
-                if (_.isArray(a)) {
-                    return a.concat(b);
-                }
-            });
+            currentConfig = _.merge(currentConfig, config[currentMode], (a, b) => { if (_.isArray(a)) { return a.concat(b); } });
         }
+
+        this.trigger();
     },
 
     get(key) {
