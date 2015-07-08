@@ -65,19 +65,24 @@ var Modal = React.createClass({
     },
 
     onSettingChange(settingKey, settingValue) {
+        var setting;
+
         switch (settingKey) {
             case 'theme':
-                UserPreferencesActions.set(UserPreferencesTypes.THEME, settingValue);
+                setting = UserPreferencesTypes.THEME;
                 break;
             case 'showFiltersDescription':
-                UserPreferencesActions.set(UserPreferencesTypes.SHOW_FILTERS_DESCRIPTION, settingValue);
+                setting = UserPreferencesTypes.SHOW_FILTERS_DESCRIPTION;
                 break;
             case 'mode':
-                UserPreferencesActions.set(UserPreferencesTypes.MODE, settingValue);
+                setting = UserPreferencesTypes.MODE;
                 break;
             default:
+                throw `no setting found with key: '${ settingKey }'`;
                 break;
         }
+
+        UserPreferencesActions.set(setting, settingValue);
     },
 
     render() {

@@ -37,7 +37,6 @@ class FilterSelector extends Component {
     }
 
     render() {
-        console.log('rendering filter selector', AvailableFiltersStore.get());
         var options = AvailableFiltersStore.get().map(function (filter) {
             return <option key={filter.type} value={filter.type}>{filter.label}</option>;
         });

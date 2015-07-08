@@ -6,17 +6,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-import Reflux                 from 'reflux';
-import AvailableFilterActions from './../actions/AvailableFilterActions';
-import ConfigStore            from './../stores/ConfigStore';
-import baseFilters            from './../baseFilters';
-import _                      from 'lodash';
+import Reflux        from 'reflux';
+import FilterActions from './../actions/FilterActions';
+import ConfigStore   from './../stores/ConfigStore';
+import baseFilters   from './../baseFilters';
+import _             from 'lodash';
 
 var availableFilters = [];
 
 var AvailableFiltersStore = Reflux.createStore({
-    listenables: AvailableFilterActions,
-
     init() {
         this.listenTo(ConfigStore, this.update);
         this.update();
@@ -24,7 +22,7 @@ var AvailableFiltersStore = Reflux.createStore({
 
     update() {
         availableFilters = [];
-        _.forEach(ConfigStore.get('filters'), function (filter) {
+        ConfigStore.get('filters').forEach(filter => {
             var baseFilter;
             if (_.isString(filter)) {
                 baseFilter = _.findLast(baseFilters, { type: filter });
@@ -49,7 +47,7 @@ var AvailableFiltersStore = Reflux.createStore({
 
     get() {
         return availableFilters;
-    },
+    }
 });
 
 export default AvailableFiltersStore;

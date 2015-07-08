@@ -50,16 +50,20 @@ var FiltersStore = Reflux.createStore({
     },
 
     removeUnavailableFilters() {
-        _.forEach(currentFilters, (f) => {
-            if (_.find(AvailableFiltersStore.get(), { type: f.type }) === undefined) {
-                this.delete(f.uid);
-            }
-        });
+        currentFilters
+            .filter(f => { return _.find(AvailableFiltersStore.get(), { type: f.type }) === undefined; })
+            .forEach(f => { this.remove(f.uid); });
+
+        this.trigger();
+    },
+
+    remove(uid) {
+        _.remove(currentFilters, { uid: uid });
+        _.forEach(currentFilters, (filter, i) => { filter.id = i; });
     },
 
     delete(uid) {
-        _.remove(currentFilters, { uid: uid });
-        _.forEach(currentFilters, (filter, i) => { filter.id = i; });
+        this.remove(uid);
 
         this.trigger();
     },
