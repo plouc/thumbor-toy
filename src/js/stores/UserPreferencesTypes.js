@@ -10,5 +10,6 @@ export default {
     SHOW_FILTERS_DESCRIPTION: 'show_filters_description',
     SETTINGS_PANEL_OPENED:    'settings_panel_opened',
     FILTERS_PANEL_OPENED:     'filters_panel_opened',
-    THEME:                    'theme'
+    THEME:                    'theme',
+    MODE:                     'mode'
 };

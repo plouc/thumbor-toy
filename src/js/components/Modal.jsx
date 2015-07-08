@@ -8,9 +8,11 @@
  */
 import React                  from 'react';
 import Reflux                 from 'reflux';
+import _                      from 'lodash';
 import PanelsActions          from './../actions/PanelsActions';
 import PanelTypes             from './../stores/PanelTypes';
 import PanelsStore            from './../stores/PanelsStore';
+import ConfigStore            from './../stores/ConfigStore';
 import ToggleControl          from './form/ToggleControl.jsx';
 import ChoiceControl          from './form/ChoiceControl.jsx';
 import UserPreferencesStore   from './../stores/UserPreferencesStore';
@@ -63,11 +65,24 @@ var Modal = React.createClass({
     },
 
     onSettingChange(settingKey, settingValue) {
-        if (settingKey === 'theme') {
-            UserPreferencesActions.set(UserPreferencesTypes.THEME, settingValue);
-        } else if (settingKey === 'showFiltersDescription') {
-            UserPreferencesActions.set(UserPreferencesTypes.SHOW_FILTERS_DESCRIPTION, settingValue);
+        var setting;
+
+        switch (settingKey) {
+            case 'theme':
+                setting = UserPreferencesTypes.THEME;
+                break;
+            case 'showFiltersDescription':
+                setting = UserPreferencesTypes.SHOW_FILTERS_DESCRIPTION;
+                break;
+            case 'mode':
+                setting = UserPreferencesTypes.MODE;
+                break;
+            default:
+                throw `no setting found with key: '${ settingKey }'`;
+                break;
         }
+
+        UserPreferencesActions.set(setting, settingValue);
     },
 
     render() {
@@ -86,6 +101,18 @@ var Modal = React.createClass({
             opacity: this.getTweeningValue('opacity')
         };
 
+        var modeSelector = null;
+        if (_.isArray(ConfigStore.get('modes')) && ConfigStore.get('modes').length > 0) {
+            modeSelector =
+                <ChoiceControl
+                    propKey="mode" label="mode"
+                    choices={ConfigStore.get('modes')}
+                    onChange={this.onSettingChange}
+                    defaultValue={UserPreferencesStore.get(UserPreferencesTypes.MODE)}
+                />
+            ;
+        }
+
         return (
             <div className={classes} style={{ display: this.state.display }}>
                 <div className="modal__overlay" onClick={this.onCloseClick}/>
@@ -101,6 +128,7 @@ var Modal = React.createClass({
                                 onChange={this.onSettingChange}
                                 defaultValue={UserPreferencesStore.get(UserPreferencesTypes.SHOW_FILTERS_DESCRIPTION)}
                             />
+                            {modeSelector}
                             <ChoiceControl
                                 propKey="theme" label="theme"
                                 choices={themes}

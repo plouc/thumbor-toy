@@ -6,12 +6,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-import React, { Component } from 'react';
-import FiltersStore         from './../../stores/FiltersStore';
-import FilterActions        from './../../actions/FilterActions';
+import React, { Component }  from 'react';
+import AvailableFiltersStore from './../../stores/AvailableFiltersStore';
+import FilterActions         from './../../actions/FilterActions';
 
 
 class FilterSelector extends Component {
+
+    init() {
+        this.listenTo(AvailableFiltersStore, this.render());
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -32,7 +37,7 @@ class FilterSelector extends Component {
     }
 
     render() {
-        var options = FiltersStore.available().map(function (filter) {
+        var options = AvailableFiltersStore.get().map(function (filter) {
             return <option key={filter.type} value={filter.type}>{filter.label}</option>;
         });
         options.unshift((

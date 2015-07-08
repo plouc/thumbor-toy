@@ -6,42 +6,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-import Reflux        from 'reflux';
-import FilterActions from './../actions/FilterActions';
-import config        from './../../../config';
-import baseFilters   from './../baseFilters';
-import _             from 'lodash';
+import Reflux                from 'reflux';
+import FilterActions         from './../actions/FilterActions';
+import ConfigStore           from './../stores/ConfigStore';
+import AvailableFiltersStore from './../stores/AvailableFiltersStore';
+import baseFilters           from './../baseFilters';
+import _                     from 'lodash';
 
 var currentFilters   = [];
-var availableFilters = [];
 var internalId       = 0;
-
-_.forEach(config.filters, function (filter) {
-    var baseFilter;
-    if (_.isString(filter)) {
-        baseFilter = _.findLast(baseFilters, { type: filter });
-        if (!baseFilter) {
-            throw `no filter found with type: '${ filter }'`;
-        }
-        filter = baseFilter;
-    } else {
-        baseFilter = _.findLast(baseFilters, { type: filter.type });
-        if (baseFilter) {
-            filter = _.merge(baseFilter, filter);
-        }
-    }
-
-    filter.settingsConfig = filter.settingsConfig || [];
-
-    availableFilters.push(filter);
-});
-
 
 var FiltersStore = Reflux.createStore({
     listenables: FilterActions,
 
+    init() {
+        this.listenTo(AvailableFiltersStore, this.removeUnavailableFilters);
+    },
+
     add(type, settings = {}) {
-        var filter = _.find(availableFilters, { 'type': type });
+        var filter = _.find(AvailableFiltersStore.get(), { 'type': type });
         if (filter === undefined) {
             throw `invalid filter type: '${ type }'`;
         }
@@ -66,9 +49,21 @@ var FiltersStore = Reflux.createStore({
         this.trigger();
     },
 
-    delete(uid) {
+    removeUnavailableFilters() {
+        currentFilters
+            .filter(f => { return _.find(AvailableFiltersStore.get(), { type: f.type }) === undefined; })
+            .forEach(f => { this.remove(f.uid); });
+
+        this.trigger();
+    },
+
+    remove(uid) {
         _.remove(currentFilters, { uid: uid });
         _.forEach(currentFilters, (filter, i) => { filter.id = i; });
+    },
+
+    delete(uid) {
+        this.remove(uid);
 
         this.trigger();
     },
@@ -105,10 +100,6 @@ var FiltersStore = Reflux.createStore({
     current() {
         return currentFilters;
     },
-
-    available() {
-        return availableFilters;
-    }
 });
 
 export default FiltersStore;

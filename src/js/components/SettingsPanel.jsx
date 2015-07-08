@@ -16,6 +16,7 @@ import UserPreferencesActions from './../actions/UserPreferencesActions';
 import UserPreferencesStore   from './../stores/UserPreferencesStore';
 import UserPreferencesTypes   from './../stores/UserPreferencesTypes';
 import PanelTypes             from './../stores/PanelTypes';
+import ConfigStore            from './../stores/ConfigStore';
 
 var SettingsPanel = React.createClass({
     displayName: 'SettingsPanel',
@@ -23,6 +24,10 @@ var SettingsPanel = React.createClass({
     mixins: [
         Reflux.ListenerMixin
     ],
+
+    init() {
+        this.listenTo(ConfigStore, this.render());
+    },
 
     getInitialState() {
         return {
@@ -44,7 +49,7 @@ var SettingsPanel = React.createClass({
 
     render() {
         var presetSelector = null;
-        if (_.isArray(this.props.config.presetImages) && this.props.config.presetImages.length > 0) {
+        if (_.isArray(ConfigStore.get('presetImages')) && ConfigStore.get('presetImages').length > 0) {
             presetSelector = <PresetSelector />;
         }
 
@@ -60,8 +65,8 @@ var SettingsPanel = React.createClass({
         return (
             <div className={classes}>
                 {presetSelector}
-                <Source config={this.props.config.source} />
-                <Resize presets={this.props.config.presetsResize || []} />
+                <Source source={ConfigStore.get('source')} />
+                <Resize presets={ConfigStore.get('presetsResize') || []} />
                 <span className="sidebar__toggle" onClick={this.onToggleClick}>
                     <i className={toggleIconClasses}/>
                 </span>

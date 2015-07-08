@@ -8,7 +8,7 @@
  */
 import React         from 'react';
 import Reflux        from 'reflux';
-import config        from './../../../config';
+import ConfigStore   from './../stores/ConfigStore';
 import SourceActions from './../actions/SourceActions';
 import ResizeActions from './../actions/ResizeActions';
 import FilterActions from './../actions/FilterActions';
@@ -46,7 +46,7 @@ var PresetSelector = React.createClass({
                 resize:  {},
                 filters: []
             }
-        }].concat(config.presetImages);
+        }].concat(ConfigStore.get('presetImages'));
 
         var options = this.props.images.map((image, i) => {
             return <option key={i} value={i}>{image.label}</option>;
