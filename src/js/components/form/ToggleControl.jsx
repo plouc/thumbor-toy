@@ -25,14 +25,14 @@ class ToggleControl extends Control {
     }
 
     render() {
-        var { propKey, label, defaultValue, wrapperClass } = this.props;
+        var { propKey, label, value, wrapperClass } = this.props;
 
         var id = `toggle-${this.uid}`;
 
         return (
             <div className={wrapperClass}>
                 <span className="toggle">
-                    <input id={id} ref={propKey} type="checkbox" onChange={this.onChange.bind(this)} defaultChecked={defaultValue}/>
+                    <input id={id} ref={propKey} type="checkbox" onChange={this.onChange.bind(this)} checked={value}/>
                     <label htmlFor={id}/>
                 </span>
                 <label htmlFor={id}>

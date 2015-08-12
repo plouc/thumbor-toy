@@ -19,19 +19,23 @@ import ChoiceControl                   from './../form/ChoiceControl.jsx';
 
 class Filter extends Component {
     onToggleSettings() {
-        FilterActions.update(this.props.filter.uid, _.merge(this.props.filter, {
-            expanded: !this.props.filter.expanded
+        let { filter } = this.props;
+
+        FilterActions.update(filter.uid, _.merge(filter, {
+            expanded: !filter.expanded
         }));
     }
 
     getSettingsNodes() {
-        return this.props.filter.settingsConfig.map(setting => {
+        let { filter } = this.props;
+
+        return filter.settingsConfig.map(setting => {
             if (setting.type === 'text') {
                 return (
                     <TextControl key={setting.key}
                         propKey={setting.key} label={setting.label}
                         onChange={this.onChange.bind(this)}
-                        defaultValue={this.props.filter.settings[setting.key]}
+                        value={filter.settings[setting.key]}
                     />
                 );
             } else if (setting.type === 'toggle') {
@@ -39,7 +43,7 @@ class Filter extends Component {
                     <ToggleControl key={setting.key}
                         propKey={setting.key} label={setting.label}
                         onChange={this.onChange.bind(this)}
-                        defaultValue={this.props.filter.settings[setting.key]}
+                        value={filter.settings[setting.key]}
                     />
                 );
             } else if (setting.type === 'choice') {
@@ -47,7 +51,7 @@ class Filter extends Component {
                     <ChoiceControl key={setting.key}
                         propKey={setting.key} label={setting.label}
                         onChange={this.onChange.bind(this)}
-                        defaultValue={this.props.filter.settings[setting.key]}
+                        value={filter.settings[setting.key]}
                         choices={setting.choices}
                     />
                 );
@@ -57,17 +61,23 @@ class Filter extends Component {
     }
 
     onChange(settingKey, settingValue) {
-        FilterActions.update(this.props.filter.uid, _.merge(this.props.filter.settings, {
+        let { filter } = this.props;
+
+        FilterActions.update(filter.uid, _.merge(filter.settings, {
             [settingKey]: settingValue
         }));
     }
 
     getClassName() {
-        return `filter${ this.props.filter.active ? ' _is-active' : '' }`;
+        let { filter } = this.props;
+
+        return `filter${ filter.active ? ' _is-active' : '' }`;
     }
 
     getBodyClassName() {
-        return `filter__body${ this.props.filter.expanded ? ' _is-expanded' : ''}`;
+        let { filter } = this.props;
+
+        return `filter__body${ filter.expanded ? ' _is-expanded' : ''}`;
     }
 
     render() {
@@ -80,7 +90,10 @@ class Filter extends Component {
         if (this.props.showDescription) {
             description = (
                 <div className="filter__description"
-                    dangerouslySetInnerHTML={{ __html: marked(this.props.filter.description, { renderer: mdRenderer }) }}/>
+                    dangerouslySetInnerHTML={{
+                        __html: marked(this.props.filter.description, { renderer: mdRenderer })
+                    }}
+                />
             );
         }
 

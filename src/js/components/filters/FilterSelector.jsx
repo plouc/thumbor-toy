@@ -12,7 +12,6 @@ import FilterActions         from './../../actions/FilterActions';
 
 
 class FilterSelector extends Component {
-
     init() {
         this.listenTo(AvailableFiltersStore, this.render());
     }
@@ -37,17 +36,17 @@ class FilterSelector extends Component {
     }
 
     render() {
-        var options = AvailableFiltersStore.get().map(function (filter) {
+        let options = AvailableFiltersStore.get().map(filter => {
             return <option key={filter.type} value={filter.type}>{filter.label}</option>;
         });
-        options.unshift((
-            <option key={0} value="">Add a filter</option>
-        ));
+        options.unshift(<option key={0} value="">Add a filter</option>);
+
+        let { filterType } = this.state;
 
         return (
             <div className="filter-selector">
                 <div className="select-box select-box--filters">
-                    <select ref="filter" onChange={this.onChange.bind(this)} value={this.state.filterType}>
+                    <select ref="filter" onChange={this.onChange.bind(this)} value={filterType}>
                         {options}
                     </select>
                     <i className="fa fa-plus" />

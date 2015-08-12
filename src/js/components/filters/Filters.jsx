@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 import React                  from 'react';
-import Reflux                 from 'reflux';
+import { ListenerMixin }      from 'reflux';
 import FiltersStore           from './../../stores/FiltersStore';
 import UserPreferencesStore   from './../../stores/UserPreferencesStore';
 import UserPreferencesTypes   from './../../stores/UserPreferencesTypes';
@@ -18,7 +18,7 @@ import FiltersContainer       from './FiltersContainer.jsx';
 var Filters = React.createClass({
     displayName: 'Filters',
 
-    mixins: [Reflux.ListenerMixin],
+    mixins: [ListenerMixin],
 
     getInitialState() {
         return {
@@ -45,6 +45,8 @@ var Filters = React.createClass({
     },
 
     render() {
+        let { filters, showFiltersDescription } = this.state;
+
         return (
             <div className="filters__list">
                 <h3 className="panel__title">
@@ -53,7 +55,7 @@ var Filters = React.createClass({
                 <div className="panel__content panel__content--filter-selector">
                     <FilterSelector />
                 </div>
-                <FiltersContainer showFiltersDescription={this.state.showFiltersDescription} filters={this.state.filters}/>
+                <FiltersContainer showFiltersDescription={showFiltersDescription} filters={filters}/>
             </div>
         );
     }

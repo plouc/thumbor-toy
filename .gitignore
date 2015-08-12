@@ -2,5 +2,6 @@
 node_modules
 /config.js
 thumbor-toy.js
+thumbor-toy.min.js
 thumbor-toy.css
 fonts

@@ -6,17 +6,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-import React         from 'react';
-import Reflux        from 'reflux';
-import UrlStore      from './../stores/UrlStore';
-import SourceStore   from './../stores/SourceStore';
-import LoaderActions from './../actions/LoaderActions';
-import $             from 'jquery';
+import React             from 'react';
+import { ListenerMixin } from 'reflux';
+import UrlStore          from './../stores/UrlStore';
+import SourceStore       from './../stores/SourceStore';
+import LoaderActions     from './../actions/LoaderActions';
+import $                 from 'jquery';
 
 var ImageComponent = React.createClass({
     displayName: 'ImageComponent',
 
-    mixins: [Reflux.ListenerMixin],
+    mixins: [ListenerMixin],
 
     getInitialState() {
         return {

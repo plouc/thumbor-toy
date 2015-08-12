@@ -6,20 +6,26 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-import React         from 'react';
-import Reflux        from 'reflux';
-import _             from 'lodash';
-import SourceActions from './../actions/SourceActions';
-import SourceStore   from './../stores/SourceStore';
-import SwitchControl from './form/SwitchControl.jsx';
-import ChoiceControl from './form/ChoiceControl.jsx';
-import TextControl   from './form/TextControl.jsx';
+import React             from 'react';
+import { ListenerMixin } from 'reflux';
+import _                 from 'lodash';
+import SourceActions     from './../actions/SourceActions';
+import SourceStore       from './../stores/SourceStore';
+import SwitchControl     from './form/SwitchControl.jsx';
+import ChoiceControl     from './form/ChoiceControl.jsx';
+import TextControl       from './form/TextControl.jsx';
 
 
-var Source = React.createClass({
+const imageSourceTypeChoices = [
+    { label: 'predefined', value: 'static'  },
+    { label: 'manual',     value: 'dynamic' }
+];
+
+
+const Source = React.createClass({
     displayName: 'ImageSource',
 
-    mixins: [Reflux.ListenerMixin],
+    mixins: [ListenerMixin],
 
     componentWillMount() {
         this.listenTo(SourceStore, () => {
@@ -27,7 +33,8 @@ var Source = React.createClass({
                 server: SourceStore.server(),
                 image:  SourceStore.image()
             });
-            var server = _.find(this.props.source.servers, { value: SourceStore.server() });
+
+            let server = _.find(this.props.source.servers, { value: SourceStore.server() });
             if (server !== undefined) {
                 this.setState({
                     images: server.images
@@ -60,12 +67,14 @@ var Source = React.createClass({
     },
 
     render() {
-        var images = [{
+        let { images, image, server, sourceType } = this.state;
+
+        let imageChoices = [{
             label: '--- select an image ---',
             value: ''
-        }].concat(this.state.images);
+        }].concat(images);
 
-        var servers = [{
+        let serverChoices = [{
             label: '--- select a server ---',
             value: ''
         }].concat(this.props.source.servers);
@@ -74,9 +83,9 @@ var Source = React.createClass({
         if (this.state.sourceType === 'static') {
             sourceControl = (
                 <ChoiceControl
-                    propKey="image" choices={images}
+                    propKey="image" choices={imageChoices}
                     onChange={this.onImageChange}
-                    defaultValue={this.state.image}
+                    value={image}
                 />
             );
         } else {
@@ -85,25 +94,20 @@ var Source = React.createClass({
                     propKey="image" label=""
                     fullWidth={true}
                     onChange={this.onImageChange}
-                    defaultValue={this.state.image}
+                    value={image}
                 />
             );
         }
 
-        var imageSourceTypes = [
-            { label: 'predefined', value: 'static'  },
-            { label: 'manual',     value: 'dynamic' }
-        ];
-
-        var imageSource = null;
-        if (this.state.server !== '') {
+        let imageSource = null;
+        if (server !== '') {
             imageSource = (
                 <div>
                     <SwitchControl
                         propKey="image_source_type" label="image"
-                        choices={imageSourceTypes}
+                        choices={imageSourceTypeChoices}
                         onChange={this.onTypeChange}
-                        defaultValue={this.state.sourceType}
+                        value={sourceType}
                     />
                     {sourceControl}
                 </div>
@@ -118,9 +122,9 @@ var Source = React.createClass({
                 <div className="panel__content">
                     <ChoiceControl
                         label="server"
-                        propKey="server" choices={servers}
+                        propKey="server" choices={serverChoices}
                         onChange={this.onServerChange}
-                        defaultValue={this.state.server}
+                        value={server}
                     />
                     {imageSource}
                 </div>

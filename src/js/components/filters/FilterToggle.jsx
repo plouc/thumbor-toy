@@ -25,7 +25,9 @@ var FilterToggle = React.createClass({
         e.preventDefault();
         e.stopPropagation();
 
-        FilterActions.delete(this.props.filter.uid);
+        let { filter } = this.props;
+
+        FilterActions.delete(filter.uid);
     },
 
     onToggleVisibility(e) {
@@ -36,21 +38,25 @@ var FilterToggle = React.createClass({
     },
 
     onToggleActive() {
-        FilterActions.toggle(this.props.filter.uid);
+        let { filter } = this.props;
+
+        FilterActions.toggle(filter.uid);
     },
 
     render() {
+        let { filter } = this.props;
+
         return (
             <div className="filter__header" onClick={this.onToggleActive}>
                 <span className="filter__toggle">
-                    <i className={'fa fa-eye' + (this.props.filter.active ? '' : '-slash') } />
+                    <i className={'fa fa-eye' + (filter.active ? '' : '-slash') } />
                 </span>
-                {this.props.filter.label}
+                {filter.label}
                 <span className="filter__delete" onClick={this.onDeleteClick} >
                     <i className="fa fa-times" />
                 </span>
                 <span className="filter__expand" onClick={this.onToggleVisibility}>
-                    <i className={'fa fa-chevron-' + (this.props.filter.expanded ? 'down' : 'right') } />
+                    <i className={'fa fa-chevron-' + (filter.expanded ? 'down' : 'right') } />
                 </span>
             </div>
         );

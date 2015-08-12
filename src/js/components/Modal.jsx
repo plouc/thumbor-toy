@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 import React                  from 'react';
-import Reflux                 from 'reflux';
+import { ListenerMixin }      from 'reflux';
 import _                      from 'lodash';
 import PanelsActions          from './../actions/PanelsActions';
 import PanelTypes             from './../stores/PanelTypes';
@@ -21,9 +21,15 @@ import UserPreferencesTypes   from './../stores/UserPreferencesTypes';
 import TweenState             from 'react-tween-state';
 
 
-var Modal = React.createClass({
+const themes = [
+    { value: 'dark',  label: 'Dark theme'  },
+    { value: 'light', label: 'Light theme' }
+];
+
+
+const Modal = React.createClass({
     mixins: [
-        Reflux.ListenerMixin,
+        ListenerMixin,
         TweenState.Mixin
     ],
 
@@ -86,35 +92,29 @@ var Modal = React.createClass({
     },
 
     render() {
-        var classes = 'modal';
-        if (this.state.opened === true) {
-            classes += ' _is-opened';
-        }
+        let { opened, display } = this.state;
 
-        var themes = [
-            { value: 'dark',  label: 'Dark theme'  },
-            { value: 'light', label: 'Light theme' }
-        ];
+        let classes = `modal${ opened === true ? ' _is-opened' : '' }`;
 
-        var style = {
+        let style = {
             top:     this.getTweeningValue('top') + '%',
             opacity: this.getTweeningValue('opacity')
         };
 
-        var modeSelector = null;
+        let modeSelector = null;
         if (_.isArray(ConfigStore.get('modes')) && ConfigStore.get('modes').length > 0) {
             modeSelector =
                 <ChoiceControl
                     propKey="mode" label="mode"
                     choices={ConfigStore.get('modes')}
                     onChange={this.onSettingChange}
-                    defaultValue={UserPreferencesStore.get(UserPreferencesTypes.MODE)}
+                    value={UserPreferencesStore.get(UserPreferencesTypes.MODE)}
                 />
             ;
         }
 
         return (
-            <div className={classes} style={{ display: this.state.display }}>
+            <div className={classes} style={{ display: display }}>
                 <div className="modal__overlay" onClick={this.onCloseClick}/>
                 <div className="modal__container" style={style}>
                     <div className="panel panel--settings">
@@ -126,14 +126,14 @@ var Modal = React.createClass({
                             <ToggleControl
                                 propKey="showFiltersDescription" label="show filters description"
                                 onChange={this.onSettingChange}
-                                defaultValue={UserPreferencesStore.get(UserPreferencesTypes.SHOW_FILTERS_DESCRIPTION)}
+                                value={UserPreferencesStore.get(UserPreferencesTypes.SHOW_FILTERS_DESCRIPTION)}
                             />
                             {modeSelector}
                             <ChoiceControl
                                 propKey="theme" label="theme"
                                 choices={themes}
                                 onChange={this.onSettingChange}
-                                defaultValue={UserPreferencesStore.get(UserPreferencesTypes.THEME)}
+                                value={UserPreferencesStore.get(UserPreferencesTypes.THEME)}
                             />
                         </div>
                     </div>

@@ -5,7 +5,7 @@ import Control              from './Control.jsx';
 
 class SwitchControl extends Control {
     constructor(props) {
-        super(props)
+        super(props);
         this.uid = `switch.${ SwitchControl.counter }`;
         SwitchControl.counter++;
     }
@@ -22,10 +22,10 @@ class SwitchControl extends Control {
     }
 
     render() {
-        var classes = `switch switch--${ this.props.choices.length }`;
+        let { label, choices, value } = this.props;
 
         var nodes = [];
-        this.props.choices.forEach((choice, index) => {
+        choices.forEach((choice, index) => {
             var id = `${ choice.value }.${ index }`;
             nodes.push(
                 <input
@@ -33,23 +33,23 @@ class SwitchControl extends Control {
                     name={this.uid} id={id}
                     type="radio" className={`switch__radio--${index}`}
                     onChange={this.onChange.bind(this)}
-                    defaultChecked={choice.value === this.props.defaultValue}
+                    checked={choice.value === value}
                 />
             );
             nodes.push(<label key={`${ id }.label`} htmlFor={id}>{choice.label}</label>);
         });
 
-        var label = null;
-        if (this.props.label && this.props.label !== '') {
-            label = (
-                <label className="control-group__label control-group__label--full">{this.props.label}</label>
+        let labelNode = null;
+        if (label && label !== '') {
+            labelNode = (
+                <label className="control-group__label control-group__label--full">{label}</label>
             );
         }
 
         return (
             <div className={this.props.wrapperClass}>
-                {label}
-                <div className={classes}>
+                {labelNode}
+                <div className={`switch switch--${ choices.length }`}>
                     {nodes}
                     <i/>
                 </div>

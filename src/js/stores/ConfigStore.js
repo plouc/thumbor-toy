@@ -13,15 +13,16 @@ import UserPreferencesTypes from './UserPreferencesTypes';
 import _                    from 'lodash';
 import config               from './../../../config';
 
+var currentConfig;
+
 function ensureModeExists(key) {
     if (!_.has(config, key)) {
         throw Error(`No configuration found for mode '${ key }'`);
     }
 }
 
-var currentConfig;
 
-var ConfigStore = Reflux.createStore({
+const ConfigStore = Reflux.createStore({
     listenables: ConfigActions,
 
     init() {
@@ -30,15 +31,15 @@ var ConfigStore = Reflux.createStore({
     },
 
     update() {
-        var currentMode = UserPreferencesStore.get(UserPreferencesTypes.MODE);
+        let currentMode = UserPreferencesStore.get(UserPreferencesTypes.MODE);
         ensureModeExists(currentMode);
 
         currentConfig = _.cloneDeep(config.common);
-        if (currentMode != 'common') {
+        if (currentMode !== 'common') {
             currentConfig = _.merge(currentConfig, config[currentMode], (a, b) => { if (_.isArray(a)) { return a.concat(b); } });
         }
 
-        this.trigger();
+        this.trigger(currentConfig);
     },
 
     get(key) {
