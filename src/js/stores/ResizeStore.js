@@ -16,7 +16,8 @@ const defaultResize = {
     height: 300,
     mode:   'default'
 };
-var currentResizeConfig = defaultResize;
+
+var currentResizeConfig = _.clone(defaultResize);
 
 const ResizeStore = Reflux.createStore({
     init() {
@@ -24,16 +25,14 @@ const ResizeStore = Reflux.createStore({
         this.listenTo(ResizeActions.clear,  this.clearResize);
     },
 
-    updateResize(config) {
-        console.log('ResizeStore.updateResize()', config);
-        currentResizeConfig = _.merge(currentResizeConfig, config);
+    clearResize() {
+        currentResizeConfig = _.clone(defaultResize);
 
         this.trigger(currentResizeConfig);
     },
 
-    clearResize() {
-        console.log('ResizeStore.clearResize()');
-        currentResizeConfig = defaultResize;
+    updateResize(config) {
+        currentResizeConfig = _.merge(currentResizeConfig, config);
 
         this.trigger(currentResizeConfig);
     },
