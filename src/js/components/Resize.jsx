@@ -6,24 +6,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-import React         from 'react';
-import Reflux        from 'reflux';
-import _             from 'lodash';
-import ResizeActions from './../actions/ResizeActions';
-import ResizeStore   from './../stores/ResizeStore';
-import SourceStore   from './../stores/SourceStore';
-import ToggleControl from './form/ToggleControl.jsx';
-import TextControl   from './form/TextControl.jsx';
-import SwitchControl from './form/SwitchControl.jsx';
+import React             from 'react';
+import { ListenerMixin } from 'reflux';
+import _                 from 'lodash';
+import ResizeActions     from './../actions/ResizeActions';
+import ResizeStore       from './../stores/ResizeStore';
+import SourceStore       from './../stores/SourceStore';
+import ToggleControl     from './form/ToggleControl.jsx';
+import TextControl       from './form/TextControl.jsx';
+import SwitchControl     from './form/SwitchControl.jsx';
 
 
 const Resize = React.createClass({
     displayName: 'Resize',
 
-    mixins: [Reflux.ListenerMixin],
+    mixins: [ListenerMixin],
 
     componentWillMount() {
         this.listenTo(SourceStore, this.onSourceUpdate);
+        this.listenTo(ResizeStore, this.onResizeUpdate);
     },
 
     getInitialState() {
@@ -39,8 +40,16 @@ const Resize = React.createClass({
         });
     },
 
+    onResizeUpdate() {
+        this.setState({
+            resize: ResizeStore.config()
+        });
+    },
+
     onChange(key, value) {
-        ResizeActions.update(_.merge(this.state.resize, {
+        let { resize } = this.state;
+
+        ResizeActions.update(_.merge(resize, {
             [key]: value
         }));
     },
@@ -57,9 +66,8 @@ const Resize = React.createClass({
             contentClasses += ' _is-hidden';
         }
 
-        if (this.state.active === true) {
-        } else {
-        }
+        let { resize } = this.state;
+        console.log(resize);
 
         return (
             <div className="panel panel--resize">
@@ -71,13 +79,13 @@ const Resize = React.createClass({
                         <ToggleControl
                             propKey="active" label="active"
                             onChange={this.onChange}
-                            defaultValue={this.state.resize.active}
+                            value={resize.active}
                             wrapperClass='resize__switch'
                         />
                         <ToggleControl
                             propKey="debug" label="debug"
                             onChange={this.onChange}
-                            defaultValue={this.state.resize.debug}
+                            value={resize.debug}
                             wrapperClass='resize__switch'
                         />
                     </div>
@@ -85,16 +93,16 @@ const Resize = React.createClass({
                         propKey="mode" label=""
                         choices={resizeModes}
                         onChange={this.onChange}
-                        defaultValue={this.state.resize.mode}
+                        value={resize.mode}
                     />
                     <TextControl
                         propKey="width" label="width"
-                        defaultValue={this.state.resize.width}
+                        value={resize.width}
                         onChange={this.onChange}
                     />
                     <TextControl
                         propKey="height" label="height"
-                        defaultValue={this.state.resize.height}
+                        value={resize.height}
                         onChange={this.onChange}
                     />
                 </div>
