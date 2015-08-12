@@ -61,13 +61,12 @@ var Resize = React.createClass({
             { label: 'fit',     value: 'fit'     }
         ];
 
-        var contentClasses = 'panel__content';
-        if (this.state.active === false) {
+        let { resize, active } = this.state;
+
+        let contentClasses = 'panel__content';
+        if (active === false) {
             contentClasses += ' _is-hidden';
         }
-
-        let { resize } = this.state;
-        console.log(resize);
 
         return (
             <div className="panel panel--resize">

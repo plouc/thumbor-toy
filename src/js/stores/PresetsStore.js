@@ -15,9 +15,6 @@ import FilterActions  from './../actions/FilterActions';
 import ConfigStore    from './ConfigStore';
 
 
-var presets = [];
-
-
 const PresetsStore = Reflux.createStore({
     listenables: PresetsActions,
 
@@ -26,16 +23,12 @@ const PresetsStore = Reflux.createStore({
     },
 
     onConfigUpdate(config) {
-        presets = config.presetImages || [];
-
-        console.log('PresetsStore.onConfigUpdate', presets);
+        let presets = config.presetImages || [];
 
         this.trigger(presets);
     },
 
     load(preset) {
-        console.log('PresetsStore.load()', preset.data);
-
         let { data } = preset;
         if (null === data.image || null === data.server) {
             return;

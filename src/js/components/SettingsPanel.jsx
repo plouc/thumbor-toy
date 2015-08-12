@@ -44,12 +44,10 @@ var SettingsPanel = React.createClass({
     },
 
     onConfigUpdate(config) {
-        console.log('SettingsPanel.onConfigUpdate()', config);
         this.setState({ config: config });
     },
 
     onPresetsUpdate(presets) {
-        console.log('SettingsPanel.onPresetsUpdate()', presets);
         this.setState({ presets: presets });
     },
 
