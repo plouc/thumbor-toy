@@ -28,7 +28,7 @@ function ensurePrefExists(key) {
     }
 }
 
-var UserPreferencesStore = Reflux.createStore({
+const UserPreferencesStore = Reflux.createStore({
     listenables: UserPreferencesActions,
 
     init() {

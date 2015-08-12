@@ -16,7 +16,7 @@ import _                     from 'lodash';
 var currentFilters   = [];
 var internalId       = 0;
 
-var FiltersStore = Reflux.createStore({
+const FiltersStore = Reflux.createStore({
     listenables: FilterActions,
 
     init() {

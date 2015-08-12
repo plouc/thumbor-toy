@@ -6,20 +6,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-import React         from 'react';
-import Reflux        from 'reflux';
-import UrlStore      from './../stores/UrlStore';
-import LoaderStore   from './../stores/LoaderStore';
-import SourceStore   from './../stores/SourceStore';
-import PanelsActions from './../actions/PanelsActions';
-import Url           from './Url.jsx';
-import PanelTypes    from './../stores/PanelTypes';
+import React             from 'react';
+import { ListenerMixin } from 'reflux';
+import UrlStore          from './../stores/UrlStore';
+import LoaderStore       from './../stores/LoaderStore';
+import SourceStore       from './../stores/SourceStore';
+import PanelsActions     from './../actions/PanelsActions';
+import Url               from './Url.jsx';
+import PanelTypes        from './../stores/PanelTypes';
+import ShortenerUrl      from './ShortenerUrl.jsx';
 
 
 var Header = React.createClass({
     displayName: 'Header',
 
-    mixins: [Reflux.ListenerMixin],
+    mixins: [ListenerMixin],
 
     getInitialState() {
         return {
@@ -66,6 +67,7 @@ var Header = React.createClass({
         return (
             <div className="header">
                 <Url url={this.state.url} error={this.state.hasError} />
+                <ShortenerUrl/>
                 <span className="header__settings" onClick={this.onSettingsClick}>
                     <i className="fa fa-cog"/>
                 </span>

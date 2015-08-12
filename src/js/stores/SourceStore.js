@@ -12,7 +12,7 @@ import SourceActions from './../actions/SourceActions';
 var currentServer = '';
 var currentImage  = '';
 
-var SourceStore = Reflux.createStore({
+const SourceStore = Reflux.createStore({
     listenables: SourceActions,
 
     set(server, image) {

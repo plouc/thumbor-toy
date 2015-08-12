@@ -6,20 +6,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-import React         from 'react';
-import Reflux        from 'reflux';
-import _             from 'lodash';
-import SourceActions from './../actions/SourceActions';
-import SourceStore   from './../stores/SourceStore';
-import SwitchControl from './form/SwitchControl.jsx';
-import ChoiceControl from './form/ChoiceControl.jsx';
-import TextControl   from './form/TextControl.jsx';
+import React             from 'react';
+import { ListenerMixin } from 'reflux';
+import _                 from 'lodash';
+import SourceActions     from './../actions/SourceActions';
+import SourceStore       from './../stores/SourceStore';
+import SwitchControl     from './form/SwitchControl.jsx';
+import ChoiceControl     from './form/ChoiceControl.jsx';
+import TextControl       from './form/TextControl.jsx';
 
 
 var Source = React.createClass({
     displayName: 'ImageSource',
 
-    mixins: [Reflux.ListenerMixin],
+    mixins: [ListenerMixin],
 
     componentWillMount() {
         this.listenTo(SourceStore, () => {

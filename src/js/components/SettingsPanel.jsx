@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 import React                  from 'react';
-import Reflux                 from 'reflux';
+import { ListenerMixin }      from 'reflux';
 import _                      from 'lodash';
 import Source                 from './Source.jsx';
 import Resize                 from './Resize.jsx';
@@ -17,25 +17,25 @@ import UserPreferencesStore   from './../stores/UserPreferencesStore';
 import UserPreferencesTypes   from './../stores/UserPreferencesTypes';
 import PanelTypes             from './../stores/PanelTypes';
 import ConfigStore            from './../stores/ConfigStore';
+import PresetsStore           from './../stores/PresetsStore';
+
 
 var SettingsPanel = React.createClass({
     displayName: 'SettingsPanel',
 
-    mixins: [
-        Reflux.ListenerMixin
-    ],
-
-    init() {
-        this.listenTo(ConfigStore, this.render());
-    },
+    mixins: [ListenerMixin],
 
     getInitialState() {
         return {
-            opened: UserPreferencesStore.get(UserPreferencesTypes.SETTINGS_PANEL_OPENED)
+            presets: [],
+            config:  ConfigStore.getAll(),
+            opened:  UserPreferencesStore.get(UserPreferencesTypes.SETTINGS_PANEL_OPENED)
         };
     },
 
     componentWillMount() {
+        this.listenTo(ConfigStore,  this.onConfigUpdate);
+        this.listenTo(PresetsStore, this.onPresetsUpdate);
         this.listenTo(UserPreferencesStore, () => {
             this.setState({
                 opened: UserPreferencesStore.get(UserPreferencesTypes.SETTINGS_PANEL_OPENED)
@@ -43,19 +43,26 @@ var SettingsPanel = React.createClass({
         });
     },
 
+    onConfigUpdate(config) {
+        console.log('SettingsPanel.onConfigUpdate()', config);
+        this.setState({ config: config });
+    },
+
+    onPresetsUpdate(presets) {
+        console.log('SettingsPanel.onPresetsUpdate()', presets);
+        this.setState({ presets: presets });
+    },
+
     onToggleClick() {
         UserPreferencesActions.set(UserPreferencesTypes.SETTINGS_PANEL_OPENED, !this.state.opened);
     },
 
     render() {
-        var presetSelector = null;
-        if (_.isArray(ConfigStore.get('presetImages')) && ConfigStore.get('presetImages').length > 0) {
-            presetSelector = <PresetSelector />;
-        }
+        let { presets, opened, config } = this.state;
 
         var classes           = 'sidebar sidebar--settings';
         var toggleIconClasses = 'fa fa-';
-        if (this.state.opened) {
+        if (opened === true) {
             classes += ' _is-opened';
             toggleIconClasses += 'times';
         } else {
@@ -64,9 +71,9 @@ var SettingsPanel = React.createClass({
 
         return (
             <div className={classes}>
-                {presetSelector}
-                <Source source={ConfigStore.get('source')} />
-                <Resize presets={ConfigStore.get('presetsResize') || []} />
+                {presets.length > 0 ? <PresetSelector presets={presets} /> : null}
+                <Source source={config.source} />
+                <Resize presets={config.presetsResize || []} />
                 <span className="sidebar__toggle" onClick={this.onToggleClick}>
                     <i className={toggleIconClasses}/>
                 </span>

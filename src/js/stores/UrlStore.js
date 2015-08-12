@@ -14,7 +14,7 @@ import ResizeStore  from './ResizeStore';
 
 var currentUrl = '';
 
-var UrlStore = Reflux.createStore({
+const UrlStore = Reflux.createStore({
     init() {
         this.listenTo(SourceStore,  this.update);
         this.listenTo(FiltersStore, this.update);
@@ -22,8 +22,8 @@ var UrlStore = Reflux.createStore({
     },
 
     update() {
-        var currentFilters = _.filter(FiltersStore.current(), { 'active': true });
-        var filters        = '';
+        let currentFilters = _.filter(FiltersStore.current(), { 'active': true });
+        let filters        = '';
         if (currentFilters.length) {
             filters = 'filters:' + _.map(currentFilters, filter => {
                 var settings = '';
@@ -36,8 +36,8 @@ var UrlStore = Reflux.createStore({
             }).join(':') + '/';
         }
 
-        var resizeConfig = ResizeStore.config();
-        var resize       = '';
+        let resizeConfig = ResizeStore.config();
+        let resize       = '';
         if (resizeConfig.active) {
             if (resizeConfig.debug === true && resizeConfig.mode === 'smart') {
                 resize += 'debug/';

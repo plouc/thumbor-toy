@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 import React                  from 'react';
-import Reflux                 from 'reflux';
+import { ListenerMixin }      from 'reflux';
 import _                      from 'lodash';
 import PanelsActions          from './../actions/PanelsActions';
 import PanelTypes             from './../stores/PanelTypes';
@@ -23,7 +23,7 @@ import TweenState             from 'react-tween-state';
 
 var Modal = React.createClass({
     mixins: [
-        Reflux.ListenerMixin,
+        ListenerMixin,
         TweenState.Mixin
     ],
 

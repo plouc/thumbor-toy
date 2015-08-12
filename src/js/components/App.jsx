@@ -7,18 +7,20 @@
  * file that was distributed with this source code.
  */
 import React                 from 'react';
-import Reflux                from 'reflux';
+import { ListenerMixin }     from 'reflux';
 import Image                 from './Image.jsx';
 import Header                from './Header.jsx';
 import Loader                from './Loader.jsx';
 import SettingsPanel         from './SettingsPanel.jsx';
 import Modal                 from './Modal.jsx';
 import FiltersPanel          from './FiltersPanel.jsx';
+import ConfigStore           from './../stores/ConfigStore';
 import UserPreferencesStore  from './../stores/UserPreferencesStore';
 import UserPreferencesTypes  from './../stores/UserPreferencesTypes';
 
-var App = React.createClass({
-    mixins: [Reflux.ListenerMixin],
+
+const App = React.createClass({
+    mixins: [ListenerMixin],
 
     getInitialState() {
         return {
@@ -28,6 +30,10 @@ var App = React.createClass({
 
     componentWillMount() {
         this.listenTo(UserPreferencesStore, this.onPreferencesUpdate);
+    },
+
+    componentDidMount() {
+        ConfigStore.update();
     },
 
     onPreferencesUpdate() {
@@ -51,5 +57,6 @@ var App = React.createClass({
         );
     }
 });
+
 
 export default App;

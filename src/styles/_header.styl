@@ -17,7 +17,7 @@
   left  0
   right 0
 
-  padding (($header-height - $header-inner-height) / 2) (($header-height - $header-inner-height) * 1.5 + $header-inner-height * 2) 0 (($header-height - $header-inner-height) / 2)
+  padding (($header-height - $header-inner-height) / 2) (($header-height - $header-inner-height) + $header-inner-height) 0 (($header-height - $header-inner-height) / 2)
 
   box-shadow 0 0 3px rgba(0, 0, 0, 0.35)
   font-size 16px
@@ -26,15 +26,6 @@
 
   &._has-error
     padding-left 40px
-
-  input[type="text"]
-    vertical-align top
-    font-family consolas, menlo, monaco, monospace;
-    t(background-color, 'url-bg-color')
-    width 100%
-    height $header-inner-height
-    padding 9px 9px 9px 46px
-    box-sizing border-box
 
   &__settings
     @extends $unselectable
@@ -70,6 +61,32 @@
       margin-right 7px
       t(color, 'notice-icon-color')
 
+.url
+  width 50%
+  float left
+  padding-right (($header-height - $header-inner-height) * 0.5 + $header-inner-height)
+  position relative
+
+  &--shortened
+    padding-left (($header-height - $header-inner-height) + $header-inner-height)
+
+input[type=text].url__field
+  cursor not-allowed
+  vertical-align top
+  font-family consolas, menlo, monaco, monospace
+  t(background-color, 'url-bg-color')
+  width 100%
+  height $header-inner-height
+  padding 9px 9px 9px ($header-inner-height + 5px)
+  box-sizing border-box
+
+  +placeholder()
+    t(color, 'url-placeholder-color')
+
+  .url--shortened &
+    padding-left 9px
+
+
 .url__status
   color $url-status-color-ok
   width       $header-inner-height
@@ -78,14 +95,15 @@
   position absolute
   font-size 20px
   text-align center
-  top  (($header-height - $header-inner-height) / 2)
-  left (($header-height - $header-inner-height) / 2)
+  top  0
+  left 0
   &._is-unkown
     color $url-status-color-unknown
   &._has-error
     color $url-status-color-error
 
-.url__copy
+.url__copy,
+.url__shorten
   @extends $unselectable
   cursor pointer
   t(background, 'copy-btn-bg-color')
@@ -95,15 +113,20 @@
   height      $header-inner-height
   line-height $header-inner-height
   text-align center
-  top   (($header-height - $header-inner-height) / 2)
-  right ($header-height - $header-inner-height) + $header-inner-height
+  top   0
   display block
   border-radius 2px
 
+.url__shorten
+  left (($header-height - $header-inner-height) / 2)
+
+.url__copy
+  right 0
+
   &__tooltip
     position absolute
-    top   (($header-height - $header-inner-height) / 2)
-    right (($header-height - $header-inner-height) * 1.5 + $header-inner-height * 2)
+    top   0
+    right (($header-height - $header-inner-height) / 2 + $header-inner-height)
     height      $header-inner-height
     line-height $header-inner-height
     padding 0 11px
@@ -112,9 +135,11 @@
     t(color,      'copy-btn-color')
     font-size 12px
     border-radius 2px
+    z-index 200
 
 .zeroclipboard-is-hover,
-.url__copy:hover
+.url__copy:hover,
+.url__shorten:hover
   t(background, 'copy-btn-bg-color-hover')
   t(color,      'copy-btn-color-hover')
 

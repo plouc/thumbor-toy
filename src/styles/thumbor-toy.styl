@@ -11,6 +11,15 @@
 $fa-font-path = 'fonts'
 @require './../../node_modules/font-awesome-stylus/stylus/index.styl'
 
+placeholder()
+  &::-webkit-input-placeholder
+    {block}
+  &:-moz-placeholder
+    {block}
+  &::-moz-placeholder
+    {block}
+  &:-ms-input-placeholder
+    {block}
 
 $unselectable
   -moz-user-select none
