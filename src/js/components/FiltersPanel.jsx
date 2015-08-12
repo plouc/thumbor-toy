@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 import React                  from 'react';
-import Reflux                 from 'reflux';
+import { ListenerMixin }      from 'reflux';
 import PanelTypes             from './../stores/PanelTypes';
 import UserPreferencesActions from './../actions/UserPreferencesActions';
 import UserPreferencesStore   from './../stores/UserPreferencesStore';
@@ -17,9 +17,7 @@ import Filters                from './filters/Filters.jsx';
 var FiltersPanel = React.createClass({
     displayName: 'FiltersPanel',
 
-    mixins: [
-        Reflux.ListenerMixin
-    ],
+    mixins: [ListenerMixin],
 
     getInitialState() {
         return {

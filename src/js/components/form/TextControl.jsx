@@ -10,16 +10,16 @@ import React   from 'react';
 import Control from './Control.jsx';
 
 
-export default class TextControl extends Control {
+class TextControl extends Control {
     onChange() {
-        var { propKey, onChange } = this.props;
-        var value = this.refs[propKey].getDOMNode().value;
+        let { propKey, onChange } = this.props;
+        let value = this.refs[propKey].getDOMNode().value;
 
         onChange(propKey, value);
     }
 
     render() {
-        var { propKey, label, defaultValue, wrapperClass } = this.props;
+        var { propKey, label, wrapperClass, value } = this.props;
 
         var inputClasses = 'control-group__control';
         var labelClasses = 'control-group__label';
@@ -40,8 +40,10 @@ export default class TextControl extends Control {
                 <input className={inputClasses}
                     ref={propKey} type="text"
                     onChange={this.onChange.bind(this)}
-                    defaultValue={defaultValue} />
+                    value={value} />
             </div>
         );
     }
 }
+
+export default TextControl;

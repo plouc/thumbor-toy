@@ -12,7 +12,7 @@ import LoaderActions from './../actions/LoaderActions';
 var isLoading = false;
 var hasError  = false;
 
-var LoaderStore = Reflux.createStore({
+const LoaderStore = Reflux.createStore({
     init() {
         this.listenTo(LoaderActions.loading, this.setLoading);
         this.listenTo(LoaderActions.loaded,  this.setLoaded);

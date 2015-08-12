@@ -18,7 +18,7 @@ var panelsState = {
     [PanelTypes.SETTINGS]: false
 };
 
-export default Reflux.createStore({
+const PanelsStore = Reflux.createStore({
     listenables: PanelsActions,
 
     updated(panelId) {
@@ -47,3 +47,5 @@ export default Reflux.createStore({
         return panelsState[panelId];
     }
 });
+
+export default PanelsStore;

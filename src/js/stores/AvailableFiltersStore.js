@@ -14,7 +14,7 @@ import _             from 'lodash';
 
 var availableFilters = [];
 
-var AvailableFiltersStore = Reflux.createStore({
+const AvailableFiltersStore = Reflux.createStore({
     init() {
         this.listenTo(ConfigStore, this.update);
         this.update();

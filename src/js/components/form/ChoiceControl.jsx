@@ -20,7 +20,7 @@ class ChoiceControl extends Control {
     }
 
     render() {
-        var { label, propKey, choices, defaultValue } = this.props;
+        var { label, propKey, choices, value } = this.props;
 
         var options = choices.map(choice => {
             return <option key={choice.value} value={choice.value}>{choice.label}</option>;
@@ -30,7 +30,7 @@ class ChoiceControl extends Control {
             <div className={this.props.wrapperClass}>
                 <label className="control-group__label control-group__label--full">{label}</label>
                 <div className="select-box">
-                    <select ref={propKey} onChange={this.onChange.bind(this)} defaultValue={defaultValue}>
+                    <select ref={propKey} onChange={this.onChange.bind(this)} value={value}>
                         {options}
                     </select>
                     <i className="fa fa-angle-down" />

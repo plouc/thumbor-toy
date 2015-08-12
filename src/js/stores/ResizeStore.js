@@ -10,7 +10,7 @@ import Reflux        from 'reflux';
 import ResizeActions from './../actions/ResizeActions';
 import _             from 'lodash';
 
-var defaultResize = {
+const defaultResize = {
     active: false,
     width:  500,
     height: 300,
@@ -18,24 +18,25 @@ var defaultResize = {
 };
 var currentResizeConfig = defaultResize;
 
-var ResizeStore = Reflux.createStore({
+const ResizeStore = Reflux.createStore({
     init() {
         this.listenTo(ResizeActions.update, this.updateResize);
         this.listenTo(ResizeActions.clear,  this.clearResize);
     },
 
     updateResize(config) {
+        console.log('ResizeStore.updateResize()', config);
         currentResizeConfig = _.merge(currentResizeConfig, config);
 
-        this.trigger();
+        this.trigger(currentResizeConfig);
     },
 
     clearResize() {
+        console.log('ResizeStore.clearResize()');
         currentResizeConfig = defaultResize;
 
-        this.trigger();
+        this.trigger(currentResizeConfig);
     },
-
 
     config() {
         return currentResizeConfig;

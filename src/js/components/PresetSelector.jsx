@@ -6,51 +6,40 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-import React         from 'react';
-import Reflux        from 'reflux';
-import ConfigStore   from './../stores/ConfigStore';
-import SourceActions from './../actions/SourceActions';
-import ResizeActions from './../actions/ResizeActions';
-import FilterActions from './../actions/FilterActions';
-import _             from 'lodash';
+import React, { PropTypes } from 'react';
+import PresetsActions       from './../actions/PresetsActions';
 
-var PresetSelector = React.createClass({
+
+const PresetSelector = React.createClass({
     displayName: 'PresetSelector',
 
-    mixins: [Reflux.ListenerMixin],
+    propTypes: {
+        presets: PropTypes.arrayOf(PropTypes.shape({
+            label: PropTypes.string.isRequired,
+            data:  PropTypes.object.isRequired
+        })).isRequired
+    },
 
-    onChange(e) {
-        var imageData = this.props.images[e.target.value].data;
-
-        if (null === imageData.image || null === imageData.server) {
+    onPresetSelection(e) {
+        let index = parseInt(e.target.value);
+        if (index === -1) {
             return;
         }
 
-        SourceActions.setServer(imageData.server);
-        SourceActions.setImage(imageData.image);
-        ResizeActions.clear();
-        ResizeActions.update(imageData.resize);
-        FilterActions.clear();
-        _.forEach(imageData.filters, function (filter) {
-            FilterActions.add(filter.type);
-            //FilterActions.update(index, filter.settings);
-        });
+        let { presets } = this.props;
+
+        PresetsActions.load(presets[index]);
     },
 
     render() {
-        this.props.images = [{
-            label: '--- select a preset image ---',
-            data:  {
-                server:  null,
-                image:   null,
-                resize:  {},
-                filters: []
-            }
-        }].concat(ConfigStore.get('presetImages'));
+        let { presets } = this.props;
 
-        var options = this.props.images.map((image, i) => {
-            return <option key={i} value={i}>{image.label}</option>;
+        let options = presets.map((preset, i) => {
+            return <option key={i} value={i}>{preset.label}</option>;
         });
+
+        // prepend an empty option
+        options.unshift(<option key={-1} value={-1}>--- select a preset image ---</option>);
 
         return (
             <div className="panel panel--img-src">
@@ -60,8 +49,7 @@ var PresetSelector = React.createClass({
                 </h3>
                 <div className="panel__content">
                     <div className="select-box">
-                        <select className="control--full-width"
-                                onChange={this.onChange}>
+                        <select className="control--full-width" onChange={this.onPresetSelection}>
                             {options}
                         </select>
                         <i className="fa fa-angle-down" />
