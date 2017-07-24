@@ -15,7 +15,7 @@
     "chalk": "^1.0.0",
     "eslint": "^0.22.1",
     "eslint-plugin-react": "^2.4.0",
-    "font-awesome-stylus": "^4.3.0",
+    "font-awesome-stylus": "4.7.0",
     "gulp": "^3.8.9",
     "gulp-concat": "^2.4.1",
     "gulp-cssmin": "^0.1.6",
