@@ -11,6 +11,7 @@
   "devDependencies": {
     "babel-eslint": "^3.1.10",
     "babelify": "^6.1.2",
+    "base-64": "^0.1.0",
     "browserify": "^6.2.0",
     "chalk": "^1.0.0",
     "eslint": "^0.22.1",
@@ -32,6 +33,7 @@
     "marked": "^0.3.3",
     "moment": "^2.8.3",
     "normalize-css": "^2.3.1",
+    "query-string": "^5.0.0",
     "react": "^0.13.3",
     "react-dnd": "^1.1.1",
     "react-tools": "*",
@@ -39,11 +41,13 @@
     "react-zeroclipboard": "^1.1.0",
     "reactify": "^0.15.2",
     "reflux": "^0.2.12",
+    "url": "^0.11.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^3.2.1"
   },
   "scripts": {
     "test": "gulp build:dev && gulp build"
-  }
+  },
+  "dependencies": {}
 }

@@ -11,6 +11,7 @@ var watermarkImages = [
 
 export default {
     common: {
+        SECRET_KEY: 'MY_SECURE_KEY',
         modes: [],
         source: {
             servers: [
