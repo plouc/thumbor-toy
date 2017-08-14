@@ -9,6 +9,7 @@
 import React             from 'react';
 import { ListenerMixin } from 'reflux';
 import _                 from 'lodash';
+import queryString       from 'query-string';
 import SourceActions     from './../actions/SourceActions';
 import SourceStore       from './../stores/SourceStore';
 import SwitchControl     from './form/SwitchControl.jsx';
@@ -17,7 +18,7 @@ import TextControl       from './form/TextControl.jsx';
 
 
 const imageSourceTypeChoices = [
-    { label: 'predefined', value: 'static'  },
+    //{ label: 'predefined', value: 'static'  },
     { label: 'manual',     value: 'dynamic' }
 ];
 
@@ -29,6 +30,7 @@ const Source = React.createClass({
 
     componentWillMount() {
         this.listenTo(SourceStore, () => {
+
             this.setState({
                 server: SourceStore.server(),
                 image:  SourceStore.image()
@@ -40,12 +42,23 @@ const Source = React.createClass({
                     images: server.images
                 });
             }
+
         });
     },
 
     getInitialState() {
+        if (this.props.source.servers.length === 1) {
+             SourceStore.setServer(this.props.source.servers[0].value)
+        }
+
+        var qs = queryString.parse(window.location.search)
+        if (qs.SourceImageUrl) {
+            SourceStore.setImage(qs.SourceImageUrl)
+        }
+
         return {
-            sourceType: 'static',
+            //sourceType: 'static',
+            sourceType: 'dynamic',
             server:     SourceStore.server(),
             image:      SourceStore.image(),
             images:     []
@@ -74,13 +87,34 @@ const Source = React.createClass({
             value: ''
         }].concat(images);
 
-        let serverChoices = [{
-            label: '--- select a server ---',
-            value: ''
-        }].concat(this.props.source.servers);
+        let serverSource = null;
+        if (this.props.source.servers.length === 1) {
+
+            serverSource = (
+                <TextControl
+                    propKey="server" label={this.props.source.servers[0].label}
+                    onChange={this.onServerChange}
+                    value={server}
+                />
+            );
+
+        } else{
+            let serverChoices = [{
+                label: '--- select a server ---',
+                value: ''
+            }].concat(this.props.source.servers);
+            serverSource = (
+                    <ChoiceControl
+                        label="server"
+                        propKey="server" choices={serverChoices}
+                        onChange={this.onServerChange}
+                        value={server}
+                    />
+            );
+        }
 
         var sourceControl;
-        if (this.state.sourceType === 'static') {
+        if (sourceType === 'static') {
             sourceControl = (
                 <ChoiceControl
                     propKey="image" choices={imageChoices}
@@ -100,7 +134,9 @@ const Source = React.createClass({
         }
 
         let imageSource = null;
+
         if (server !== '') {
+
             imageSource = (
                 <div>
                     <SwitchControl
@@ -120,12 +156,7 @@ const Source = React.createClass({
                     Image Source <i className="fa fa-picture-o" />
                 </h3>
                 <div className="panel__content">
-                    <ChoiceControl
-                        label="server"
-                        propKey="server" choices={serverChoices}
-                        onChange={this.onServerChange}
-                        value={server}
-                    />
+                    {serverSource}
                     {imageSource}
                 </div>
             </div>

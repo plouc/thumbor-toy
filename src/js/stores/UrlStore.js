@@ -6,11 +6,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-import Reflux       from 'reflux';
-import _            from 'lodash';
-import SourceStore  from './SourceStore';
-import FiltersStore from './FiltersStore';
-import ResizeStore  from './ResizeStore';
+import Reflux                 from 'reflux';
+import _                      from 'lodash';
+import CryptoJS               from 'crypto-js';
+import base64                 from 'base-64';
+import ConfigStore            from './../stores/ConfigStore';
+import SourceStore            from './SourceStore';
+import FiltersStore           from './FiltersStore';
+import ResizeStore            from './ResizeStore';
 
 var currentUrl = '';
 
@@ -19,6 +22,29 @@ var UrlStore = Reflux.createStore({
         this.listenTo(SourceStore,  this.update);
         this.listenTo(FiltersStore, this.update);
         this.listenTo(ResizeStore,  this.update);
+    },
+
+    signature(resize, filters, image_uri) {
+        var SECRET_KEY = ConfigStore.get('SECRET_KEY')
+        if (SECRET_KEY) {
+            var message = '';
+            if (resize) {
+                message += resize;
+            }
+
+            if (filters) {
+                message += filters;
+            }
+
+            if (image_uri) {
+                message += image_uri;
+            }
+
+            var encrypted_hash = CryptoJS.HmacSHA1(message, SECRET_KEY)
+            return CryptoJS.enc.Base64.stringify(encrypted_hash).replace('/', '_') + '/';
+        } else {
+            return 'unsafe/';
+        }
     },
 
     update() {
@@ -54,7 +80,12 @@ var UrlStore = Reflux.createStore({
             }
         }
 
-        currentUrl = SourceStore.server() + 'unsafe/' + resize + filters + SourceStore.image();
+        var signature = this.signature(resize, filters, SourceStore.image());
+        console.log('signature: '+ signature)
+        console.log('resize: '+ resize)
+        console.log('filters: '+ filters)
+        console.log('image: '+ SourceStore.image())
+        currentUrl = SourceStore.server() + signature + resize + filters + SourceStore.image();
 
         this.trigger(currentUrl);
     },
