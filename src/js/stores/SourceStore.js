@@ -8,6 +8,8 @@
  */
 import Reflux        from 'reflux';
 import SourceActions from './../actions/SourceActions';
+import ConfigStore from './../stores/ConfigStore';
+import _                    from 'lodash';
 
 var currentServer = '';
 var currentImage  = '';
@@ -15,7 +17,9 @@ var currentImage  = '';
 const SourceStore = Reflux.createStore({
     listenables: SourceActions,
 
-    set(server, image) {
+    set(serverUrl, image) {
+        var server = _.filter(
+            ConfigStore.get('source').servers, server => server.value == serverUrl)[0];
         currentServer = server;
         currentImage  = image;
 
@@ -39,6 +43,10 @@ const SourceStore = Reflux.createStore({
     },
 
     server() {
+        return currentServer.value;
+    },
+
+    fullServer() {
         return currentServer;
     },
 

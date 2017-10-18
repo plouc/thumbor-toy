@@ -74,7 +74,7 @@ module.exports = {
             servers: [
                 {
                     label: 'server1',
-                    url: 'http://my.thumbor.server/',
+                    value: 'http://my.thumbor.server/',
                 }
             ]
         },
@@ -105,6 +105,7 @@ module.exports = {
                 {
                     label: 'server 2',
                     url: 'http://my.other.thumbor.server/',
+                    key: 'foobar'
                 }
             ]
         }
