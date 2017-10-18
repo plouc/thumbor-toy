@@ -45,5 +45,8 @@
   },
   "scripts": {
     "test": "gulp build:dev && gulp build"
+  },
+  "dependencies": {
+    "jssha": "^1.6.1"
   }
 }

@@ -8,6 +8,7 @@
  */
 import Reflux       from 'reflux';
 import _            from 'lodash';
+import jsSHA        from 'jssha';
 import SourceStore  from './SourceStore';
 import FiltersStore from './FiltersStore';
 import ResizeStore  from './ResizeStore';
@@ -54,7 +55,27 @@ var UrlStore = Reflux.createStore({
             }
         }
 
-        currentUrl = SourceStore.server() + 'unsafe/' + resize + filters + SourceStore.image();
+        var server = SourceStore.fullServer();
+        var serverUrl = '';
+        var serverKey = '';
+        if (typeof server == 'object') {
+            serverUrl = server.value;
+            serverKey = server.key;
+        } else {
+            serverUrl = server;
+            serverKey = '';
+        }
+
+        var instructions = resize + filters + encodeURIComponent(SourceStore.image())
+
+        currentUrl = serverUrl;
+        if (!serverKey) {
+            currentUrl += 'unsafe/' + instructions;
+        }
+        else {
+            currentUrl += sign(instructions, serverKey);
+            currentUrl += '/' + instructions;
+        };
 
         this.trigger(currentUrl);
     },
@@ -65,3 +86,25 @@ var UrlStore = Reflux.createStore({
 });
 
 export default UrlStore;
+
+
+
+// From https://github.com/bein-sports/thumbor-js-client/blob/e3506846cd5f6fdc005746ec95cbacfd98969860/src/thumbor-js-client.js#L63
+function sign(urlPart, secret) {
+
+    //urlPart = urlPart.replace(':', '%3A')
+    var hmacObj = new jsSHA(urlPart, "TEXT");
+    //Generates hMac key
+    var hash = hmacObj.getHMAC(
+        secret,
+        "TEXT",
+        "SHA-1",
+        "B64"
+    );
+
+    // Replaces / by _ and + by - , to avoid url issues
+    return hash.replace(/\//g, "_").replace(/\+/g, "-");
+
+};
+
+window.sign = sign;
