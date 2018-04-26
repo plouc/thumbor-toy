@@ -15,6 +15,13 @@ export default {
         source: {
             servers: [
                 {
+                    label:  'thumbor local dev site',
+                    value:  'http://127.0.0.1:8888/',
+                    images: [
+                        { label: 'sample image', value: 'thumborize.me/static/img/beach.jpg' }
+                    ]
+                },
+                {
                     label:  'thumbor demo site',
                     value:  'http://thumbor.thumborize.me/',
                     images: [
